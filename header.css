@@ -14,7 +14,6 @@
 
 .header_logo{
     grid-area: l;
-
 }
 .header_siteName{
     grid-area: c;
@@ -59,4 +58,33 @@
     font-size:20px;
     margin:auto auto;
 
+}
+.header_logo_img{
+    animation-name:logo_animation;
+    animation-duration: 3s;
+    animation-iteration-count: 5;
+
+}
+@keyframes logo_animation{
+    0% {
+        transform: rotate(0deg);
+    }
+    18%{
+        transform: rotate(30deg);
+        
+    }
+    36%{
+        transform: rotate(0deg);
+        transform: scale(1.2);
+
+    }
+    54%{
+        transform: rotate(-30deg);
+    }
+    70%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform:rotate(0deg); /*animation delay between itterations*/
+    }
 }
