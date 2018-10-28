@@ -3,11 +3,11 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding:20px;
   margin:20px;
-  transition: margin 0.7s
+  transition: margin 0.7s;
+  font-family:Open Sanf;
 }
 .card:hover{
   margin:20px 25px;
-
 }
 
 #adresa{
@@ -17,7 +17,9 @@
 #map{
   grid-row:3/4;
   grid-column:3/4;
-
+}
+#message_row{
+  width:100%;
 }
 
 .form {
@@ -41,26 +43,22 @@
 .contact_Title_Div{
   padding-top:30px;
   padding-bottom:30px;
+  padding-left:30px;
+  font-family: Open Sans;
   background-color:black;
   color:white;
   position:relative;
-  width:100%;
-  text-align:center;
   grid-row:1/2;
   grid-column: 1/5;
 }
 .contact_Title_Span{
-  font-size:60px;
-  //border-bottom: 6px solid black;
-
+  font-size:40px;
 }
 
 #adresa h3 span{
-  //border-bottom:3px solid #009688;
   border-bottom:3px solid black;
   font size:24px;
   font-weight:400;
-  //font-family:"Segoe UI";
 }
 .ico{
   font-weight:400;
@@ -87,20 +85,25 @@
 
 }
 
-.cos_input{
-  border-bottom:1px solid rgb(204,204,204);
+
+ .cos_input {
+  font-family: "Open Sans", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  border: 0;
   width:100%;
-  border-left-width: 0;
-  border-right-width: 0;
-  border-top-width: 0;
-  padding: 8px;
-  text-align: center;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button{
+  left:20px;
 }
 
 .cos_label{
     display:block;
 }
-
 .cos_send_button{
   padding-top:8px;
   padding-bottom:8px;
@@ -109,36 +112,48 @@
   color:white;
   background-color:#313854;
   border:none;
-
 }
-
 .cos_send_button:hover{
-
   background-color:#394263;
 }
 
-@media (max-width: 960px)
-{
-  .contact_Container{
-  margin:auto;
-  }
-}
+
 @media (max-width:800px)
 {
-  .cos_50per{
-    width:100%;
-  }
-  .contact_Title_Span{
-    font-size:40px;
-  }
-  .contact_Container{
-    padding:50px;
+  .container{
+    grid-template-rows: 50px 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
   }
   .contact_Title_Div{
-    margin-top: 0;
-    margin-bottom: 50px;
+    grid-row:1/2;
+    grid-column:1/2;
+  }
+  .cos_form{
+    grid-row:2/3;
+    grid-column:1/2;
   }
   #adresa{
-    padding-left:33%;
+    grid-row:3/4;
+    grid-column:1/2;
   }
+  #map{
+    grid-row:4/5;
+    grid-column:1/2;0
+  }
+  .contact_Title_Div{
+    padding-top:30px;
+  }
+  .contact_Title_Span{
+    font-size:20px;
+  }
+  .cos_form_row{
+    width:100%;
+  }
+  .card{
+    margin:10px 5px;
+  }
+  .card:hover{
+    margin:10px 5px;
+  }
+
 }
