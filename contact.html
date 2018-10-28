@@ -13,15 +13,27 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="sideNav" class="sidenav">
+        <a href="javascript:void(0)"  class="close_nav_button" onclick="closeNav()">&times;<a>
+        <a href="#" class="sidenav_myclasses">My Classes</a>
+        <a href="#" class="sidenav_schedule">Schedule</a>
+        <a href="#" class="sidenav_users">Users</a>
+        <a href="#" class="sidenav_teachers">Teachers</a>
+        <a href="#" class="sidenav_grades">Grades</a>
+        <a href="#" class="sidenav_profile">Profile</a>
+        <a href="contact.html" class="sidenav_contactUs">ContactUs</a>
+        <a href="#" class="sidenav_logOut">Log Out</a>   
+    </div>
+
     <div class="header">
 
-        <div class=header_left>
+       <div class=header_left>
             <div class="header_left_menu">
-                <i class="fas fa-bars"></i>
+                <i onclick="openNav()"; class="fas fa-bars" ></i>
                 My Profile
-            </div>
+            </div>        
         </div>
-
+        
         <div class="header_logo_img">
             <img class="header_logo_img" src="icon.png" alt="">
         </div>
@@ -36,7 +48,7 @@
         </div>
 
     </div>
-    <div class="container">
+    <div class="container" id="container">
     <div class="contact_Title_Div"><span class="contact_Title_Span">Contact Us</span></div>
 
     <!--<div class="contact_Content_Div">-->
@@ -69,6 +81,7 @@
         </div>
 
 <!--</div>-->
+<script src="nav.js"></script>
 <script src="map.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH7weUXxtqb9S6W-5IQsFsuN-LQxaaDDc&callback=contactMap"></script>
 </body>

@@ -28,23 +28,17 @@ body{
 }
 .header_right {
     grid-area: r;
-    float:right;
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "rl rr";
-}
-.header_right input{
-    grid-area: rr;
-    margin-top:5px;
-    margin-bottom:5px;
-    border-color: #fff;
-
 }
 .header_right_home{
     grid-area: rl;
     color:#fff;
     font-size:20px;
     margin:auto auto;
+    margin-left: auto;
+    margin-right: 5px;;
 }
 .header_logo_img{
     margin-top:auto;
@@ -85,4 +79,101 @@ body{
     margin-left:15px;
     margin-top: auto;
     margin-bottom: auto;
+}
+.sidenav{
+    padding-top: 50px;
+    height:100%;
+    width:0;
+    position:fixed;
+    background-color: #394263;
+    overflow: hidden; /*no horizontal scroll*/
+    transition: 0.5s;
+    display:grid;
+    grid-template-rows: repeat(10,1fr);
+    grid-template-columns: 1fr;
+    grid-template-areas: "one"
+                         "two"
+                         "three"
+                         "four"
+                         "five"
+                         "six"
+                         "seven"
+                         "eight"
+                         "nine"
+                         "ten";
+    
+}
+.sidenav a{
+    padding: 8px 8px 8px 32px;
+    font-size:20px;
+    color:white;
+    transition:0.3s; 
+}
+
+.sidenav a:hover{
+    color:yellow;
+}
+
+.sidenav .close_nav_button{
+    grid-area: one;
+    position: absolute;
+    right:25px;
+    font-size:30px;
+    margin-left: 50px;
+}
+.container{
+    transition: margin-left .5s;
+}
+.sidenav_myclasses{
+    grid-area: two;
+}
+.sidenav_schedule{
+    grid-area: three;
+}
+
+.sidenav_teachers{
+    grid-area: four;
+}
+.sidenav_users{
+    grid-area: five;
+}
+.sidenav_grades{
+    grid-area: six;
+}
+.sidenav_profile{
+    grid-area: seven;
+}
+.sidenav_contactUs{
+    grid-area: eight;
+}
+.sidenav_logOut{
+    grid-area: nine;
+}
+.header_right input[type=text]{
+    align-items: end;
+    width:130px;
+    grid-area: rr;
+    margin-top:5px;
+    color:white;
+    margin-left: auto;
+    margin-right: 5px;
+    margin-bottom:5px;
+    border-radius: 25px;
+    border-color:white;
+    transition:width 0.4s ease-in-out;
+    background-color: #394263;
+
+}
+.header_right input[type=text]:focus{
+    width:100%;
+    grid-area: rr;
+    margin-right: 5px;
+    margin-top:5px;
+    margin-bottom:5px;
+    border-color: #fff;
+
+}
+::placeholder{
+text-align: center;
+color:white;
 }

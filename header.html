@@ -11,11 +11,23 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="sideNav" class="sidenav">
+        <a href="javascript:void(0)"  class="close_nav_button" onclick="closeNav()">&times;<a>
+        <a href="#" class="sidenav_myclasses">My Classes</a>
+        <a href="#" class="sidenav_schedule">Schedule</a>
+        <a href="#" class="sidenav_users">Users</a>
+        <a href="#" class="sidenav_teachers">Teachers</a>
+        <a href="#" class="sidenav_grades">Grades</a>
+        <a href="#" class="sidenav_profile">Profile</a>
+        <a href="contact.html" class="sidenav_contactUs">ContactUs</a>
+        <a href="#" class="sidenav_logOut">Log Out</a>   
+    </div>
+
     <div class="header">
 
         <div class=header_left>
             <div class="header_left_menu">
-                <i class="fas fa-bars"></i>
+                <i onclick="openNav()"; class="fas fa-bars" ></i>
                 My Profile
             </div>        
         </div>
@@ -34,5 +46,6 @@
         </div>
         
     </div>
+<script src="nav.js"></script>
 </body>
 </html>
