@@ -1,25 +1,28 @@
-.card{
-  background-color:white;
+.card {
+  background-color: white;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  padding:20px;
-  margin:20px;
-  transition: margin 0.7s;
-  font-family:Open Sanf;
-}
-.card:hover{
-  margin:20px 25px;
+  padding: 20px;
+  margin: 20px;
+  transition: margin 0.3s;
+  font-family: Open Sanf;
 }
 
-#adresa{
-  grid-row:3/4;
+.card:hover {
+  margin: 20px 25px;
+}
+
+#adresa {
+  grid-row: 3/4;
   grid-column: 2/3;
 }
-#map{
-  grid-row:3/4;
-  grid-column:3/4;
+
+#map {
+  grid-row: 3/4;
+  grid-column: 3/4;
 }
-#message_row{
-  width:100%;
+
+#message_row {
+  width: 100%;
 }
 
 .form {
@@ -32,128 +35,139 @@
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.container{
-  height:calc(100%-50px);
-  position:relative;
-  display:grid;
+
+.container {
+  height: calc(100%-50px);
+  position: relative;
+  display: grid;
   grid-template-rows: 100px 0.5fr 0.5fr;
   grid-template-columns: 1fr 2fr 2fr 1fr;
 }
 
-.contact_Title_Div{
-  padding-top:30px;
-  padding-bottom:30px;
-  padding-left:30px;
+.contact_Title_Div {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
   font-family: Open Sans;
-  background-color:black;
-  color:white;
-  position:relative;
-  grid-row:1/2;
+  background-color: black;
+  color: white;
+  position: relative;
+  grid-row: 1/2;
   grid-column: 1/5;
 }
-.contact_Title_Span{
-  font-size:40px;
+
+.contact_Title_Span {
+  font-size: 40px;
 }
 
-#adresa h3 span{
-  border-bottom:3px solid black;
-  font size:24px;
-  font-weight:400;
-}
-.ico{
-  font-weight:400;
-  font-size:24px;
-  padding:10px;
-  color:#313854;
+#adresa h3 span {
+  border-bottom: 3px solid black;
+  font size: 24px;
+  font-weight: 400;
 }
 
-.cos_form{
-  margin-top:20px;
+.ico {
+  font-weight: 400;
+  font-size: 24px;
+  padding: 10px;
+  color: #313854;
+}
+
+.cos_form {
+  margin-top: 20px;
   background-color: white;
-  padding:50px;
+  padding: 50px;
   font-family: "Segoe UI";
-  grid-row:2/3;
-  grid-column:2/4;
+  grid-row: 2/3;
+  grid-column: 2/4;
 }
 
-.cos_form_row{
-  margin-top:16px;
-  margin-bottom:16px;
-  width:40%;
-  display:inline-block;
-  margin:10px;
-
+.cos_form_row {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: 40%;
+  display: inline-block;
+  margin: 10px;
 }
 
-
- .cos_input {
+.cos_input {
   font-family: "Open Sans", sans-serif;
   outline: 0;
   background: #f2f2f2;
   border: 0;
-  width:100%;
+  width: 100%;
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button{
-  left:20px;
+
+.form button {
+  left: 20px;
 }
 
-.cos_label{
-    display:block;
-}
-.cos_send_button{
-  padding-top:8px;
-  padding-bottom:8px;
-  padding-left:16px;
-  padding-right:16px;
-  color:white;
-  background-color:#313854;
-  border:none;
-}
-.cos_send_button:hover{
-  background-color:#394263;
+.cos_label {
+  display: block;
 }
 
+.cos_send_button {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  background-color: #313854;
+  border: none;
+}
 
-@media (max-width:800px)
-{
-  .container{
+.cos_send_button:hover {
+  background-color: #394263;
+}
+
+@media (max-width:800px) {
+  .container {
     grid-template-rows: 50px 1fr 1fr 1fr;
     grid-template-columns: 1fr;
   }
-  .contact_Title_Div{
-    grid-row:1/2;
-    grid-column:1/2;
-  }
-  .cos_form{
-    grid-row:2/3;
-    grid-column:1/2;
-  }
-  #adresa{
-    grid-row:3/4;
-    grid-column:1/2;
-  }
-  #map{
-    grid-row:4/5;
-    grid-column:1/2;0
-  }
-  .contact_Title_Div{
-    padding-top:30px;
-  }
-  .contact_Title_Span{
-    font-size:20px;
-  }
-  .cos_form_row{
-    width:100%;
-  }
-  .card{
-    margin:10px 5px;
-  }
-  .card:hover{
-    margin:10px 5px;
+
+  .contact_Title_Div {
+    grid-row: 1/2;
+    grid-column: 1/2;
   }
 
+  .cos_form {
+    grid-row: 2/3;
+    grid-column: 1/2;
+  }
+
+  #adresa {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+
+  #map {
+    grid-row: 4/5;
+    grid-column: 1/2;
+    0
+  }
+
+  .contact_Title_Div {
+    padding-top: 30px;
+  }
+
+  .contact_Title_Span {
+    font-size: 20px;
+  }
+
+  .cos_form_row {
+    width: 100%;
+  }
+
+  .card {
+    margin: 10px 5px;
+  }
+
+  .card:hover {
+    margin: 10px 5px;
+  }
 }
