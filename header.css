@@ -168,7 +168,7 @@ body{
     border-color:white;
     transition:width 0.4s ease-in-out;
     background-color: #394263;
-
+    outline: none;
 }
 .header_right input[type=text]:focus{
     width:100%;

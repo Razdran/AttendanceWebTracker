@@ -27,3 +27,45 @@ body{
 .spanMyClasses{
     font-size:30px;
 }
+.myClassesList{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    background-color:red;
+
+}
+.myClassesNotes{
+    
+    grid-row: 2/3;
+    grid-column: 3/4;
+    width: 100%;
+    height: 90%;
+    margin-left:0px;
+    margin-right:0px;
+    
+}
+.submitNotesButton{
+    width: 100px;
+    height: 30px;;
+    color:white;
+    border-radius: 25px;
+    border-color:yellow;
+    background-color: #394263;
+    margin-left: 80%;
+}
+.notebookStyle{
+    box-sizing:border-box;/*prevent textarea > its div */
+    width: 80%;
+    font-size: 18px;
+    border-radius: 25px;
+    font-family:cursive;
+    margin-left:5%;
+    margin-right: 5%; 
+    margin-top:5%;
+    resize: vertical;
+    background:url("lines.png") repeat-y;
+    line-height: 25px;
+    outline: none;
+    padding-left:100px;
+    text-align: left;
+    overflow: hidden;
+}
