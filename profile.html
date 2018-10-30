@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <link rel="stylesheet" type="text/css" href="profile.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" 
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="sideNav" class="sidenav">
+                <div class="top-sidenav">
+                        <div class="photo"><img src="man.png"></div>
+                       <span class="name">Mart Florin</span>
+                       <a href="javascript:void(0)"  class="close_nav_button" onclick="closeNav()">&times;</a>
+                       </div>
+                <a href="myClasses.html" class="sidenav_myclasses">My Classes</a>
+                <a href="calendar.html" class="sidenav_schedule">Schedule</a>
+                <a href="#" class="sidenav_users">Users</a>
+                <a href="#" class="sidenav_teachers">Teachers</a>
+                <a href="#" class="sidenav_grades">Grades</a>
+                <a href="profile.html" class="sidenav_profile">Profile</a>
+                <a href="contact.html" class="sidenav_contactUs">ContactUs</a>
+                <a href="login.html" class="sidenav_logOut">Log Out</a>   
+            </div>
+        
+            <div class="header">
+        
+                <div class=header_left>
+                    <div class="header_left_menu">
+                        <i onclick="openNav()"; class="fas fa-bars" ></i>
+                        My Profile
+                    </div>        
+                </div>
+                
+                <div class="header_logo_img">
+                    <img class="header_logo_img" src="icon.png" alt="">
+                </div>
+        
+                <div class="header_siteName">
+                    <h1>Attendance Web Tracker</h1>
+                </div>
+        
+                <div class="header_right">
+                        <input type="text" placeholder="Search..">
+                        <div class="header_right_home">Home</div>
+                </div>
+                
+            </div>
+        
+            <div class="container" id="container">
+
+                    <div class="profile-page">
+                        <div class="myClasses">
+                            <h2>My Classes</h2>
+                            <p>Matematica</p>
+                            <p>Engleza</p>
+                            <p>Introducere in programare</p>
+                            <p>Structuri de date</p>
+                            <p>ACSO</p>
+                            <p>Logica</p>
+                        </div>
+                        <form class="photo-form">
+                                <h2>Photo</h2>
+                                <img src="man.png" alt="myPhoto">
+                                <input type="file" name="pic" accept="image/*">
+                                <button class="button button-photo" type="button" ">Save</button>
+                        </form>
+                            <form class="profile-form">
+                                    <h2>Profile Settings</h2>
+                                   <p><span>First Name: </span><input type="text" placeholder="First Name" value="Mart"/></p>
+                                    <p><span>Last Name: </span><input type="text" placeholder="Last Name" value="Florin"/></p>
+                                    <p><span>Email: </span><input type="text" placeholder="Email" value="mart.florin@yahoo.com"/></p>
+                                   <p> <span>Phone: </span><input type="text" placeholder="Phone" value="0722222222"/></p>
+                                   <p><span>Password: </span><input type="password" placeholder="Password" value="test"/></p>
+                                    <button class="button button-profile" type="button">Save</button>
+                                  </form>
+                            
+                    </div>
+            </div>
+            <script src="nav.js"></script>
+</body>
+</html>

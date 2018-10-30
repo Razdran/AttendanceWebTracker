@@ -116,16 +116,36 @@ body{
     transition:0.3s; 
 }
 
-.sidenav a:hover{
+.sidenav .top-sidenav a:hover{
     color:yellow;
 }
-
-.sidenav .close_nav_button{
+.top-sidenav{
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "photo name close";
     grid-area: one;
-    position: absolute;
+}
+.top-sidenav .photo{
+    grid-area: photo;
+    margin: auto;
+}
+.sidenav .top-sidenav .photo img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.top-sidenav .name{
+    grid-area: name;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+.sidenav .close_nav_button{
     right:25px;
     font-size:30px;
-    margin-left: 50px;
+    grid-area: close;
 }
 .container{
     transition: margin-left .5s;
