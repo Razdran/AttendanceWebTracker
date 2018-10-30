@@ -4,10 +4,33 @@
   margin:20px;
   font-family:Open Sanf;
 }
+.title_Div {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  font-family: Open Sans;
+  background-color: black;
+  color: white;
+  position: relative;
+  grid-row: 1/2;
+  grid-column: 1/5;
+}
+
+.title_Span {
+  font-size: 40px;
+}
+
 
 @media (max-width:800px)
 {
   .card{
     margin:10px 5px;
+  }
+  .title_Div {
+    padding-top: 30px;
+  }
+
+  .title_Span {
+    font-size: 20px;
   }
 }

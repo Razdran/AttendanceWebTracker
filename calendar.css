@@ -1,36 +1,78 @@
 
 @import "card.css";
+#container{
+display:grid;
+grid-template-columns:50px 1fr 50px 1fr 50px;
+grid-template-rows: 100px 400px 1fr;
+height: 100%;
+position: relative;
+
+}
 
 #calendar {
-  width: 500px;
-  height: 350px;
+
+  grid-row:2/3;
+  grid-column:2/3;
+}
+.attendances{
+  grid-row:2/4;
+  grid-column:4/5;
 }
 .attendance{
-  width:500px;
+//  width:500px;
+grid-column:4/5;
+}
+.attendance:nth-child(2)
+{
+  grid-row: 1/2;
+}
+.attendance:nth-child(3)
+{
+  grid-row: 2/3;
+}
+.attendance:nth-child(4)
+{
+  grid-row:3/4;
 }
 .attendance_head{
-  height:40px;
+  height:60px;
   display:grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
   background-color:black;
 }
 .attendance_body{
-  padding:10%;
+  height:150px;
+  display:grid;
+  grid-template-rows: 20px 1fr 1fr 20px;
+  grid-template-columns:30px 1fr 30px;
 }
-.present{
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #313854;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
+.class_info{
+  grid-row:2/3;
+  grid-column:2/3;
+}
+.class_form{
+  grid-row:3/4;
+  grid-column:2/3;
+  text-align:center;
+  //display:grid;
+  //grid-template-columns:40px 1fr 40px 1fr 40px;
+}
+.class_input{
+margin-left:40px;
+margin-right:40px;
+border-radius:10px;
+outline:none;
+}
+.class_button{
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  background-color: #313854;
+  border: none;
 }
 .notes_button:hover{
   background:  #394263;
@@ -38,6 +80,7 @@
 .class_name{
   text-align: center;
   color:white;
+  font-size:30px;
 }
 .hour{
   color:white;
@@ -124,13 +167,35 @@ td {
   width: 40px;
   height: 40px;
 }
+.title_Div{
+  grid-row:1/2;
+  grid-column:1/6;
+}
 
-@media(max-width:500px) {
+@media(max-width:800px) {
+  #container{
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 400px 1fr;
+  }
+  #calendar{
+    grid-row:2/3;
+    grid-column:1/2;
+
+
+  }
+  .attendances{
+    grid-row:3/4;
+    grid-column:1/2;
+
+  }
   .card {
     width: 100%;
   }
-  table{
-    margin-left:40px;
-    margin-right:40px;
+  .class_form{
+    text-align:center;
   }
+  .prev,.next{
+    top:-60px;
+  }
+
 }

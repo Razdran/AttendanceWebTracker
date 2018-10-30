@@ -50,6 +50,7 @@
 
   </div>
   <div class="container" id="container">
+    <div class="title_Div"><span class="title_Span">Schedule</span></div>
 
     <div id="calendar" class="card">
       <div id="calendar_head">
@@ -61,16 +62,54 @@
       </div>
     </div>
 
-  </div>
-  <div class="attendance card">
-    <div class="attendance_head">
-      <div class="class_name">Mate</div>
-      <div class="hour">8:00</div>
+    <div class="attendances">
+
+    <div class="attendance card">
+      <div class="attendance_head">
+        <div class="class_name">Mate</div>
+        <div class="hour">8:00-10:00</div>
+      </div>
+      <div class="attendance_body">
+        <div class="class_info">Cursul de matematica se va tine in amfiteatrul C2.Studentii sunt rugati sa vina cu laptopul.</div>
+        <form class="class_form" method="post">
+        <input class="class_input" type="text" name="cod_prezenta" placeholder="attendance code">
+        <button class="class_button" type="submit" name="present" >present</button>
+        </form>
+      </div>
     </div>
-    <div class="attendance_body">
-      <button class="present">present</button>
+
+    <div class="attendance card">
+      <div class="attendance_head">
+        <div class="class_name">CLIW</div>
+        <div class="hour">10:00-12:00</div>
+      </div>
+      <div class="attendance_body">
+        <div class="class_info">Se va prezenta componenta de front a proiectului.Toata lumea va lua 10</div>
+        <form class="class_form" method="post">
+        <input class="class_input" type="text" name="cod_prezenta" placeholder="attendance code">
+        <button class="class_button" type="submit" name="present" >present</button>
+        </form>
+      </div>
     </div>
+
+    <div class="attendance card">
+      <div class="attendance_head">
+        <div class="class_name">POO</div>
+        <div class="hour">12:00-14:00</div>
+      </div>
+      <div class="attendance_body">
+        <div class="class_info">Suprascrierea operatorilor,functii friend,bla bla</div>
+        <form class="class_form" method="post">
+        <input class="class_input" type="text" name="cod_prezenta" placeholder="attendance code">
+        <button class="class_button" type="submit" name="present" >present</button>
+        </form>
+      </div>
+    </div>
+
+    </div>
+
   </div>
+
   <script src="nav.js"></script>
   <script src="calendar.js"></script>
 </body>
