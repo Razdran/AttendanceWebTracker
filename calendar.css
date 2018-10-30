@@ -1,9 +1,47 @@
-@import "default.css";
+
 @import "card.css";
 
-.card {
+#calendar {
   width: 500px;
   height: 350px;
+}
+.attendance{
+  width:500px;
+}
+.attendance_head{
+  height:40px;
+  display:grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+  background-color:black;
+}
+.attendance_body{
+  padding:10%;
+}
+.notes_button{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #313854;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.notes_button:hover{
+  background:  #394263;
+}
+.class_name{
+  text-align: center;
+  color:white;
+}
+.hour{
+  color:white;
+  text-align:center;
 }
 
 .container {
