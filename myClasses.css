@@ -30,7 +30,6 @@ body{
 .myClassesList{
     grid-row: 2/3;
     grid-column: 2/3;
-    background-color:red;
 
 }
 .myClassesNotes{
@@ -69,3 +68,23 @@ body{
     text-align: left;
     overflow: hidden;
 }
+.collapsible{
+    background-color: #394263;
+    color:white;
+    cursor:pointer;
+    padding:10px;
+    width:100%;
+    text-align:left;
+    outline:none;
+    font-size: 14px;
+}
+.active .collapsible:hover{
+    background-color: #313854;
+}
+.content{
+    padding-left: 20px;
+    display: none;
+    transition: max-height 0.5s ease-out;
+    max-height: 0;
+    overflow: hidden;
+ }
