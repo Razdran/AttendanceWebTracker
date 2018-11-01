@@ -214,3 +214,26 @@ body{
     max-width: 100%;
     overflow-x: hidden;
 }
+@media (max-width:800px){
+    .header_left{
+        font-size: 0;
+    }
+    .header_left i{
+        font-size: 30px;
+    }
+    .header{
+        grid-template-rows: 50px;
+        grid-template-columns: 1fr 32px 1fr 1fr;
+    }
+    .header_siteName{
+        font-size: 8px;
+    }
+    .header_right_home{
+        font-size: 0px;
+    }
+}
+@media (max-width:350px){
+    .header_siteName{
+        font-size: 6px;
+    }
+}
