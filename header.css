@@ -191,7 +191,7 @@ body{
     outline: none;
 }
 .header_right input[type=text]:focus{
-    width:100%;
+    width:95%;
     grid-area: rr;
     margin-right: 5px;
     margin-top:5px;
