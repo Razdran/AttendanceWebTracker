@@ -60,7 +60,7 @@ body{
     margin-right: 5%; 
     margin-top:5%;
     resize: vertical;
-    background:url("lines.png") repeat-y;
+    background:url("../html/lines.png") repeat-y;
     line-height: 25px;
     outline: none;
     padding-left:100px;
