@@ -1,0 +1,15 @@
+	Aplicatia se adreseaza atat studentilor cat si profesorilor. Prin aceasta aplicatie profesorii
+pot crea evenimente precum seminarii,cursuri sau teste. Acestia pot selecta un grup de studenti care
+sa participe la aceste evenimente si le pot atribui acestora atat punctaje cat si un feedback 
+despre activitatea lor la evenimentul respectiv. 
+	Profesorii pot crea statistici despre prezentele sau notele la unul din evenimente
+dupa mai multe criterii. De asemenea profesorii pot sa importe date privind prezentele si notele
+din surse externe precum Google Drive si le pot exporta in astfel de surse externe.	
+De asemenea Stundentii trebuie sa isi confirme prezenta la unul din evenimente folosind un 
+cod transmis de catre profesor acesta fiind valabil doar daca geolocatia studentului este
+aceeasi cu cea in care se desfasoara evenimentul. 
+	Studentul poate lua notite la fiecare eveniment in parte si isi poate consulta orarul ,in care vor aparea
+toate evenimentele la care a fost selectat de catre profesori.
+	Asadar, aplicatia are ca tipuri de utilizatori profesori si studenti care isi doresc un mod
+mai eficient si mai atractiv de a face prezenta si de a lua notite la cursuri/seminarii.
+	
