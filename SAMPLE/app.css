@@ -15,6 +15,7 @@
     border-radius: 16px;
     overflow: hidden;
     transition: box-shadow 0.25s ease, transform 0.25s ease;
+    background-color: #00989a;
 
 }
 .card:hover{
