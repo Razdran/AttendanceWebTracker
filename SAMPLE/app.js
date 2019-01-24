@@ -78,16 +78,23 @@ function checkNewUser(_uid)
 }
 
 function createSession(_titlu,_maxPrezente,_sessionCode){
-	var ref=database.ref("sessions");
-	var data={
-		id:"1",
-		titlu:_titlu,
-		organizatorName:mainApp.name,
-		organizatorUID:mainApp.uid,
-		maxPrezente:_maxPrezente,
-		sessionCode:_sessionCode,
-		active:0
-	}	
+
+	if(mainApp.permission == 1)
+	{
+		var ref = database.ref("sessions");
+		var data =
+			{
+				id:"1",
+				titlu:_titlu,
+				organizatorName: mainApp.user.displayName,
+				organizatorUID: mainApp.user.uid,
+				maxPrezente: _maxPrezente,
+				sessionCode: _sessionCode,
+				active:0
+			}
+		ref.push(data);	
+	}
+	
 }
 
 function updateSession(_maxPrezente,_sessionCode,_active){
@@ -101,5 +108,6 @@ function updateSession(_maxPrezente,_sessionCode,_active){
 async function mainFlow(){
 	mainApp.permission = await checkPermissions() ;
 	console.log(mainApp.permission);
+	createSession("mate",20,"querty");
 }
 
