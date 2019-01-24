@@ -78,7 +78,6 @@ function createSession(_titlu, _maxPrezente, _sessionCode) {
 		var ref = database.ref("sessions");
 		var data =
 		{
-			id: "1",
 			titlu: _titlu,
 			organizatorName: mainApp.user.displayName,
 			organizatorUID: mainApp.user.uid,
@@ -86,47 +85,40 @@ function createSession(_titlu, _maxPrezente, _sessionCode) {
 			sessionCode: _sessionCode,
 			active: 0
 		}
-		ref.push(data);
+		var result = ref.push(data);
+		return result.key;
 	}
 
 }
 
-function updateSession(_maxPrezente, _sessionCode, _active) {
-
+function getSessionById(_sessionId) {
+	return firebase.database().ref('/sessions/' + _sessionId).once('value').then(function (result) {
+		var object = result.val();
+		object.key = _sessionId;
+		return object;
+	});
 }
 
-function renderSession(sessionId)
-{
-	getSessionById(sessionId).then((session)=>{
-	console.log("s",session);
-	dashboard=document.getElementById("dashboard");
-	card=document.createElement("div");
-	dashboard.appendChild(card);
-	titlu=document.createElement("div");
-	titluSpan=document.createElement("span");
-	card.appendChild(titlu);
-	titlu.appendChild(titluSpan);
-	organizator=document.createElement("div");
-	organizatorSpan=document.createElement("span");
-	card.appendChild(organizator);
-	organizator.appendChild(organizatorSpan);
-	prezente=document.createElement("div");
-	prezenteSpan=document.createElement("span");
-	card.appendChild(prezente);
-	prezente.appendChild(prezenteSpan);
-	});
-
+function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
+	_sessionId.then(function (result) {
+		var updates = {};
+		updatedSession = result;
+		updatedSession.maxPrezente = _maxPrezente;
+		updatedSession.sessionCode = _sessionCode;
+		updatedSession.active = _active;
+		keyForSession = result.key;
+		delete result.key;
+		updates['/sessions/' + keyForSession] = updatedSession;
+		return firebase.database().ref().update(updates);
+	})
 }
 
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
-//setPermissions("jQJyXKzhCshUC9BCo5OAqofr7iM2",1);
+//setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
 
 
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
-	console.log(mainApp.permission);
-	id=createSession("mate", 20, "querty");
-	renderSession(id);
-	
+	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 }
 
