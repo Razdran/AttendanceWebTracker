@@ -113,25 +113,24 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 	})
 }
 
-function renderSession(sessionId)
-{
-	getSessionById(sessionId).then((session)=>{
-	console.log("s",session);
-	dashboard=document.getElementById("dashboard");
-	card=document.createElement("div");
-	dashboard.appendChild(card);
-	titlu=document.createElement("div");
-	titluSpan=document.createElement("span");
-	card.appendChild(titlu);
-	titlu.appendChild(titluSpan);
-	organizator=document.createElement("div");
-	organizatorSpan=document.createElement("span");
-	card.appendChild(organizator);
-	organizator.appendChild(organizatorSpan);
-	prezente=document.createElement("div");
-	prezenteSpan=document.createElement("span");
-	card.appendChild(prezente);
-	prezente.appendChild(prezenteSpan);
+function renderSession(sessionId) {
+	getSessionById(sessionId).then((session) => {
+		console.log("s", session);
+		dashboard = document.getElementById("dashboard");
+		card = document.createElement("div");
+		dashboard.appendChild(card);
+		titlu = document.createElement("div");
+		titluSpan = document.createElement("span");
+		card.appendChild(titlu);
+		titlu.appendChild(titluSpan);
+		organizator = document.createElement("div");
+		organizatorSpan = document.createElement("span");
+		card.appendChild(organizator);
+		organizator.appendChild(organizatorSpan);
+		prezente = document.createElement("div");
+		prezenteSpan = document.createElement("span");
+		card.appendChild(prezente);
+		prezente.appendChild(prezenteSpan);
 	});
 }
 
@@ -153,11 +152,13 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 //setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
 
 
-mainApp.permission = await checkPermissions();
+
 async function mainFlow() {
+	mainApp.permission = await checkPermissions();
 	console.log(mainApp.permission);
-	id=createSession("mate", 20, "querty");
-	//renderSession(id);
+	id = createSession("mate", 20, "querty");
+	console.log(id);
+	renderSession(id);
 	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 
 }
