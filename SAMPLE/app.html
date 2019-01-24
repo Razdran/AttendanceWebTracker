@@ -10,53 +10,57 @@
     <link rel="stylesheet" type="text/css" href="app.css">
 
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
-	<link rel="stylesheet" href="card.css"></link>
+    <link rel="stylesheet" href="card.css">
+    </link>
 </head>
 
 <body>
 
-<div class="header">
+    <div class="header">
 
-    <div class=header_left>
-        <div class="header_left_menu">
-        </div>        
-    </div>
-    
-    <div class="header_logo_img">
-        <img class="header_logo_img" src="../html/icon.png" alt="logo">
-    </div>
-
-    <div class="header_siteName">
-        <h1>Attendance Web Tracker</h1>
-    </div>
-</div>  
-<button id="btn1">exportHTML5</button>
-<button id="btn2">exportJSON</button>
-<button onclick="mainApp.logout()">Log Out</button>
-<button id="addClass" onclick="popUp()" style="width: auto">Create a new class</button>
-
-<div id="dashboard"></div>
-<div id='createClass' class="modal">
-    <span onclick="closePopUp()" class="close" title="Close">X</span>
-    <form class="modal-content">
-        <div class="formContainer">
-            <h1>Create Class</h1>
-            <p>Please fill in this form to create an account</p>
-            <hr>
-            <label for="Titlu"><b>Title</b></label>
-            <input type="text" placeholder="Enter title" name="Titlu" required>
-            <label for="Maxim prezente"><b>Max number of students</b></label>
-            <input type="number" placeholder="Enter max students" name="Maxim prezente" required>
-            <label for="codPrezenta"><b>Presence code</b></label>
-            <button class="createBtn">Create presence code:</button>
-            <button class="create">Create class</button>
+        <div class=header_left>
+            <div class="header_left_menu">
+            </div>
         </div>
-    </form>
+
+        <div class="header_logo_img">
+            <img class="header_logo_img" src="../html/icon.png" alt="logo">
+        </div>
+
+        <div class="header_siteName">
+            <h1>Attendance Web Tracker</h1>
+        </div>
+    </div>
+    <button id="btn1">exportHTML5</button>
+    <button id="btn2">exportJSON</button>
+    <button onclick="mainApp.logout()">Log Out</button>
+    <button id="addClass" onclick="popUp()" style="width: auto">Create a new class</button>
+
+    <div id="dashboard"></div>
+    <div id='createClass' class="modal">
+        <form class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUp()" class="close" title="Close">&times;</span>
+
+                <h1>Create Session</h1>
+                <p>Please fill in this form to create a new session</p>
+                <hr>
+                <div class="wrapperForm">
+                    <input type="text" class="i1" placeholder="Enter title" name="Titlu" required>
+                    <input type="number" class="i2" placeholder="Enter max students" name="Maxim prezente" required>
+                    <input type="text" class="i3" placeholder="session code" name="codPrezenta" required>
+
+                    <button class="createBtn">Create code</button>
+
+                    <button class="create">CREATE</button>
+                </div>
+            </div>
+        </form>
 
 
 
-</div>
-<script>
+    </div>
+    <script>
 
 
 
@@ -70,7 +74,7 @@
 
         });
 
-  </script>
+    </script>
 
     <script src="fireBase.js"></script>
     <script src="app.js"></script>

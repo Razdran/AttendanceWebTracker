@@ -73,12 +73,12 @@ input[type=text], input[type=number] {
     margin-bottom: 25px;
   }
   .close {
-    position: absolute;
     right: 20px;
     top: 75px;
-    font-size: 40px;
+    font-size: 20px;
     font-weight: bold;
-    color: #f1f1f1;
+    color: black;
+    float:right;
   }
   
   .close:hover,
@@ -86,13 +86,59 @@ input[type=text], input[type=number] {
     color: #f44336;
     cursor: pointer;
   }  
+.wrapperForm{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr ;
+    grid-template-rows: 1fr 1fr 1fr 0.5fr 1fr;
+}
+
+.i1{
+    color: white;
+    grid-column: 2/4;
+    grid-row:1/2;
+}
+
+.i2{
+    
+    color: white;
+
+    grid-column: 2/4;
+    grid-row:2/3;
+}
+.i3{
+    
+    color: white;
+    grid-column: 2/3;
+    grid-row:3/4;
+}
+
   .createBtn{
-      float:right;
+    height: 45px;  
+    width:100px;  
+    margin-top:5px;  
+    margin-left: 50px;
+    grid-column: 3/4;
+    grid-row:3/4;
+    background-color: #03bd8d;
+    border-radius:50%;
   }
   .create{
-      background-color: #00989a;
-      display: block;
+    color:white;
+    margin-top:20px;
+    background-color: #00989a; 
+     
+    grid-column: 2/4;
+    grid-row:5/6;
   }
+
+
+h1{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+
   .addClass{
       display: inline-block;
   }
