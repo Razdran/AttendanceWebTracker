@@ -78,7 +78,6 @@ function createSession(_titlu, _maxPrezente, _sessionCode) {
 		var ref = database.ref("sessions");
 		var data =
 		{
-			id: "1",
 			titlu: _titlu,
 			organizatorName: mainApp.user.displayName,
 			organizatorUID: mainApp.user.uid,
@@ -86,13 +85,32 @@ function createSession(_titlu, _maxPrezente, _sessionCode) {
 			sessionCode: _sessionCode,
 			active: 0
 		}
-		ref.push(data);
+		var result = ref.push(data);
+		return result.key;
 	}
 
 }
 
-function updateSession(_maxPrezente, _sessionCode, _active) {
+function getSessionById(_sessionId) {
+	return firebase.database().ref('/sessions/' + _sessionId).once('value').then(function (result) {
+		var object = result.val();
+		object.key = _sessionId;
+		return object;
+	});
+}
 
+function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
+	_sessionId.then(function (result) {
+		var updates = {};
+		updatedSession = result;
+		updatedSession.maxPrezente = _maxPrezente;
+		updatedSession.sessionCode = _sessionCode;
+		updatedSession.active = _active;
+		keyForSession = result.key;
+		delete result.key;
+		updates['/sessions/' + keyForSession] = updatedSession;
+		return firebase.database().ref().update(updates);
+	})
 }
 
 function renderSession(sessionId)
@@ -126,7 +144,8 @@ async function mainFlow() {
 	mainApp.permission = await checkPermissions();
 	console.log(mainApp.permission);
 	id=createSession("mate", 20, "querty");
-	renderSession(id);
-	
+	//renderSession(id);
+	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
+
 }
 
