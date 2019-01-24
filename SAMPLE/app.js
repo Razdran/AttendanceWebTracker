@@ -69,20 +69,20 @@ function checkPermissions() {
 
 
 function createSession(_titlu, _maxPrezente, _sessionCode) {
-	console.log("m",mainApp);
+	console.log("m", mainApp);
 	if (mainApp.permission == 1) {
-		
+
 		var ref = database.ref("sessions");
 		var data =
 		{
 			titlu: _titlu,
 			organizatorName: mainApp.user.displayName,
 			organizatorUID: mainApp.user.uid,
-			prezente:0,
+			prezente: 0,
 			maxPrezente: _maxPrezente,
 			sessionCode: _sessionCode,
-			active: 0,
-			participants:[]
+			active: 1,
+			participants: []
 		}
 		var result = ref.push(data);
 		return result.key;
@@ -111,12 +111,16 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 		return firebase.database().ref().update(updates);
 	})
 }
-function participate(_sessionId){
+function participate(_sessionId) {
 	_sessionId.then(function (result) {
+		participantsText=mainApp.user.uid+' '+ mainApp.user.displayName+' ';
+
+		console.log("participate" + _sessionId);
 		var updates = {};
 		updatedSession = result;
 		updatedSession.prezente++;
-		updatedSession.participants.push([mainApp.user.uid,mainApp.user.displayName]);
+		console.log(result);
+		updatedSession.participants.push(mainApp.user.uid);
 		keyForSession = result.key;
 		delete result.key;
 		updates['/sessions/' + keyForSession] = updatedSession;
@@ -126,64 +130,59 @@ function participate(_sessionId){
 
 function renderSession(sessionId) {
 	getSessionById(sessionId).then((session) => {
-		console.log(mainApp.permission,session.organizatorUID,session.active);
-		if((mainApp.permission==1&&session.organizatorUID==mainApp.user.uid)||(mainApp.permission==0&&session.active==1))
-		{
+		console.log(mainApp.permission, session.organizatorUID, session.active);
+		if ((mainApp.permission == 1 && session.organizatorUID == mainApp.user.uid) || (mainApp.permission == 0 && session.active == 1)) {
 			console.log("s", session);
 			dashboard = document.getElementById("dashboard");
 			card = document.createElement("div");
-			card.id=sessionId;
-			card.className="card";
-			card.setAttribute("onclick","sessionPopUp(\""+card.id+"\");")
+			card.id = sessionId;
+			card.className = "card";
+			card.setAttribute("onclick", "sessionPopUp(\"" + card.id + "\");")
 			dashboard.appendChild(card);
 			titlu = document.createElement("div");
-			titlu.className="titlu";
+			titlu.className = "titlu";
 			titluSpan = document.createElement("span");
-			titluSpan.className="titluSpan";
-			titluSpan.innerHTML=session.titlu;
+			titluSpan.className = "titluSpan";
+			titluSpan.innerHTML = session.titlu;
 			card.appendChild(titlu);
 			titlu.appendChild(titluSpan);
 			organizator = document.createElement("div");
-			organizator.className="organizator";
+			organizator.className = "organizator";
 			organizatorSpan = document.createElement("span");
-			organizatorSpan.className="organizatorSpan";
-			organizatorSpan.innerHTML=session.organizatorName;
+			organizatorSpan.className = "organizatorSpan";
+			organizatorSpan.innerHTML = session.organizatorName;
 			card.appendChild(organizator);
 			organizator.appendChild(organizatorSpan);
 			prezente = document.createElement("div");
-			prezente.className="prezente";
+			prezente.className = "prezente";
 			prezenteSpan = document.createElement("span");
-			prezenteSpan.className="prezenteSpan";
-			prezenteSpan.innerHTML=session.prezente+"/"+session.maxPrezente;
+			prezenteSpan.className = "prezenteSpan";
+			prezenteSpan.innerHTML = session.prezente + "/" + session.maxPrezente;
 			card.appendChild(prezente);
 			prezente.appendChild(prezenteSpan);
 		}
 	});
 }
-function getSessionKeyes(){
-	lista=[];
-	let promise = new Promise((resolve, reject) => 
-	{
+function getSessionKeyes() {
+	lista = [];
+	let promise = new Promise((resolve, reject) => {
 		userRef = database.ref().child("sessions");
-		userRef.on("value", data => 
-		{
+		userRef.on("value", data => {
 			keys = Object.keys(data.val());
 			resolve(keys);
 		});
 	});
 	return promise;
 }
-function renderAllSessions(){
-	getSessionKeyes().then(function(keys) 
-											 { 
-												
-												for (var k=0;k<keys.length;k++)
-												{
-													renderSession(keys[k]);
-												}
-											 });
-	
-	
+function renderAllSessions() {
+	getSessionKeyes().then(function (keys) {
+
+		for (var k = 0; k < keys.length; k++) {
+			renderSession(keys[k]);
+		}
+	});
+
+
 }
 
 function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
@@ -200,46 +199,55 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 	})
 }
 
-function generateSessionCode()
-{
-		var text="";
-		var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-		for(var i=0;i<6;i++)
-		{
-			text+=letters.charAt(Math.floor(Math.random() * letters.length))
-		}
-		return text;
+function generateSessionCode() {
+	var text = "";
+	var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+	for (var i = 0; i < 6; i++) {
+		text += letters.charAt(Math.floor(Math.random() * letters.length))
+	}
+	return text;
 }
 
-function createGrade(_participantId,_participantName,_sessionId,_feedback,_grade){
+function createGrade(_participantId, _participantName, _sessionId, _feedback, _grade) {
 	if (mainApp.permission == 1) {
-		
+
 		var ref = database.ref("grades");
 		var data =
 		{
-			participantId:_participantId,
-			participantName:_participantName,
-			sessionId:_sessionId,
-			feedback:_feedback,
-			grade:_grade
+			participantId: _participantId,
+			participantName: _participantName,
+			sessionId: _sessionId,
+			feedback: _feedback,
+			grade: _grade
 		}
 		var result = ref.push(data);
 		return result.key;
 	}
 }
-function sessionPopUp(_sessionId)
-{
-		if(mainApp.permission==1)
-		{
-			console.log("organizator"+_sessionId);
-		}
-		else{
-			console.log("participant"+_sessionId);
-		}
+function sessionPopUp(_sessionId) {
+	if (mainApp.permission == 1) {
+		console.log("organizator" + _sessionId);
+	}
+	else {
+		getSessionById(_sessionId).then((session) => {
+			console.log("participant" + _sessionId);
+			document.getElementById('submitPresence').style.display = 'block';
+			let btn = document.getElementById('submitPresenceBtn');
+			btn.addEventListener("click", function(){
+
+				if (document.getElementById('code').value == session.sessionCode) {
+					
+					participate(getSessionById(_sessionId));
+				}
+			})
+
+		})
+
+	}
 }
-function setup(){
-	
-	
+function setup() {
+
+
 }
 
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
@@ -249,11 +257,15 @@ function setup(){
 
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
-	
+	createSession("test2",20,"carapace");	
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 	//createSession("test",15,generateSessionCode());
-	
+
 	renderAllSessions();
-	
+
+}
+function closePopUp2() {
+	document.getElementById('submitPresence').style.display = 'none';
+
 }
