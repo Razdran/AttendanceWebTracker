@@ -27,7 +27,6 @@ var database = firebase.database();
 	mainApp.logout = logout;
 	console.log("am setat logout");
 
-
 })()
 
 function setPermissions(_uid, _permission) {
@@ -132,6 +131,7 @@ function renderSession(sessionId) {
 		card = document.createElement("div");
 		card.id=sessionId;
 		card.className="card";
+		card.setAttribute("onclick","sessionPopUp(\""+card.id+"\");")
 		dashboard.appendChild(card);
 		titlu = document.createElement("div");
 		titlu.className="titlu";
@@ -151,7 +151,7 @@ function renderSession(sessionId) {
 		prezente.className="prezente";
 		prezenteSpan = document.createElement("span");
 		prezenteSpan.className="prezenteSpan";
-		prezenteSpan.innerHTML="0/"+session.maxPrezente;
+		prezenteSpan.innerHTML=session.prezente+"/"+session.maxPrezente;
 		card.appendChild(prezente);
 		prezente.appendChild(prezenteSpan);
 	});
@@ -172,6 +172,7 @@ function getSessionKeyes(){
 function renderAllSessions(){
 	getSessionKeyes().then(function(keys) 
 											 { 
+												
 												for (var k=0;k<keys.length;k++)
 												{
 													renderSession(keys[k]);
@@ -222,6 +223,20 @@ function createGrade(_participantId,_participantName,_sessionId,_feedback,_grade
 		return result.key;
 	}
 }
+function sessionPopUp(_sessionId)
+{
+		if(mainApp.permission==1)
+		{
+			console.log("organizator"+_sessionId);
+		}
+		else{
+			console.log("participant"+_sessionId);
+		}
+}
+function setup(){
+	
+	
+}
 
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
 //setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
@@ -233,6 +248,8 @@ async function mainFlow() {
 	
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
+	//createSession("test",15,generateSessionCode());
+	
 	renderAllSessions();
 	
 }
