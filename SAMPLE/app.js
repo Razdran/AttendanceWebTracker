@@ -133,19 +133,31 @@ function renderSession(sessionId)
 	card.appendChild(prezente);
 	prezente.appendChild(prezenteSpan);
 	});
+}
 
+function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
+	_sessionId.then(function (result) {
+		var updates = {};
+		updatedSession = result;
+		updatedSession.maxPrezente = _maxPrezente;
+		updatedSession.sessionCode = _sessionCode;
+		updatedSession.active = _active;
+		keyForSession = result.key;
+		delete result.key;
+		updates['/sessions/' + keyForSession] = updatedSession;
+		return firebase.database().ref().update(updates);
+	})
 }
 
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
-//setPermissions("jQJyXKzhCshUC9BCo5OAqofr7iM2",1);
+//setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
 
 
+mainApp.permission = await checkPermissions();
 async function mainFlow() {
-	mainApp.permission = await checkPermissions();
 	console.log(mainApp.permission);
 	id=createSession("mate", 20, "querty");
 	//renderSession(id);
 	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 
 }
-
