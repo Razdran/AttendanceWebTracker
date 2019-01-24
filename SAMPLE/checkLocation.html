@@ -14,6 +14,7 @@
 
 
 <script>
+    var studentInFaculty;//variabila in care se retine daca studentul este in facultate
     var x = document.getElementById("demo");
     function getLocation() {
       if (navigator.geolocation) {
@@ -23,15 +24,14 @@
       }
     }
     function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
   if(position.coords.latitude>47.173720&&
      position.coords.latitude<47.174336&&
      position.coords.longitude>27.574524&&
      position.coords.longitude<27.575696)
-        console.log("esti in facultate!");
+        studentInFaculty=true;
   else
-        console.log("nu esti in facultate!");
+        studentInFaculty=false;
+    console.log(studentInFaculty);
 }
     </script> 
 </body>
