@@ -15,7 +15,23 @@
     border-radius: 16px;
     overflow: hidden;
     transition: box-shadow 0.25s ease, transform 0.25s ease;
+
 }
 .card:hover{
     box-shadow: 5px 12px 20px rgba(36,37,38,0.2);
+}
+.titlu{
+    text-align: center;
+    background-color: rgba(0,0,0,0.2);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+.organizator{
+    margin-top:10px;
+    font-size: 25px;
+    text-align: center;
+}
+.prezente{
+    margin-top:60px;
 }
