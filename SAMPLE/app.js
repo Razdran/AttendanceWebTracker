@@ -49,7 +49,6 @@ function gotData(data) {
 }
 
 function checkPermissions() {
-	console.log("am intrat");
 	let promise = new Promise((resolve, reject) => {
 		userRef = database.ref().child("permissions");
 		userRef.on("value", data => {
@@ -68,13 +67,12 @@ function checkPermissions() {
 	return promise;
 
 }
-function checkNewUser(_uid) {
 
-}
 
 function createSession(_titlu, _maxPrezente, _sessionCode) {
-
+	console.log("m",mainApp);
 	if (mainApp.permission == 1) {
+		
 		var ref = database.ref("sessions");
 		var data =
 		{
@@ -118,20 +116,56 @@ function renderSession(sessionId) {
 		console.log("s", session);
 		dashboard = document.getElementById("dashboard");
 		card = document.createElement("div");
+		card.id=sessionId;
+		card.className="card";
 		dashboard.appendChild(card);
 		titlu = document.createElement("div");
+		titlu.className="titlu";
 		titluSpan = document.createElement("span");
+		titluSpan.className="titluSpan";
+		titluSpan.innerHTML=session.titlu;
 		card.appendChild(titlu);
 		titlu.appendChild(titluSpan);
 		organizator = document.createElement("div");
+		organizator.className="organizator";
 		organizatorSpan = document.createElement("span");
+		organizatorSpan.className="organizatorSpan";
+		organizatorSpan.innerHTML=session.organizatorName;
 		card.appendChild(organizator);
 		organizator.appendChild(organizatorSpan);
 		prezente = document.createElement("div");
+		prezente.className="prezente";
 		prezenteSpan = document.createElement("span");
+		prezenteSpan.className="prezenteSpan";
+		prezenteSpan.innerHTML="0/"+session.maxPrezente;
 		card.appendChild(prezente);
 		prezente.appendChild(prezenteSpan);
 	});
+}
+function getSessionKeyes(){
+	lista=[];
+	let promise = new Promise((resolve, reject) => 
+	{
+		userRef = database.ref().child("sessions");
+		userRef.on("value", data => 
+		{
+			keys = Object.keys(data.val());
+			resolve(keys);
+		});
+	});
+	return promise;
+	
+}
+function renderAllSessions(){
+	getSessionKeyes().then(function(keys) 
+											 { 
+												for (var k=0;k<keys.length;k++)
+												{
+													renderSession(keys[k]);
+												}
+											 });
+	
+	
 }
 
 function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
@@ -156,9 +190,9 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
 	console.log(mainApp.permission);
-	id = createSession("mate", 20, "querty");
-	console.log(id);
-	renderSession(id);
-	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
-
+	console.log(mainApp.permission);
+	
+	//renderSession(id);
+	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
+	renderAllSessions();
 }
