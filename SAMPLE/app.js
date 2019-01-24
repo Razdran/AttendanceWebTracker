@@ -126,34 +126,38 @@ function participate(_sessionId){
 
 function renderSession(sessionId) {
 	getSessionById(sessionId).then((session) => {
-		console.log("s", session);
-		dashboard = document.getElementById("dashboard");
-		card = document.createElement("div");
-		card.id=sessionId;
-		card.className="card";
-		card.setAttribute("onclick","sessionPopUp(\""+card.id+"\");")
-		dashboard.appendChild(card);
-		titlu = document.createElement("div");
-		titlu.className="titlu";
-		titluSpan = document.createElement("span");
-		titluSpan.className="titluSpan";
-		titluSpan.innerHTML=session.titlu;
-		card.appendChild(titlu);
-		titlu.appendChild(titluSpan);
-		organizator = document.createElement("div");
-		organizator.className="organizator";
-		organizatorSpan = document.createElement("span");
-		organizatorSpan.className="organizatorSpan";
-		organizatorSpan.innerHTML=session.organizatorName;
-		card.appendChild(organizator);
-		organizator.appendChild(organizatorSpan);
-		prezente = document.createElement("div");
-		prezente.className="prezente";
-		prezenteSpan = document.createElement("span");
-		prezenteSpan.className="prezenteSpan";
-		prezenteSpan.innerHTML=session.prezente+"/"+session.maxPrezente;
-		card.appendChild(prezente);
-		prezente.appendChild(prezenteSpan);
+		console.log(mainApp.permission,session.organizatorUID,session.active);
+		if((mainApp.permission==1&&session.organizatorUID==mainApp.user.uid)||(mainApp.permission==0&&session.active==1))
+		{
+			console.log("s", session);
+			dashboard = document.getElementById("dashboard");
+			card = document.createElement("div");
+			card.id=sessionId;
+			card.className="card";
+			card.setAttribute("onclick","sessionPopUp(\""+card.id+"\");")
+			dashboard.appendChild(card);
+			titlu = document.createElement("div");
+			titlu.className="titlu";
+			titluSpan = document.createElement("span");
+			titluSpan.className="titluSpan";
+			titluSpan.innerHTML=session.titlu;
+			card.appendChild(titlu);
+			titlu.appendChild(titluSpan);
+			organizator = document.createElement("div");
+			organizator.className="organizator";
+			organizatorSpan = document.createElement("span");
+			organizatorSpan.className="organizatorSpan";
+			organizatorSpan.innerHTML=session.organizatorName;
+			card.appendChild(organizator);
+			organizator.appendChild(organizatorSpan);
+			prezente = document.createElement("div");
+			prezente.className="prezente";
+			prezenteSpan = document.createElement("span");
+			prezenteSpan.className="prezenteSpan";
+			prezenteSpan.innerHTML=session.prezente+"/"+session.maxPrezente;
+			card.appendChild(prezente);
+			prezente.appendChild(prezenteSpan);
+		}
 	});
 }
 function getSessionKeyes(){
