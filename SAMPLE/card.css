@@ -1,5 +1,9 @@
+body{
+background-color:#f6f6f6;
+}
 .card{
-background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+//background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
 color:white;
-
+box-shadow:0 6px 15px rgba(36,37,38,0.08);
+border-radius:16px;
 }

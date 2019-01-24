@@ -79,9 +79,11 @@ function createSession(_titlu, _maxPrezente, _sessionCode) {
 			titlu: _titlu,
 			organizatorName: mainApp.user.displayName,
 			organizatorUID: mainApp.user.uid,
+			prezente:0,
 			maxPrezente: _maxPrezente,
 			sessionCode: _sessionCode,
-			active: 0
+			active: 0,
+			participants:[]
 		}
 		var result = ref.push(data);
 		return result.key;
@@ -104,6 +106,18 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 		updatedSession.maxPrezente = _maxPrezente;
 		updatedSession.sessionCode = _sessionCode;
 		updatedSession.active = _active;
+		keyForSession = result.key;
+		delete result.key;
+		updates['/sessions/' + keyForSession] = updatedSession;
+		return firebase.database().ref().update(updates);
+	})
+}
+function participate(_sessionId){
+	_sessionId.then(function (result) {
+		var updates = {};
+		updatedSession = result;
+		updatedSession.prezente++;
+		updatedSession.participants.push([mainApp.user.uid,mainApp.user.displayName]);
 		keyForSession = result.key;
 		delete result.key;
 		updates['/sessions/' + keyForSession] = updatedSession;
@@ -154,7 +168,6 @@ function getSessionKeyes(){
 		});
 	});
 	return promise;
-	
 }
 function renderAllSessions(){
 	getSessionKeyes().then(function(keys) 
@@ -182,6 +195,34 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 	})
 }
 
+function generateSessionCode()
+{
+		var text="";
+		var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+		for(var i=0;i<6;i++)
+		{
+			text+=letters.charAt(Math.floor(Math.random() * letters.length))
+		}
+		return text;
+}
+
+function createGrade(_participantId,_participantName,_sessionId,_feedback,_grade){
+	if (mainApp.permission == 1) {
+		
+		var ref = database.ref("grades");
+		var data =
+		{
+			participantId:_participantId,
+			participantName:_participantName,
+			sessionId:_sessionId,
+			feedback:_feedback,
+			grade:_grade
+		}
+		var result = ref.push(data);
+		return result.key;
+	}
+}
+
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
 //setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
 
@@ -189,10 +230,9 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
-	console.log(mainApp.permission);
-	console.log(mainApp.permission);
 	
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 	renderAllSessions();
+	
 }
