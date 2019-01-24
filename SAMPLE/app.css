@@ -1,0 +1,21 @@
+#dashboard{
+    display:flex;
+    justify-content: space-around;
+    flex-flow: wrap;
+}
+.card{
+    font-size: 40px;
+    color:white;
+    background-image: linear-gradient(to bottom left, #03bd8d 0%, #00989a 100%);
+    width: 370px;
+    margin:0 15px;
+    height: 210px;
+    margin-bottom: 50px;
+    box-shadow: 0 6px 15px rgba(36,37,38,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.card:hover{
+    box-shadow: 5px 12px 20px rgba(36,37,38,0.2);
+}

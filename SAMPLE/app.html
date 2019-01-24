@@ -6,14 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="app.css">
+
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
 </head>
 
 <body>
 
+<div class="header">
 
-<p>DASHBOARD</p>
-<br/>
+    <div class=header_left>
+        <div class="header_left_menu">
+        </div>        
+    </div>
+    
+    <div class="header_logo_img">
+        <img class="header_logo_img" src="../html/icon.png" alt="logo">
+    </div>
+
+    <div class="header_siteName">
+        <h1>Attendance Web Tracker</h1>
+    </div>
+</div>  
 <button id="btn1">exportHTML5</button>
 <button id="btn2">exportJSON</button>
 <button onclick="mainApp.logout()">Log Out</button>
