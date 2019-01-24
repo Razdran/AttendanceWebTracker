@@ -106,8 +106,9 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 		updatedSession.maxPrezente = _maxPrezente;
 		updatedSession.sessionCode = _sessionCode;
 		updatedSession.active = _active;
-
-		updates['/sessions/' + _sessionId.key] = updatedSession;
+		keyForSession = result.key;
+		delete result.key;
+		updates['/sessions/' + keyForSession] = updatedSession;
 		return firebase.database().ref().update(updates);
 	})
 }
@@ -118,5 +119,6 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
+	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 }
 
