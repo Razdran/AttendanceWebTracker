@@ -95,13 +95,38 @@ function updateSession(_maxPrezente, _sessionCode, _active) {
 
 }
 
+function renderSession(sessionId)
+{
+	getSessionById(sessionId).then((session)=>{
+	console.log("s",session);
+	dashboard=document.getElementById("dashboard");
+	card=document.createElement("div");
+	dashboard.appendChild(card);
+	titlu=document.createElement("div");
+	titluSpan=document.createElement("span");
+	card.appendChild(titlu);
+	titlu.appendChild(titluSpan);
+	organizator=document.createElement("div");
+	organizatorSpan=document.createElement("span");
+	card.appendChild(organizator);
+	organizator.appendChild(organizatorSpan);
+	prezente=document.createElement("div");
+	prezenteSpan=document.createElement("span");
+	card.appendChild(prezente);
+	prezente.appendChild(prezenteSpan);
+	});
+
+}
+
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
-//setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
+//setPermissions("jQJyXKzhCshUC9BCo5OAqofr7iM2",1);
 
 
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
 	console.log(mainApp.permission);
-	createSession("mate", 20, "querty");
+	id=createSession("mate", 20, "querty");
+	renderSession(id);
+	
 }
 
