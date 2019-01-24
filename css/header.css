@@ -14,6 +14,7 @@ body{
     grid-template-columns:1.3fr 32px 1fr 1fr;
     grid-template-areas: "l c c2 r";
     z-index:10;
+    margin-bottom:100px;
 
 }
 
