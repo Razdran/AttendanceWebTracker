@@ -292,22 +292,53 @@ function sessionPopUp(_sessionId) {
 			{
 				tr=document.createElement("tr");
 				td1=document.createElement("td");
-				td1.id="linia"+i+"coloana1";
-				td1.innerHTML=session.participants[i].name;
+				td1.id="linia"+i+"coloana0";
+				input1=document.createElement("input");
+				input1.className="inputEditing";
+				input1.id="input"+td1.id;
+				input1.setAttribute("type","text");
+				input1.value=session.participants[i].name;
 				td1.setAttribute("onclick","editing(\""+td1.id+"\")");
+				td1.appendChild(input1);
+				
 				td2=document.createElement("td");
-				td2.id="linia"+i+"coloana2";
-				td2.innerHTML="";
+				td2.id="linia"+i+"coloana1";
+				input2=document.createElement("input");
+				input2.className="inputEditing";
+				input2.id="input"+td2.id;
+				input2.setAttribute("type","text");
+				input2.value="";
 				td2.setAttribute("onclick","editing(\""+td2.id+"\")");
+				td2.appendChild(input2);
+				
 				td3=document.createElement("td");
-				td3.id="linia"+i+"coloana3";
-				td3.innerHTML="";
+				td3.id="linia"+i+"coloana2";
+				input3=document.createElement("input");
+				input3.className="inputEditing";
+				input3.id="input"+td3.id;
+				input3.setAttribute("type","text");
+				input3.value="";
 				td3.setAttribute("onclick","editing(\""+td3.id+"\")");
+				td3.appendChild(input3);
+				
 				tr.appendChild(td1);
 				tr.appendChild(td2);
 				tr.appendChild(td3);
 				table.appendChild(tr);
 			}
+			
+			submitBtn=document.getElementById("create2");
+			submitBtn.addEventListener("click",function(){
+					for(i=0;i<sesion.participants.length;i++)
+					{
+							var uid=session.participants[i].id;
+							var nume=document.getElementById("inputlinia"+i+"coloana0").value;
+							var feedback=document.getElementById("inputlinia"+i+"coloana2").value;
+							var grade=document.getElementById("inputlinia"+i+"coloana1").value;
+							createGrade(uid,nume,session.id,feedback,grade);						
+					}
+						
+			});
 			
 			
 		})
@@ -335,15 +366,8 @@ function editing(id){
 	console.log("class",cell);
 	if(cell.className!="editing")
 	{
-	content=cell.innerHTML;
-	cell.innerHTML="";
-	cell.className="editing";
-	input=document.createElement("input");
-	input.className="inputEditing";
-	input.setAttribute("type","text");
-	input.value=content;
-	document.getElementById(id).appendChild(input);
 	
+	cell.className="editing";
 	console.log("editing "+id);
 	}
 }
@@ -397,6 +421,9 @@ async function mainFlow() {
 	btn2.addEventListener("click",function(){
 		document.getElementById("newCode").value=generateSessionCode();
 	});
+	
+	
+	
 }
 function closePopUp2() {
 	document.getElementById('submitPresence').style.display = 'none';
