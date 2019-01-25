@@ -111,52 +111,48 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 		return firebase.database().ref().update(updates);
 	})
 }
-function checkSubmited(uid,participants)
-{
-	for(var p=0;p<participants.length;p++)
-	{
-		if(participants[p].id==uid)
-			return 1;
-	}
+function checkSubmited(uid, participants) {
+	if (participants == undefined)
+		return 0;
+	else
+		for (var p = 0; p < participants.length; p++) {
+			if (participants[p].id == uid)
+				return 1;
+		}
 	return 0;
 }
 function participate(_sessionId) {
 	_sessionId.then(function (result) {
-		if(result.prezente<result.maxPrezente)
-		{
-			if(checkSubmited(mainApp.user.uid,result.participants)==0)
-			{
+		if (result.prezente < result.maxPrezente) {
+			if (checkSubmited(mainApp.user.uid, result.participants) == 0) {
 				console.log("participate" + _sessionId);
 				var updates = {};
 				updatedSession = result;
 				updatedSession.prezente++;
 				console.log(result);
-				if(updatedSession.participants == undefined)
-				{
+				if (updatedSession.participants == undefined) {
 					updatedSession.participants = [];
 				}
 				updatedSession.participants = updatedSession.participants.concat(
-				[{
-				id: mainApp.user.uid,
-				name: mainApp.user.displayName
-				}]);
+					[{
+						id: mainApp.user.uid,
+						name: mainApp.user.displayName
+					}]);
 				keyForSession = result.key;
 				console.log(keyForSession);
-				document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML=updatedSession.prezente+"/"+updatedSession.maxPrezente;
+				document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML = updatedSession.prezente + "/" + updatedSession.maxPrezente;
 				delete result.key;
 				updates['/sessions/' + keyForSession] = updatedSession;
 				return firebase.database().ref().update(updates);
 			}
-			else
-			{
-				console.log(mainApp.user.displayName+" has been already submitted");
+			else {
+				console.log(mainApp.user.displayName + " has been already submitted");
 			}
 		}
-		else
-		{
+		else {
 			console.log("s-au terminat locurile");
 		}
-				
+
 	})
 }
 
@@ -259,16 +255,17 @@ function createGrade(_participantId, _participantName, _sessionId, _feedback, _g
 function sessionPopUp(_sessionId) {
 	if (mainApp.permission == 1) {
 		console.log("organizator" + _sessionId);
+		document.getElementById('viewPresence').style.display='block';
 	}
 	else {
 		getSessionById(_sessionId).then((session) => {
 			console.log("participant" + _sessionId);
 			document.getElementById('submitPresence').style.display = 'block';
 			let btn = document.getElementById('submitPresenceBtn');
-			btn.addEventListener("click", function(){
+			btn.addEventListener("click", function () {
 
 				if (document.getElementById('code').value == session.sessionCode) {
-					
+
 					participate(getSessionById(_sessionId));
 				}
 			})
@@ -278,6 +275,23 @@ function sessionPopUp(_sessionId) {
 	}
 }
 function setup() {
+btngroup=document.getElementById("btn-group");
+if(mainApp.permission==1)
+{
+	addbtn=document.createElement("button");
+	addbtn.className="button";
+	addbtn.id="addClass";
+	addbtn.setAttribute("onclick","popUp()");
+	addbtn.style.width="auto";
+	addbtn.innerHTML="Create a new session";
+	btngroup.appendChild(addbtn);
+}
+console.log(mainApp.user.displayName);
+p=document.createElement("p");
+p.id="username";
+p.innerHTML=mainApp.user.displayName;
+btngroup.appendChild(p);
+//       <button class="button" id="addClass" onclick="popUp()" style="width: auto">Create a new class</button>
 
 
 }
@@ -293,11 +307,29 @@ async function mainFlow() {
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 	//createSession("test",15,generateSessionCode());
+	setup();
 
 	renderAllSessions();
+	btn=document.getElementById('create');
+	btn.addEventListener("click",function(){
+		title=document.getElementById("newTitle").value;
+		max=document.getElementById("newMax").value;
+		code=document.getElementById("newCode").value;
+		newSession=createSession(title,max,code);
+		renderSession(newSession);
 
+	})
+
+	btn2=document.getElementById("generateCodeBtn");
+	btn2.addEventListener("click",function(){
+		document.getElementById("newCode").value=generateSessionCode();
+	});
 }
 function closePopUp2() {
 	document.getElementById('submitPresence').style.display = 'none';
+
+}
+function closePopUp3() {
+	document.getElementById('viewPresence').style.display = 'none';
 
 }

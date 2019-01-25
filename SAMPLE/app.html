@@ -31,14 +31,12 @@
             <h1>Attendance Web Tracker</h1>
         </div>
     </div>
-    <button id="btn1">exportHTML5</button>
-    <button id="btn2">exportJSON</button>
-    <button onclick="mainApp.logout()">Log Out</button>
-    <button id="addClass" onclick="popUp()" style="width: auto">Create a new class</button>
-
+    <div class="btn-group" id="btn-group">
+        <button class="button" onclick="mainApp.logout()">Log Out</button>
+    </div>
     <div id="dashboard"></div>
     <div id='createClass' class="modal">
-        <form class="modal-content">
+        <div class="modal-content">
             <div class="formContainer">
                 <span onclick="closePopUp()" class="close" title="Close">&times;</span>
 
@@ -46,33 +44,50 @@
                 <p>Please fill in this form to create a new session</p>
                 <hr>
                 <div class="wrapperForm">
-                    <input type="text" class="i1" placeholder="Enter title" name="Titlu" required>
-                    <input type="number" class="i2" placeholder="Enter max students" name="Maxim prezente" required>
-                    <input type="text" class="i3" placeholder="session code" name="codPrezenta" required>
+                    <input id="newTitle" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
+                    <input id="newMax" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
+                        required>
+                    <input id="newCode" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
 
-                    <button class="createBtn">Create code</button>
+                    <button id="generateCodeBtn" class="createBtn">Create code</button>
 
-                    <button class="create">CREATE</button>
+                    <button id="create" class="create">CREATE</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <div id='submitPresence' class="modal">
-            <div class="modal-content">
-                <div class="formContainer">
-                    <span onclick="closePopUp2()" class="close" title="Close">&times;</span>
-    
-                    <h1>Submit Presence</h1>
-                    <p>Please fill in the presence code</p>
-                    <hr>
-                    <input id ="code" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
-                    <button id="submitPresenceBtn" class="createBtn">Send code</button>
-                </div>
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUp2()" class="close" title="Close">&times;</span>
+
+                <h1>Submit Presence</h1>
+                <p>Please fill in the presence code</p>
+                <hr>
+                <input id="code" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
+                <button id="submitPresenceBtn" class="createBtn">Send code</button>
             </div>
+        </div>
     </div>
-    
-        
+
+    <div id='viewPresence' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUp3()" class="close" title="Close">&times;</span>
+                
+                <h1>Update Session</h1>
+                <hr>
+                <input type="checkbox" name="active" value="active">Active<br>
+                <ol>
+
+                </ol>
+
+            </div>
+        </div>
+    </div>
+
+
     <script>
 
 
