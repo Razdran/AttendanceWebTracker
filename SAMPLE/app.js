@@ -329,13 +329,20 @@ function sessionPopUp(_sessionId) {
 			
 			submitBtn=document.getElementById("create2");
 			submitBtn.addEventListener("click",function(){
-					for(i=0;i<sesion.participants.length;i++)
+					console.log("click");
+					for(i=0;i<session.participants.length;i++)
 					{
 							var uid=session.participants[i].id;
 							var nume=document.getElementById("inputlinia"+i+"coloana0").value;
 							var feedback=document.getElementById("inputlinia"+i+"coloana2").value;
-							var grade=document.getElementById("inputlinia"+i+"coloana1").value;
-							createGrade(uid,nume,session.id,feedback,grade);						
+							if(feedback=="")
+							feedback="none";
+							let grade=document.getElementById("inputlinia"+i+"coloana1").value;
+							if(grade=="")
+							grade=0;
+							
+							//console.log(uid,nume,_sessionId,feedback,grade);
+							createGrade(uid,nume,_sessionId,feedback,grade);						
 					}
 						
 			});
