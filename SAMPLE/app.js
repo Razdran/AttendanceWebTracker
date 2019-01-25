@@ -330,6 +330,7 @@ function editing(id){
 	cell.innerHTML="";
 	cell.className="editing";
 	input=document.createElement("input");
+	input.className="inputEditing";
 	input.setAttribute("type","text");
 	input.value=content;
 	document.getElementById(id).appendChild(input);
