@@ -353,16 +353,22 @@ function sessionPopUp(_sessionId) {
 	else {
 		getSessionById(_sessionId).then((session) => {
 			console.log("participant" + _sessionId);
-			document.getElementById('submitPresence').style.display = 'block';
-			let btn = document.getElementById('submitPresenceBtn');
-			btn.addEventListener("click", function () {
+			if(checkSubmited(mainApp.user.uid,session.participants)==0){
+				document.getElementById('submitPresence').style.display = 'block';
+				let btn = document.getElementById('submitPresenceBtn');
+				btn.addEventListener("click", function () {
 
-				if (document.getElementById('code').value == session.sessionCode) {
+					if (document.getElementById('code').value == session.sessionCode) {
 
-					participate(getSessionById(_sessionId));
-				}
-			})
-
+						participate(getSessionById(_sessionId));
+					}
+				
+				})
+			}
+			else{
+				document.getElementById('seeGrades').style.display = 'block';
+				
+			}
 		})
 
 	}
@@ -438,5 +444,9 @@ function closePopUp2() {
 }
 function closePopUp3() {
 	document.getElementById('viewPresence').style.display = 'none';
+
+}
+function closePopUp4() {
+	document.getElementById('seeGrades').style.display = 'none';
 
 }
