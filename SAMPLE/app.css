@@ -208,4 +208,7 @@ p{
           font-size: 0px;
       }
   }
-  
+  table{
+      width: 60%;
+      margin: auto;
+  }
