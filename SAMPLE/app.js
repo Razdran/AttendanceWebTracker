@@ -265,6 +265,40 @@ function sessionPopUp(_sessionId) {
 				document.getElementById("checkActive").checked=true;
 			else
 				document.getElementById("checkActive").checked=false;
+			console.log(session.participants[0]);
+			
+				table=document.getElementById("studentsTable");
+				tr=document.createElement("tr");
+				th1=document.createElement("th");
+				th1.innerHTML="Name";
+				th2=document.createElement("th");
+				th2.innerHTML="Grade";
+				th3=document.createElement("th");
+				th3.innerHTML="Feedback";
+				tr.appendChild(th1);
+				tr.appendChild(th2);
+				tr.appendChild(th3);
+				table.appendChild(tr);
+			for(var i=0;i<session.participants.length;i++)
+			{
+				tr=document.createElement("tr");
+				td1=document.createElement("td");
+				td1.id="linia"+i+"coloana1";
+				td1.innerHTML=session.participants[i].name;
+				td1.setAttribute("onclick","editing(\""+td1.id+"\")");
+				td2=document.createElement("td");
+				td2.id="linia"+i+"coloana2";
+				td2.innerHTML="";
+				td2.setAttribute("onclick","editing(\""+td2.id+"\")");
+				td3=document.createElement("td");
+				td3.id="linia"+i+"coloana3";
+				td3.innerHTML="";
+				td3.setAttribute("onclick","editing(\""+td3.id+"\")");
+				tr.appendChild(td1);
+				tr.appendChild(td2);
+				tr.appendChild(td3);
+				table.appendChild(tr);
+			}
 			
 			
 		})
@@ -284,6 +318,23 @@ function sessionPopUp(_sessionId) {
 
 		})
 
+	}
+}
+
+function editing(id){
+	var cell=document.getElementById(id);
+	console.log("class",cell);
+	if(cell.className!="editing")
+	{
+	content=cell.innerHTML;
+	cell.innerHTML="";
+	cell.className="editing";
+	input=document.createElement("input");
+	input.setAttribute("type","text");
+	input.value=content;
+	document.getElementById(id).appendChild(input);
+	
+	console.log("editing "+id);
 	}
 }
 function setup() {
