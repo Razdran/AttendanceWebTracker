@@ -168,6 +168,7 @@ function renderSession(sessionId) {
 			card = document.createElement("div");
 			card.id = sessionId;
 			card.className = "card";
+			card.style.position="relative";
 			card.setAttribute("onclick", "sessionPopUp(\"" + card.id + "\");")
 			dashboard.appendChild(card);
 			titlu = document.createElement("div");
@@ -191,6 +192,16 @@ function renderSession(sessionId) {
 			prezenteSpan.innerHTML = session.prezente + "/" + session.maxPrezente;
 			card.appendChild(prezente);
 			prezente.appendChild(prezenteSpan);
+			if(mainApp.permission==0)
+			{
+			if(checkSubmited(mainApp.user.uid,session.participants)==1)
+			{
+				img=document.createElement("img");
+				img.setAttribute("src","check.svg");
+				img.id="checkMark";
+				card.appendChild(img);
+			}
+			}
 		}
 	});
 }
