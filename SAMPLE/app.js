@@ -158,6 +158,9 @@ function participate(_sessionId) {
 
 function renderSession(sessionId) {
 	getSessionById(sessionId).then((session) => {
+		var loader = document.getElementById("loader-container");
+		loader.style.display = "none";
+		
 		console.log(mainApp.permission, session.organizatorUID, session.active);
 		if ((mainApp.permission == 1 && session.organizatorUID == mainApp.user.uid) || (mainApp.permission == 0 && session.active == 1)) {
 			console.log("s", session);
@@ -204,7 +207,7 @@ function getSessionKeyes() {
 }
 function renderAllSessions() {
 	getSessionKeyes().then(function (keys) {
-
+		
 		for (var k = 0; k < keys.length; k++) {
 			renderSession(keys[k]);
 		}

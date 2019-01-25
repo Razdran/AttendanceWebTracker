@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="app.css">
+	<link rel="stylesheet" type="text/css" href="mySpinner.css">
 
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <link rel="stylesheet" href="card.css">
@@ -34,7 +35,19 @@
     <div class="btn-group" id="btn-group">
         <button class="button" onclick="mainApp.logout()">Log Out</button>
     </div>
-    <div id="dashboard"></div>
+    <div id="dashboard">
+    <div id="loader-container">
+      <div class="loader-div">
+        <div class="loader-div">
+          <div class="loader-div">
+            <div class="loader-div">
+      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
     <div id='createClass' class="modal">
         <div class="modal-content">
             <div class="formContainer">

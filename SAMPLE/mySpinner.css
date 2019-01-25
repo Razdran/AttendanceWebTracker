@@ -1,0 +1,26 @@
+
+#loader-container{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index:999;
+}
+
+.loader-div{
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  border: 8px solid rgba(0,0,0,0);
+  border-top: 8px solid #03bd8d;
+  border-bottom: 8px solid #03bd8d;
+  border-radius: 50%;
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate{
+  100%{
+    transform: rotate(360deg);
+  }
+}
