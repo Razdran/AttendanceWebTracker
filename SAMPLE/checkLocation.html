@@ -14,25 +14,24 @@
 
 
 <script>
-    var studentInFaculty;//variabila in care se retine daca studentul este in facultate
-    var x = document.getElementById("demo");
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+      var studentInFaculty;//variabila in care se retine daca studentul este in facultate
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } 
       }
-    }
-    function showPosition(position) {
-  if(position.coords.latitude>47.173720&&
-     position.coords.latitude<47.174336&&
-     position.coords.longitude>27.574524&&
-     position.coords.longitude<27.575696)
-        studentInFaculty=true;
-  else
-        studentInFaculty=false;
-    
-}
+      function showPosition(position) {
+    if(position.coords.latitude>47.173720&&
+      position.coords.latitude<47.174336&&
+      position.coords.longitude>27.574524&&
+      position.coords.longitude<27.575696)
+          studentInFaculty=true;
+    else
+          studentInFaculty=false;
+          console.log(studentInFaculty);
+      
+  }
+
     </script> 
 </body>
 </html>
