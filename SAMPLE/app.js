@@ -254,8 +254,20 @@ function createGrade(_participantId, _participantName, _sessionId, _feedback, _g
 }
 function sessionPopUp(_sessionId) {
 	if (mainApp.permission == 1) {
-		console.log("organizator" + _sessionId);
-		document.getElementById('viewPresence').style.display='block';
+		getSessionById(_sessionId).then((session) => {
+		
+			console.log("organizator" + _sessionId);
+			document.getElementById('viewPresence').style.display='block';
+			document.getElementById("Title").value=session.titlu;
+			document.getElementById("Max").value=session.maxPrezente;
+			document.getElementById("Code").value=session.sessionCode;
+			if(session.active==1)
+				document.getElementById("checkActive").checked=true;
+			else
+				document.getElementById("checkActive").checked=false;
+			
+			
+		})
 	}
 	else {
 		getSessionById(_sessionId).then((session) => {
