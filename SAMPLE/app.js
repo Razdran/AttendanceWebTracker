@@ -111,28 +111,52 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 		return firebase.database().ref().update(updates);
 	})
 }
+function checkSubmited(uid,participants)
+{
+	for(var p=0;p<participants.length;p++)
+	{
+		if(participants[p].id==uid)
+			return 1;
+	}
+	return 0;
+}
 function participate(_sessionId) {
 	_sessionId.then(function (result) {
-		participantsText=mainApp.user.uid+' '+ mainApp.user.displayName+' ';
-
-		console.log("participate" + _sessionId);
-		var updates = {};
-		updatedSession = result;
-		updatedSession.prezente++;
-		console.log(result);
-		if(updatedSession.participants == undefined){
-			updatedSession.participants = [];
+		if(result.prezente<result.maxPrezente)
+		{
+			if(checkSubmited(mainApp.user.uid,result.participants)==0)
+			{
+				console.log("participate" + _sessionId);
+				var updates = {};
+				updatedSession = result;
+				updatedSession.prezente++;
+				console.log(result);
+				if(updatedSession.participants == undefined)
+				{
+					updatedSession.participants = [];
+				}
+				updatedSession.participants = updatedSession.participants.concat(
+				[{
+				id: mainApp.user.uid,
+				name: mainApp.user.displayName
+				}]);
+				keyForSession = result.key;
+				console.log(keyForSession);
+				document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML=updatedSession.prezente+"/"+updatedSession.maxPrezente;
+				delete result.key;
+				updates['/sessions/' + keyForSession] = updatedSession;
+				return firebase.database().ref().update(updates);
+			}
+			else
+			{
+				console.log(mainApp.user.displayName+" has been already submitted");
+			}
 		}
-		updatedSession.participants = updatedSession.participants.concat([{
-		id: mainApp.user.uid,
-        name: mainApp.user.displayName
-		}]);
-		keyForSession = result.key;
-		console.log(keyForSession);
-		document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML=updatedSession.prezente+"/"+updatedSession.maxPrezente;
-		delete result.key;
-		updates['/sessions/' + keyForSession] = updatedSession;
-		return firebase.database().ref().update(updates);
+		else
+		{
+			console.log("s-au terminat locurile");
+		}
+				
 	})
 }
 
