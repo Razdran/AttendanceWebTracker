@@ -66,6 +66,24 @@ function checkPermissions() {
 	return promise;
 
 }
+function getGrades(_sessionId,_participantId){
+	let promise=new Promise((resolve,reject)=>
+	{
+		gradesRef=database.ref().child("grades");
+		gradesRef.on("value",data=>{
+			keys = Object.keys(data.val());
+			for (i = 0; i < keys.length; i++) 
+			{
+				if (data.val()[keys[i]]["sessionId"]==_sessionId && data.val()[keys[i]]["participantId"]==_participantId) 
+				{
+					
+					resolve(data.val()[keys[i]]);
+				}
+			}
+		})
+	});
+	return promise;
+}
 
 
 function createSession(_titlu, _maxPrezente, _sessionCode) {
@@ -97,6 +115,7 @@ function getSessionById(_sessionId) {
 		return object;
 	});
 }
+
 
 function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 	_sessionId.then(function (result) {
@@ -378,6 +397,13 @@ function sessionPopUp(_sessionId) {
 			}
 			else{
 				document.getElementById('seeGrades').style.display = 'block';
+				document.getElementById("myGrades").innerHTML="not evaluated";
+				document.getElementById("myFeedback").innerHTML="Please wait for feedback";
+				getGrades(_sessionId,mainApp.user.uid).then((result)=>{
+					document.getElementById("myGrades").innerHTML=result.grade;
+					document.getElementById("myFeedback").innerHTML=result.feedback;
+					
+				});
 				
 			}
 		})
