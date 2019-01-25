@@ -120,7 +120,13 @@ function participate(_sessionId) {
 		updatedSession = result;
 		updatedSession.prezente++;
 		console.log(result);
-		updatedSession.participants.push(mainApp.user.uid);
+		if(updatedSession.participants == undefined){
+			updatedSession.participants = [];
+		}
+		updatedSession.participants = updatedSession.participants.concat([{
+		id: mainApp.user.uid,
+        name: mainApp.user.displayName
+		}]);
 		keyForSession = result.key;
 		delete result.key;
 		updates['/sessions/' + keyForSession] = updatedSession;
@@ -257,7 +263,7 @@ function setup() {
 
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
-	createSession("test2",20,"carapace");	
+	//createSession("test2",20,"carapace");	
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 	//createSession("test",15,generateSessionCode());
