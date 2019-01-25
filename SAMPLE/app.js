@@ -128,6 +128,8 @@ function participate(_sessionId) {
         name: mainApp.user.displayName
 		}]);
 		keyForSession = result.key;
+		console.log(keyForSession);
+		document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML=updatedSession.prezente+"/"+updatedSession.maxPrezente;
 		delete result.key;
 		updates['/sessions/' + keyForSession] = updatedSession;
 		return firebase.database().ref().update(updates);
