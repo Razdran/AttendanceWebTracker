@@ -271,6 +271,12 @@ function sessionPopUp(_sessionId) {
 			console.log(session.participants[0]);
 			
 				table=document.getElementById("studentsTable");
+				table.remove();
+				table=document.createElement("table");
+				table.id="studentsTable";
+				parinte=document.getElementById("updateForm");
+				parinte.appendChild(table);
+				
 				tr=document.createElement("tr");
 				th1=document.createElement("th");
 				th1.innerHTML="Name";
