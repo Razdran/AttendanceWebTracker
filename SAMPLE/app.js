@@ -140,6 +140,27 @@ function checkSubmited(uid, participants) {
 		}
 	return 0;
 }
+function evaluate(_uid,_sessionId,_grade,_feedback)
+{
+	_sessionId.then(function(result)
+	{
+		var updates={};
+		updatedSession=result;
+		for(var i=0;i<updatedSession.participants.length;i++)
+		{
+			if(updatedSession.participants[i].id==_uid)
+			{
+				updatedSession.participants[i].grade=_grade;
+				updatedSession.participants[i].feedback=_feedback;
+			}
+		}
+		keyForSession=result.key;
+		delete result.key;
+		updates['/sessions/' + keyForSession] = updatedSession;
+		return firebase.database().ref().update(updates);
+	})
+	
+}
 function participate(_sessionId) {
 	_sessionId.then(function (result) {
 		if (result.prezente < result.maxPrezente) {
@@ -155,11 +176,17 @@ function participate(_sessionId) {
 				updatedSession.participants = updatedSession.participants.concat(
 					[{
 						id: mainApp.user.uid,
-						name: mainApp.user.displayName
+						name: mainApp.user.displayName,
+						grade:0,
+						feedback:"Please wait for review"
 					}]);
 				keyForSession = result.key;
 				console.log(keyForSession);
 				document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML = updatedSession.prezente + "/" + updatedSession.maxPrezente;
+				img=document.createElement("img");
+				img.setAttribute("src","check.svg");
+				img.id="checkMark";
+				document.getElementById(keyForSession).appendChild(img);
 				delete result.key;
 				updates['/sessions/' + keyForSession] = updatedSession;
 				return firebase.database().ref().update(updates);
@@ -179,7 +206,7 @@ function renderSession(sessionId) {
 	getSessionById(sessionId).then((session) => {
 		var loader = document.getElementById("loader-container");
 		loader.style.display = "none";
-		
+		console.log("si",sessionId);
 		console.log(mainApp.permission, session.organizatorUID, session.active);
 		if ((mainApp.permission == 1 && session.organizatorUID == mainApp.user.uid) || (mainApp.permission == 0 && session.active == 1)) {
 			console.log("s", session);
@@ -236,8 +263,8 @@ function getSessionKeyes() {
 	return promise;
 }
 function renderAllSessions() {
-	getSessionKeyes().then(function (keys) {
-		
+	getSessionKeyes().then(function (keys) 
+	{
 		for (var k = 0; k < keys.length; k++) {
 			renderSession(keys[k]);
 		}
@@ -288,7 +315,6 @@ function createGrade(_participantId, _participantName, _sessionId, _feedback, _g
 function sessionPopUp(_sessionId) {
 	if (mainApp.permission == 1) {
 		getSessionById(_sessionId).then((session) => {
-		
 			console.log("organizator" + _sessionId);
 			document.getElementById('viewPresence').style.display='block';
 			document.getElementById("Title").value=session.titlu;
@@ -298,10 +324,16 @@ function sessionPopUp(_sessionId) {
 				document.getElementById("checkActive").checked=true;
 			else
 				document.getElementById("checkActive").checked=false;
-			console.log(session.participants[0]);
+			//console.log(session.participants[0]);
 			
-				table=document.getElementById("studentsTable");
-				table.remove();
+			table=document.getElementById("studentsTable");
+			if(table!=undefined)
+			{
+			table.remove();
+			console.log("remove");
+			}
+			if(session.participants!=undefined)
+			{
 				table=document.createElement("table");
 				table.id="studentsTable";
 				parinte=document.getElementById("updateForm");
@@ -337,7 +369,12 @@ function sessionPopUp(_sessionId) {
 				input2.className="inputEditing";
 				input2.id="input"+td2.id;
 				input2.setAttribute("type","text");
-				input2.value="";
+				_grade=session.participants[i].grade;
+				if(_grade==0)
+				{
+					_grade="";
+				}
+				input2.value=_grade;
 				td2.setAttribute("onclick","editing(\""+td2.id+"\")");
 				td2.appendChild(input2);
 				
@@ -347,7 +384,13 @@ function sessionPopUp(_sessionId) {
 				input3.className="inputEditing";
 				input3.id="input"+td3.id;
 				input3.setAttribute("type","text");
-				input3.value="";
+				_feedback=session.participants[i].feedback;
+				console.log("_feedback "+_feedback);
+				if(_feedback=="Please wait for review")
+				{
+					_feedback="";
+				}
+				input3.value=_feedback;
 				td3.setAttribute("onclick","editing(\""+td3.id+"\")");
 				td3.appendChild(input3);
 				
@@ -356,10 +399,12 @@ function sessionPopUp(_sessionId) {
 				tr.appendChild(td3);
 				table.appendChild(tr);
 			}
-			
+			}
 			submitBtn=document.getElementById("create2");
 			submitBtn.addEventListener("click",function(){
 					console.log("click");
+					if(session.participants!=undefined)
+					{
 					for(i=0;i<session.participants.length;i++)
 					{
 							var uid=session.participants[i].id;
@@ -372,10 +417,24 @@ function sessionPopUp(_sessionId) {
 							grade=0;
 							
 							//console.log(uid,nume,_sessionId,feedback,grade);
-							createGrade(uid,nume,_sessionId,feedback,grade);						
+							createGrade(uid,nume,_sessionId,feedback,grade);
+							evaluate(uid,getSessionById(_sessionId),grade,feedback);
 					}
-						
+					}
+						closePopUpById('viewPresence');
 			});
+			checkBox=document.getElementById("checkActive");
+			checkBox.addEventListener("change",function(){
+				if(this.checked) 
+				{
+						updateSession(getSessionById(_sessionId), session.maxPrezente, session.sessionCode, 1);
+				} 
+				else 
+				{
+						updateSession(getSessionById(_sessionId), session.maxPrezente, session.sessionCode, 0);
+				}
+			});
+			
 			
 			
 		})
@@ -384,25 +443,33 @@ function sessionPopUp(_sessionId) {
 		getSessionById(_sessionId).then((session) => {
 			console.log("participant" + _sessionId);
 			if(checkSubmited(mainApp.user.uid,session.participants)==0){
+				document.getElementById('code').value="";
 				document.getElementById('submitPresence').style.display = 'block';
 				let btn = document.getElementById('submitPresenceBtn');
 				btn.addEventListener("click", function () {
-
+					
 					if (document.getElementById('code').value == session.sessionCode) {
-
 						participate(getSessionById(_sessionId));
+						closePopUpById('submitPresence');
 					}
-				
+						
 				})
 			}
 			else{
 				document.getElementById('seeGrades').style.display = 'block';
 				document.getElementById("myGrades").innerHTML="not evaluated";
 				document.getElementById("myFeedback").innerHTML="Please wait for feedback";
-				getGrades(_sessionId,mainApp.user.uid).then((result)=>{
-					document.getElementById("myGrades").innerHTML=result.grade;
-					document.getElementById("myFeedback").innerHTML=result.feedback;
-					
+				getSessionById(_sessionId).then((sesion)=>{
+					for(var i=0;i<session.participants.length;i++)
+					{
+						if(session.participants[i].id==mainApp.user.uid)
+						{
+							_grade=session.participants[i].grade;
+							_feedback=session.participants[i].feedback;
+						}
+					}
+					document.getElementById("myGrades").innerHTML=_grade;
+					document.getElementById("myFeedback").innerHTML=_feedback;
 				});
 				
 			}
@@ -455,35 +522,26 @@ async function mainFlow() {
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 	//createSession("test",15,generateSessionCode());
 	setup();
-
 	renderAllSessions();
 	btn=document.getElementById('create');
 	btn.addEventListener("click",function(){
+		document.getElementById("newTitle").value="";
+		document.getElementById("newMax").value="";
+		document.getElementById("newCode").value="";
 		title=document.getElementById("newTitle").value;
 		max=document.getElementById("newMax").value;
 		code=document.getElementById("newCode").value;
 		newSession=createSession(title,max,code);
 		renderSession(newSession);
-
+		closePopUpById('createClass');
 	})
 
 	btn2=document.getElementById("generateCodeBtn");
 	btn2.addEventListener("click",function(){
 		document.getElementById("newCode").value=generateSessionCode();
 	});
-	
-	
-	
 }
-function closePopUp2() {
-	document.getElementById('submitPresence').style.display = 'none';
 
-}
-function closePopUp3() {
-	document.getElementById('viewPresence').style.display = 'none';
-
-}
-function closePopUp4() {
-	document.getElementById('seeGrades').style.display = 'none';
-
+function closePopUpById(id){
+	document.getElementById(id).style.display='none';
 }
