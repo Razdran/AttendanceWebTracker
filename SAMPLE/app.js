@@ -352,6 +352,7 @@ function sessionPopUp(_sessionId) {
 				table.appendChild(tr);
 			for(var i=0;i<session.participants.length;i++)
 			{
+				console.log(session.participants[i]);
 				tr=document.createElement("tr");
 				td1=document.createElement("td");
 				td1.id="linia"+i+"coloana0";
@@ -417,12 +418,13 @@ function sessionPopUp(_sessionId) {
 							grade=0;
 							
 							//console.log(uid,nume,_sessionId,feedback,grade);
-							createGrade(uid,nume,_sessionId,feedback,grade);
+							//createGrade(uid,nume,_sessionId,feedback,grade);
 							evaluate(uid,getSessionById(_sessionId),grade,feedback);
 					}
 					}
 						closePopUpById('viewPresence');
 			});
+			
 			checkBox=document.getElementById("checkActive");
 			checkBox.addEventListener("change",function(){
 				if(this.checked) 
@@ -523,11 +525,9 @@ async function mainFlow() {
 	//createSession("test",15,generateSessionCode());
 	setup();
 	renderAllSessions();
+	//create a new session
 	btn=document.getElementById('create');
 	btn.addEventListener("click",function(){
-		document.getElementById("newTitle").value="";
-		document.getElementById("newMax").value="";
-		document.getElementById("newCode").value="";
 		title=document.getElementById("newTitle").value;
 		max=document.getElementById("newMax").value;
 		code=document.getElementById("newCode").value;

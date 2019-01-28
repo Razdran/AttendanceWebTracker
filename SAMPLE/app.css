@@ -220,7 +220,11 @@ p{
     height: 50px;
   }
   
-  
+.prezenteSpan{
+	position:absolute;
+	bottom:10%;
+	left:10%;
+}	
 #checkMark{
 	position:absolute;
 	bottom:10%;
