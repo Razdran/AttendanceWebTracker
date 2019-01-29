@@ -501,12 +501,31 @@ if(mainApp.permission==1)
 	addbtn.style.width="auto";
 	addbtn.innerHTML="Create a new session";
 	btngroup.appendChild(addbtn);
+	
+	importbtn=document.createElement("button");
+	importbtn.className="button";
+	importbtn.id="import";
+	importbtn.setAttribute("onclick","downloadJSON()");
+	importbtn.style.width="auto";
+	importbtn.innerHTML="Import";
+	btngroup.appendChild(importbtn);
+	
+	exportbtn=document.createElement("button");
+	exportbtn.className="button";
+	exportbtn.id="export";
+	exportbtn.setAttribute("onclick","downloadHTML5()");
+	exportbtn.style.width="auto";
+	exportbtn.innerHTML="Export";
+	btngroup.appendChild(exportbtn);
 }
+
 console.log(mainApp.user.displayName);
 p=document.createElement("p");
 p.id="username";
 p.innerHTML=mainApp.user.displayName;
-btngroup.appendChild(p);
+p.style.color="white";
+header=document.getElementsByClassName("header")[0];
+header.appendChild(p);
 //       <button class="button" id="addClass" onclick="popUp()" style="width: auto">Create a new class</button>
 
 
@@ -514,9 +533,88 @@ btngroup.appendChild(p);
 
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
 //setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
+async function getInfoByKeys(keys){
+	sessions=[];
+	for (var k = 0; k < keys.length; k++) 
+		{
+			_session = await getSessionById(keys[k]);
+			sessions.push(_session);
 
+		}
+	return sessions;
+	
+}
 
+async function getJSON()
+{
+	keys = await getSessionKeyes();
+	infos = await getInfoByKeys(keys);
+	sessionsJSON=JSON.stringify(infos,null,2);
+	return sessionsJSON;	
+}
+async function downloadJSON()
+{
+	data=await getJSON();
+	var blob=new Blob([data],{type:"text/plain"});
+	a=document.createElement('a');
+	a.href=window.URL.createObjectURL(blob);
+	a.download="sessions.json";
+	document.body.appendChild(a);
+	a.click();
+	a.remove();
+	
+}
 
+function getHTML5(data)
+{
+	html="";
+	html=html+"<html>\n";
+	html=html+"<head>\n";
+	html=html+"<style>\n";
+	html=html+"table \n{\nwidth: 60%;\nmargin: auto;\n}\ntable, th, td \n{\n border: 1px solid black;}\n";
+	html=html+"</style>\n";
+	html=html+"</head>\n";
+	html=html+"<body>\n";
+	for(i=0;i<data.length;i++)
+	{
+		html=html+"<h1>"+data[i].titlu+"</h1>\n";
+		html=html+"<h2>"+data[i].organizatorName+"</h2>\n";
+		participants=data[i].participants;
+		if(participants!=undefined)
+		{
+			html=html+"<table>\n";
+			html=html+"<tr><th>Name</th><th>Grade</th><th>Feedback</th></tr>\n";
+			for(j=0;j<participants.length;j++)
+			{
+				html=html+"<tr>\n";
+				html=html+"<td>"+participants[j].name+"</td>\n";
+				html=html+"<td>"+participants[j].grade+"</td>\n";
+				html=html+"<td>"+participants[j].feedback+"</td>\n";
+				html=html+"</tr>\n";
+			}
+			html=html+"</table>\n";
+		}
+		html=html+"<hr/>\n"
+	}
+	html=html+"</body>\n";
+	html=html+"</html>\n";
+	return html;
+}
+
+async function downloadHTML5()
+{
+	keys = await getSessionKeyes();
+	data = await getInfoByKeys(keys);
+	html=getHTML5(data);
+	console.log(html);
+	var blob=new Blob([html],{type:"text/plain"});
+	a=document.createElement('a');
+	a.href=window.URL.createObjectURL(blob);
+	a.download="sessions.html";
+	document.body.appendChild(a);
+	a.click();
+	a.remove();
+}
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
 	//createSession("test2",20,"carapace");	
