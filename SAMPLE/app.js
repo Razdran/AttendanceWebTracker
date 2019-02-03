@@ -494,6 +494,8 @@ function setup() {
 btngroup=document.getElementById("btn-group");
 if(mainApp.permission==1)
 {
+
+
 	addbtn=document.createElement("button");
 	addbtn.className="button";
 	addbtn.id="addClass";
@@ -501,7 +503,17 @@ if(mainApp.permission==1)
 	addbtn.style.width="auto";
 	addbtn.innerHTML="Create a new session";
 	btngroup.appendChild(addbtn);
+
 	
+	
+	chartbtn=document.createElement("button");
+	chartbtn.className="button";
+	chartbtn.id="viewChart";
+	chartbtn.setAttribute("onclick","popUp2()");	
+	chartbtn.style.width="auto";
+	chartbtn.innerHTML="Create Chart";
+	btngroup.appendChild(chartbtn);
+
 	importbtn=document.createElement("button");
 	importbtn.className="button";
 	importbtn.id="import";
@@ -517,8 +529,8 @@ if(mainApp.permission==1)
 	exportbtn.style.width="auto";
 	exportbtn.innerHTML="Export";
 	btngroup.appendChild(exportbtn);
-}
 
+}
 console.log(mainApp.user.displayName);
 p=document.createElement("p");
 p.id="username";
