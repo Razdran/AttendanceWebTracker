@@ -91,6 +91,29 @@ function createSession(_titlu, _maxPrezente, _sessionCode) {
 
 }
 
+function createGrades(_sessionId, _participantId, _grade, _feedBack) {
+
+	if (mainApp.permission == 1) {
+		var ref = database.ref("grades");
+		var data =
+		{
+			sessionId: _sessionId,
+			participantId: _participantId,
+			grade: _grade,
+			feedback: _feedBack
+		}
+		var result = ref.push(data);
+		return result.key;
+	}
+}
+
+function getGradesById(_gradesId){
+	return firebase.database().ref('/grades/' + _sessionId).once('value').then(function (result) {
+		var object = result.val();
+		object.key = _sessionId;
+		return object;
+	});
+}
 function getSessionById(_sessionId) {
 	return firebase.database().ref('/sessions/' + _sessionId).once('value').then(function (result) {
 		var object = result.val();
@@ -148,6 +171,7 @@ function updateSession(_sessionId, _maxPrezente, _sessionCode, _active) {
 	})
 }
 
+
 //setPermissions("dCJ8S4gZk1b9zffvWOHB03qWkKr2",1);
 //setPermissions("yARRnkFD9KQpeakT4Jth1Vimmur2",0);
 
@@ -160,5 +184,6 @@ async function mainFlow() {
 	console.log(id);
 	renderSession(id);
 	updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
+
 
 }
