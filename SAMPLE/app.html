@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="app.css">
-	<link rel="stylesheet" type="text/css" href="mySpinner.css">
+    <link rel="stylesheet" type="text/css" href="mySpinner.css">
 
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <link rel="stylesheet" href="card.css">
@@ -36,18 +36,18 @@
         <button class="button" onclick="mainApp.logout()">Log Out</button>
     </div>
     <div id="dashboard">
-    <div id="loader-container">
-      <div class="loader-div">
-        <div class="loader-div">
-          <div class="loader-div">
+        <div id="loader-container">
             <div class="loader-div">
-      
+                <div class="loader-div">
+                    <div class="loader-div">
+                        <div class="loader-div">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-	</div>
     <div id='createClass' class="modal">
         <div class="modal-content">
             <div class="formContainer">
@@ -57,7 +57,7 @@
                 <p>Please fill in this form to create a new session</p>
                 <hr>
                 <div class="wrapperForm">
-                    <input  id="newTitle" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
+                    <input id="newTitle" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
                     <input id="newMax" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
                         required>
                     <input id="newCode" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
@@ -88,50 +88,89 @@
         <div class="modal-content">
             <div class="formContainer">
                 <span onclick="closePopUpById('viewPresence')" class="close" title="Close">&times;</span>
-                
+
                 <h1>Update Session</h1>
                 <hr>
                 <input id="checkActive" type="checkbox" name="active" value="active">Active<br>
                 <div id="updateForm" class="formContainer">
-                        <hr>
-                        <div class="wrapperForm">
-                            <input id="Title" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
-                            <input id="Max" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
-                                required>
-                            <input id="Code" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
-        
-                            <button id="generateCodeBtn2" class="createBtn">Create code</button>
-                            
-                            <button id="create2" class="create" type="submit">CREATE</button>
-                        </div>
+                    <hr>
+                    <div class="wrapperForm">
+                        <input id="Title" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
+                        <input id="Max" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
+                            required>
+                        <input id="Code" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
+
+                        <button id="generateCodeBtn2" class="createBtn">Create code</button>
+
+                        <button id="create2" class="create" type="submit">CREATE</button>
                     </div>
+                </div>
                 <table id="studentsTable"></table>
 
             </div>
         </div>
     </div>
     <div id='seeGrades' class="modal">
-            <div class="modal-content">
-                <div class="formContainer">
-                    <span onclick="closePopUpById('seeGrades')" class="close" title="Close">&times;</span>
-    
-                    <h1>Your Grades & feedback</h1>
-                    <p></p>
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('seeGrades')" class="close" title="Close">&times;</span>
+
+                <h1>Your Grades & feedback</h1>
+                <p></p>
+                <hr>
+                Your grades
+                <div id="myGrades" class="i3"></div>
+                <hr>
+                Your feedback
+                <div id="myFeedback" class="i3"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id='createChart' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('createChart')" class="close" title="Close">&times;</span>
+
+                <h1>Create Chart</h1>
+                <p>You can filter the data by the following criteria:</p>
+                <div class="filterWrapper">
                     <hr>
-                    Your grades
-                    <div  id="myGrades"  class="i3"  ></div>
+                    <p>Grade</p>
+                    Min Grade
+                    <input id="minGrade" type="number" class="gradeFilter" placeholder="min grade" name="minGrade">
+                    Max Grade
+                    <input id="maxGrade" type="number" class="gradeFilter" placeholder="max grade" name="maxGrade">
                     <hr>
-                    Your feedback
-                    <div id="myFeedback"  class="i3" ></div>
-                    
+                    <p>Time</p>
+                    Start time
+                    <input id="startTime" type="number" class="timeFilter" placeholder="start time" name="startTime">
+                    End Time
+                    <input id="endTime" type="number" class="timeFilter" placeholder="end time" name="endTime">
+                    <hr>
+                    <button id="chart_createFiltered" class="chart_showFilteredChartBtn" type="submit" onclick="renderChart()">Show
+                        Filtered Chart</button>
+                    <hr>
+
+                    <div class="chartContainer">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <hr>
+                <div class="wrapperForm">
                 </div>
             </div>
         </div>
+    </div>
 
     <script src="fireBase.js"></script>
     <script src="app.js"></script>
     <script src="popUp.js"></script>
-
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </body>
 
 </html>

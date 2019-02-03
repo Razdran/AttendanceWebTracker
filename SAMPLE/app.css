@@ -46,7 +46,7 @@
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: scroll; /* Enable scroll if needed */
     background-color: #474e5d;
     padding-top: 50px;
   }
@@ -232,4 +232,8 @@ p{
 	width:48px;
 	height:48px;
 	
+}
+
+.chart_showFilteredChartBtn{
+    margin-left:45%;
 }
