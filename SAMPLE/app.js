@@ -657,7 +657,7 @@ function closePopUpById(id){
 	document.getElementById(id).style.display='none';
 }
 
-function renderChart()
+function renderChart(_idChart,_titlu,_legend,_data,_labels)
 {
 	let myChart = document.getElementById('myChart').getContext('2d');
 
@@ -669,27 +669,11 @@ function renderChart()
     let massPopChart = new Chart(myChart, {
       type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
       data:{
-        labels:['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+        labels:_labels,
         datasets:[{
-          label:'Population',
-          data:[
-            617594,
-            181045,
-            153060,
-            106519,
-            105162,
-            95072
-          ],
-          //backgroundColor:'green',
-          backgroundColor:[
-            'rgba(255, 99, 132, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            'rgba(75, 192, 192, 0.6)',
-            'rgba(153, 102, 255, 0.6)',
-            'rgba(255, 159, 64, 0.6)',
-            'rgba(255, 99, 132, 0.6)'
-          ],
+          label:_legend,
+          data:_data,
+          backgroundColor:'rgb(0,134,99)',
           borderWidth:1,
           borderColor:'#777',
           hoverBorderWidth:3,
@@ -699,7 +683,7 @@ function renderChart()
       options:{
         title:{
           display:true,
-          text:'Largest Cities In Massachusetts',
+          text:_titlu,
           fontSize:25
         },
         legend:{
@@ -722,4 +706,88 @@ function renderChart()
         }
       }
     });
+}
+
+
+function createArraysForChart(sessions){
+
+	rezultat={};
+	note=[];
+	for (var j=0;j<=15;j++)
+		note[j]=0;
+	for(var i=0;i<sessions.length;i++)
+	{	
+		if(sessions[i].participants!=undefined)
+		{
+		if(sessions[i].participants[0].grade!=0)
+		{
+			if(sessions[i].participants[0].grade=="0")
+			note[0]+=1;
+			
+			if(sessions[i].participants[0].grade=="1")
+			note[1]+=1;
+			
+			if(sessions[i].participants[0].grade=="2")
+			note[2]+=1;
+			
+			if(sessions[i].participants[0].grade=="3")
+			note[3]+=1;
+			
+			if(sessions[i].participants[0].grade=="4")
+			note[4]+=1;
+			
+			if(sessions[i].participants[0].grade=="5")
+			note[5]+=1;
+			
+			if(sessions[i].participants[0].grade=="6")
+			note[6]+=1;
+			
+			if(sessions[i].participants[0].grade=="7")
+			note[7]+=1;
+			
+			if(sessions[i].participants[0].grade=="8")
+			note[8]+=1;
+			
+			if(sessions[i].participants[0].grade=="9")
+			note[9]+=1;
+			
+			if(sessions[i].participants[0].grade=="10")
+			note[10]+=1;
+			
+			if(sessions[i].participants[0].grade=="11")
+			note[11]+=1;
+			if(sessions[i].participants[0].grade=="12")
+			note[12]+=1;
+			if(sessions[i].participants[0].grade=="13")
+			note[13]+=1;
+			if(sessions[i].participants[0].grade=="14")
+			note[14]+=1;
+			if(sessions[i].participants[0].grade=="15")
+			note[15]+=1;
+		}
+	}
+	}
+	rezultat["note"]=note;
+	console.log(rezultat);
+	
+	return rezultat;
+}
+
+async function chart(){
+	json=await getJSON();
+	sessions=JSON.parse(json);
+	
+	datas=createArraysForChart(sessions);
+	data=datas.note;
+	labels=[];
+	for(var i=0;i<=15;i++)
+		labels[i]=i;
+	titlu="Punctaje";
+	legenda="No of Students"
+
+
+
+
+	renderChart("myChart",titlu,legenda,data,labels);
+	  
 }
