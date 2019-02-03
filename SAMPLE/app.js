@@ -178,7 +178,8 @@ function participate(_sessionId) {
 						id: mainApp.user.uid,
 						name: mainApp.user.displayName,
 						grade:0,
-						feedback:"Please wait for review"
+						feedback:"Please wait for review",
+						time: new Date().getTime()
 					}]);
 				keyForSession = result.key;
 				console.log(keyForSession);
