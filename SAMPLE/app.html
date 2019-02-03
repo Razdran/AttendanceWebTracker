@@ -6,43 +6,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="app.css">
+	<link rel="stylesheet" type="text/css" href="mySpinner.css">
+
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <link rel="stylesheet" href="card.css">
+    </link>
 </head>
 
 <body>
 
-<<<<<<< HEAD
-<p>DASHBOARD</p>
-<br/>
-<button id="btn1">exportHTML5</button>
-<button id="btn2">exportJSON</button>
-<button onclick="mainApp.logout()">Log Out</button>
-<div id="dashboard"></div>
-<script>
-=======
-    <p>DASHBOARD</p>
-    <br/>
-    <button id="btn1" onclick="createSession('mate','20','prezent')">exportHTML5</button>
-    <button id="btn2">exportJSON</button>
-    <button onclick="mainApp.logout()">Log Out</button>
-    <script>
->>>>>>> d80d0188c0650a605ab774d4a4f532f7bda827ff
+    <div class="header">
 
+        <div class=header_left>
+            <div class="header_left_menu">
+            </div>
+        </div>
 
-        let btn1 = document.getElementById("btn1");
-        btn1.name = "Bar";
+        <div class="header_logo_img">
+            <img class="header_logo_img" src="../html/icon.png" alt="logo">
+        </div>
 
-        let btn2 = document.getElementById("btn2");
-        btn2.name = "Baz";
+        <div class="header_siteName">
+            <h1>Attendance Web Tracker</h1>
+        </div>
+    </div>
+    <div class="btn-group" id="btn-group">
+        <button class="button" onclick="mainApp.logout()">Log Out</button>
+    </div>
+    <div id="dashboard">
+    <div id="loader-container">
+      <div class="loader-div">
+        <div class="loader-div">
+          <div class="loader-div">
+            <div class="loader-div">
+      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+    <div id='createClass' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('createClass')" class="close" title="Close">&times;</span>
 
-        btn1.addEventListener("click", () => {
+                <h1>Create Session</h1>
+                <p>Please fill in this form to create a new session</p>
+                <hr>
+                <div class="wrapperForm">
+                    <input  id="newTitle" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
+                    <input id="newMax" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
+                        required>
+                    <input id="newCode" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
 
-        });
+                    <button id="generateCodeBtn" class="createBtn">Create code</button>
 
-    </script>
+                    <button id="create" class="create">CREATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id='submitPresence' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('submitPresence')" class="close" title="Close">&times;</span>
+
+                <h1>Submit Presence</h1>
+                <p>Please fill in the presence code</p>
+                <hr>
+                <input id="code" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
+                <button id="submitPresenceBtn" class="createBtn">Send code</button>
+            </div>
+        </div>
+    </div>
+
+    <div id='viewPresence' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('viewPresence')" class="close" title="Close">&times;</span>
+                
+                <h1>Update Session</h1>
+                <hr>
+                <input id="checkActive" type="checkbox" name="active" value="active">Active<br>
+                <div id="updateForm" class="formContainer">
+                        <hr>
+                        <div class="wrapperForm">
+                            <input id="Title" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
+                            <input id="Max" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
+                                required>
+                            <input id="Code" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
+        
+                            <button id="generateCodeBtn2" class="createBtn">Create code</button>
+                            
+                            <button id="create2" class="create" type="submit">CREATE</button>
+                        </div>
+                    </div>
+                <table id="studentsTable"></table>
+
+            </div>
+        </div>
+    </div>
+    <div id='seeGrades' class="modal">
+            <div class="modal-content">
+                <div class="formContainer">
+                    <span onclick="closePopUpById('seeGrades')" class="close" title="Close">&times;</span>
+    
+                    <h1>Your Grades & feedback</h1>
+                    <p></p>
+                    <hr>
+                    Your grades
+                    <div  id="myGrades"  class="i3"  ></div>
+                    <hr>
+                    Your feedback
+                    <div id="myFeedback"  class="i3" ></div>
+                    
+                </div>
+            </div>
+        </div>
 
     <script src="fireBase.js"></script>
     <script src="app.js"></script>
+    <script src="popUp.js"></script>
 
 </body>
 

@@ -114,6 +114,7 @@ function getGradesById(_gradesId){
 		return object;
 	});
 }
+
 function getSessionById(_sessionId) {
 	return firebase.database().ref('/sessions/' + _sessionId).once('value').then(function (result) {
 		var object = result.val();

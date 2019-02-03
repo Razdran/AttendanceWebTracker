@@ -1,0 +1,235 @@
+#dashboard{
+    display:flex;
+    justify-content: space-around;
+    flex-flow: wrap;
+    margin-top:20px;
+}
+.card{
+    font-size: 40px;
+    color:white;
+    background-image: linear-gradient(to bottom left, #03bd8d 0%, #00989a 100%);
+    width: 370px;
+    margin:0 15px;
+    height: 210px;
+    margin-bottom: 50px;
+    box-shadow: 0 6px 15px rgba(36,37,38,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    background-color: #00989a;
+
+}
+.card:hover{
+    box-shadow: 5px 12px 20px rgba(36,37,38,0.2);
+}
+.titlu{
+    text-align: center;
+    background-color: rgba(0,0,0,0.2);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+.organizator{
+    margin-top:10px;
+    font-size: 25px;
+    text-align: center;
+}
+.prezente{
+    margin-top:60px;
+}
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+  }
+  .formContainer {
+    padding: 16px;
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  .close {
+    right: 20px;
+    top: 75px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    float:right;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
+  }  
+.wrapperForm{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr ;
+    grid-template-rows: 1fr 1fr 1fr 0.5fr 1fr;
+}
+
+.i1{
+    color: white;
+    grid-column: 2/4;
+    grid-row:1/2;
+    width: 95%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #03bd8d;
+}
+.i1:focus{
+    background-color: #00989a;
+    outline: none;
+}
+.i2{
+    
+    color: white;
+
+    grid-column: 2/4;
+    grid-row:2/3;
+    width: 95%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #03bd8d;
+}
+
+.i2:focus{
+    background-color: #00989a;
+    outline: none;
+}
+.i3{
+    
+    color: white;
+    grid-column: 2/3;
+    grid-row:3/4;
+    width: 95%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #03bd8d;
+}
+
+.i3:focus{
+    background-color: #00989a;
+    outline: none;
+}
+  .createBtn{
+    height: 45px;  
+    width:100px;  
+    margin-top:5px;  
+    margin-left: 50px;
+    grid-column: 3/4;
+    grid-row:3/4;
+    background-color: #03bd8d;
+    border-radius:50%;
+  }
+  .create{
+    color:white;
+    margin-top:20px;
+    background-color: #00989a; 
+     
+    grid-column: 2/4;
+    grid-row:5/6;
+  }
+
+
+h1{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+
+  .addClass{
+      display: inline-block;
+  }
+
+  .btn-group .button {
+    background-color:rgb(0, 134, 99); /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+  }
+  
+  .btn-group .button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+  }
+  
+  .btn-group .button:hover {
+    background-color: #3e8e41;
+  }
+  .btn-group{
+    margin-left:10px;
+    width: 100%;
+    height: 50px;
+  }
+  #username{
+      float: right;
+      margin-right: 20px;
+      font-size: 16px;  
+    }
+  table, th, td {
+        border: 1px solid black;
+  }
+  
+  .inputEditing{
+      background: white;
+	  width:98%;
+  }
+  
+  
+ @media (max-width:450px){
+      #username{
+          font-size: 0px;
+      }
+  }
+  table{
+      width: 60%;
+      margin: auto;
+  }
+  #myGrades{
+    height:25px;
+  }
+  #myFeedback{
+    height: 50px;
+  }
+  
+.prezenteSpan{
+	position:absolute;
+	bottom:10%;
+	left:10%;
+}	
+#checkMark{
+	position:absolute;
+	bottom:10%;
+	right:10%;
+	width:48px;
+	height:48px;
+	
+}

@@ -1,6 +1,6 @@
 body{
   margin:0;
-  background-color: #eaedf1;
+  background-color:#f6f6f6;
 }
 .header{
     position:sticky;
@@ -9,17 +9,19 @@ body{
     left:0px;
     right:0px;
     height:50px;
-    background-color:#313854;
+    background-color:rgb(0, 134, 99);
     display:grid;
     grid-template-columns:1.3fr 32px 1fr 1fr;
     grid-template-areas: "l c c2 r";
     z-index:10;
-    margin-bottom:100px;
+    margin-bottom:10px;
 
 }
 
 .header_siteName{
     grid-area: c2;
+    margin-left:0px;
+    margin-right:auto;	
     font-size: 10px;
     color:#fff;
 }

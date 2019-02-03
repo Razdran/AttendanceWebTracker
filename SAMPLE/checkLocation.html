@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getLocation()">Try It</button>
+    <p id="demo">
+
+    </p>
+
+
+<script>
+      var studentInFaculty;//variabila in care se retine daca studentul este in facultate
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } 
+      }
+      function showPosition(position) {
+    if(position.coords.latitude>47.173720&&
+      position.coords.latitude<47.174336&&
+      position.coords.longitude>27.574524&&
+      position.coords.longitude<27.575696)
+          studentInFaculty=true;
+    else
+          studentInFaculty=false;
+          console.log(studentInFaculty);
+      
+  }
+
+    </script> 
+</body>
+</html>
