@@ -133,18 +133,32 @@
             <div class="formContainer">
                 <span onclick="closePopUpById('createChart')" class="close" title="Close">&times;</span>
 
-                <h1>Create Session</h1>
-                <p>Please fill in this form to create a new session</p>
+                <h1>Create Chart</h1>
+                <p>You can filter the data by the following criteria:</p>
+                <div class="filterWrapper">
+                    <hr>
+                    <p>Grade</p>
+                    Min Grade
+                    <input id="minGrade" type="number" class="gradeFilter" placeholder="min grade" name="minGrade">
+                    Max Grade
+                    <input id="maxGrade" type="number" class="gradeFilter" placeholder="max grade" name="maxGrade">
+                    <hr>
+                    <p>Time</p>
+                    Start time
+                    <input id="startTime" type="number" class="timeFilter" placeholder="start time" name="startTime">
+                    End Time
+                    <input id="endTime" type="number" class="timeFilter" placeholder="end time" name="endTime">
+                    <hr>
+                    <button id="chart_createFiltered" class="chart_showFilteredChartBtn" type="submit" onclick="renderChart()">Show
+                        Filtered Chart</button>
+                    <hr>
+
+                    <div class="chartContainer">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
                 <hr>
                 <div class="wrapperForm">
-                    <input  id="newTitle" type="text" class="i1" placeholder="Enter title" name="Titlu" required>
-                    <input id="newMax" type="number" class="i2" placeholder="Enter max students" name="Maxim prezente"
-                        required>
-                    <input id="newCode" type="text" class="i3" placeholder="session code" name="codPrezenta" required>
-
-                    <button id="generateCodeBtn" class="createBtn">Create code</button>
-
-                    <button id="create" class="create">CREATE</button>
                 </div>
             </div>
         </div>
@@ -153,7 +167,10 @@
     <script src="fireBase.js"></script>
     <script src="app.js"></script>
     <script src="popUp.js"></script>
-
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </body>
 
 </html>
