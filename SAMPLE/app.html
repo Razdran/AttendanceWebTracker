@@ -135,28 +135,33 @@
 
                 <h1>Create Chart</h1>
                 <p>You can filter the data by the following criteria:</p>
-                <div class="filterWrapper">
-                    <hr>
-                    <p>Grade</p>
+                <hr>
+                <p>Grade</p>
+
+                <div class="filterLine">
                     Min Grade
                     <input id="minGrade" type="number" class="gradeFilter" placeholder="min grade" name="minGrade">
                     Max Grade
                     <input id="maxGrade" type="number" class="gradeFilter" placeholder="max grade" name="maxGrade">
-                    <hr>
-                    <p>Time</p>
+                </div>
+
+                <hr>
+                <p>Time</p>
+                <div class="filterLine">
                     Start time
                     <input id="startTime" type="number" class="timeFilter" placeholder="start time" name="startTime">
                     End Time
                     <input id="endTime" type="number" class="timeFilter" placeholder="end time" name="endTime">
-                    <hr>
-                    <button id="chart_createFiltered" class="chart_showFilteredChartBtn" type="submit" onclick="renderChart()">Show
-                        Filtered Chart</button>
-                    <hr>
-
-                    <div class="chartContainer">
-                        <canvas id="myChart"></canvas>
-                    </div>
                 </div>
+                <hr>
+                <button id="chart_createFiltered" class="chart_showFilteredChartBtn" type="submit" onclick="chart()">Show
+                    Filtered Chart</button>
+                <hr>
+
+                <div class="chartContainer">
+                    <canvas id="myChart"></canvas>
+                </div>
+
                 <hr>
                 <div class="wrapperForm">
                 </div>
@@ -167,9 +172,9 @@
     <script src="fireBase.js"></script>
     <script src="app.js"></script>
     <script src="popUp.js"></script>
-    
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
 </body>
 
 </html>
