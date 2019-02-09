@@ -17,7 +17,7 @@
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: 'popup',
-  signInSuccessUrl: 'app.html',
+  signInSuccessUrl: 'index.html',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -28,9 +28,9 @@
     //firebase.auth.PhoneAuthProvider.PROVIDER_ID
   ],
   // Terms of service url.
-  tosUrl: 'app.html',
+  tosUrl: 'index.html',
   // Privacy policy url.
-  privacyPolicyUrl: 'app.html'
+  privacyPolicyUrl: 'index.html'
 };
 
 ui.start('#firebaseui-auth-container', uiConfig);

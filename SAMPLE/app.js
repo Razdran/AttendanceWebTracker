@@ -567,7 +567,8 @@ async function getJSON()
 }
 async function downloadJSON()
 {
-	data=await getJSON();
+	driveApi();
+	/*data=await getJSON();
 	var blob=new Blob([data],{type:"text/plain"});
 	a=document.createElement('a');
 	a.href=window.URL.createObjectURL(blob);
@@ -575,7 +576,7 @@ async function downloadJSON()
 	document.body.appendChild(a);
 	a.click();
 	a.remove();
-	
+	*/
 }
 
 function getHTML5(data)
@@ -590,8 +591,8 @@ function getHTML5(data)
 	html=html+"<body>\n";
 	for(i=0;i<data.length;i++)
 	{
-		html=html+"<h1>"+data[i].titlu+"</h1>\n";
-		html=html+"<h2>"+data[i].organizatorName+"</h2>\n";
+		html=html+"<h1 itemtype=https://schema.org/Event itemprop=event>"+data[i].titlu+"</h1>\n";
+		html=html+"<h2 itemtype=http://schema.org/Person itemprop=name>"+data[i].organizatorName+"</h2>\n";
 		participants=data[i].participants;
 		if(participants!=undefined)
 		{
@@ -600,9 +601,9 @@ function getHTML5(data)
 			for(j=0;j<participants.length;j++)
 			{
 				html=html+"<tr>\n";
-				html=html+"<td>"+participants[j].name+"</td>\n";
-				html=html+"<td>"+participants[j].grade+"</td>\n";
-				html=html+"<td>"+participants[j].feedback+"</td>\n";
+				html=html+"<td itemtype=http://schema.org/Person itemprop=name>"+participants[j].name+"</td>\n";
+				html=html+"<td itemtype=http://schema.org/Rating itemprop=ratingValue>"+participants[j].grade+"</td>\n";
+				html=html+"<td itemtype=https://schema.org/Review itemprop=review>"+participants[j].feedback+"</td>\n";
 				html=html+"</tr>\n";
 			}
 			html=html+"</table>\n";
@@ -636,6 +637,7 @@ async function mainFlow() {
 	//createSession("test",15,generateSessionCode());
 	setup();
 	renderAllSessions();
+	//driveApi();
 	//create a new session
 	btn=document.getElementById('create');
 	btn.addEventListener("click",function(){
@@ -791,7 +793,24 @@ async function chart(){
 	renderChart("myChart",titlu,legenda,data,labels);
 	  
 }
-
+function driveApi()
+{
+	gapi.load('client',driveApiStart);
+		
+}
+function driveApiStart()
+{
+	gapi.client.init({
+			'apiKey': 'AIzaSyBIyNqDsAM89uWl0XkYLo4g3c_bSUjxBK4',
+			// Your API key will be automatically added to the Discovery Document URLs.
+			'discoveryDocs': ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+			// clientId and scope are optional if auth is not required.
+			'clientId': '47040115686-sra0smn2lont5nqqqv3d98dj1s4pkfqs.apps.googleusercontent.com',
+			'scope': "https://www.googleapis.com/auth/drive.readonly",
+		}).then(()=>{
+			console.log("intru");
+		});
+}
 
 /*
       function getLocation() {

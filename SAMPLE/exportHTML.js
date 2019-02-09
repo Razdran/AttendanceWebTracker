@@ -10,7 +10,7 @@ function getHTML5(data)
 	html=html+"<body>\n";
 	for(i=0;i<data.length;i++)
 	{
-		html=html+"<h1>"+data[i].titlu+"</h1>\n";
+		html=html+"<h1 itemtype=\" \" >"+data[i].titlu+"</h1>\n";
 		html=html+"<h2>"+data[i].organizatorName+"</h2>\n";
 		participants=data[i].participants;
 		if(participants!=undefined)
