@@ -47,7 +47,7 @@ var sessions=[
     "participants": [
       {
         "feedback": "smecher",
-        "grade": "12",
+        "grade": "2",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
         "name": "cristian stefan"
       }
@@ -193,7 +193,7 @@ var sessions=[
     "participants": [
       {
         "feedback": "smec",
-        "grade": "12",
+        "grade": "4",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
         "name": "cristian stefan"
       }
@@ -211,7 +211,7 @@ var sessions=[
     "participants": [
       {
         "feedback": "sme",
-        "grade": "12",
+        "grade": "3",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
         "name": "cristian stefan"
       }
@@ -229,7 +229,7 @@ var sessions=[
     "participants": [
       {
         "feedback": "smec",
-        "grade": "12",
+        "grade": "3",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
         "name": "cristian stefan"
       }
@@ -247,7 +247,7 @@ var sessions=[
     "participants": [
       {
         "feedback": "smemmm",
-        "grade": "12",
+        "grade": "5",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
         "name": "cristian stefan"
       }
@@ -371,7 +371,8 @@ function closePopUp(){
 }
 
 
-function getCheckedSessions(){
+function getCheckedSessions()
+{
   var lista=[];
   var result=[];
   var k=-1;
@@ -390,7 +391,8 @@ function getCheckedSessions(){
   return result;
 }
 
-function getMarkInterval(){
+function getMarkInterval()
+{
   var result=[];
   result[1]=document.getElementById("minGrade").value;
   result[2]=document.getElementById("maxGrade").value;
@@ -436,7 +438,8 @@ if(result.checked==true)
   return false;
 }
 
-function getPredefinedChart(){
+function getPredefinedChart()
+{
   var selection=document.getElementById("predefinedChart");
 
   return selection.options[selection.selectedIndex].value;
@@ -494,7 +497,59 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
 }
 
 
-function createArraysForChartNothingSelected(sessions){
+function renderDoughnutChart(_idChart,_titlu,_legend,_data,_labels)
+{
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:_labels,
+        datasets:[{
+          label:_legend,
+          data:_data,
+          backgroundColor:['rgb(0,134,99)','#00989a'],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:_titlu,
+          fontSize:25
+        },
+        legend:{
+          display:true,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+}
+
+function createArraysForChartNothingSelected(sessions)
+{
 
 	rezultat={};
 	note=[];
@@ -506,49 +561,7 @@ function createArraysForChartNothingSelected(sessions){
 		{
 		if(sessions[i].participants[0].grade!=0)
 		{
-			if(sessions[i].participants[0].grade=="0")
-			note[0]+=1;
-			
-			if(sessions[i].participants[0].grade=="1")
-			note[1]+=1;
-			
-			if(sessions[i].participants[0].grade=="2")
-			note[2]+=1;
-			
-			if(sessions[i].participants[0].grade=="3")
-			note[3]+=1;
-			
-			if(sessions[i].participants[0].grade=="4")
-			note[4]+=1;
-			
-			if(sessions[i].participants[0].grade=="5")
-			note[5]+=1;
-			
-			if(sessions[i].participants[0].grade=="6")
-			note[6]+=1;
-			
-			if(sessions[i].participants[0].grade=="7")
-			note[7]+=1;
-			
-			if(sessions[i].participants[0].grade=="8")
-			note[8]+=1;
-			
-			if(sessions[i].participants[0].grade=="9")
-			note[9]+=1;
-			
-			if(sessions[i].participants[0].grade=="10")
-			note[10]+=1;
-			
-			if(sessions[i].participants[0].grade=="11")
-			note[11]+=1;
-			if(sessions[i].participants[0].grade=="12")
-			note[12]+=1;
-			if(sessions[i].participants[0].grade=="13")
-			note[13]+=1;
-			if(sessions[i].participants[0].grade=="14")
-			note[14]+=1;
-			if(sessions[i].participants[0].grade=="15")
-			note[15]+=1;
+			note[parseInt(sessions[i].participants[0].grade)]+=1;
 		}
 	}
 	}
@@ -653,7 +666,42 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
   var l;
   if(_predefinedChart!="SelectValue")
   {
-    //predefined charts
+    if(_predefinedChart=="StudentiTrecuti")
+    {
+      var a_intervalNote=[];
+      var a_intervalTimp=0;
+      var a_trecut_picat;
+      a_intervalNote[0]=1;
+      a_intervalTimp[0]=1;
+      a_trecut_picat=false;
+
+      var labels=[];
+      var titlu;
+      var legenda;
+
+
+      datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,a_intervalNote,a_intervalTimp,a_trecut_picat);
+      inote=datas.note;
+      labels[0]="Picati";
+      labels[1]="trecuti";
+      titlu="studenti trecuti/picati";
+      legenda="No of students";
+
+      var da=0;
+      var nu=0;
+      for(var h=0;h<inote.length;h++)
+        if(h>=5)
+          da+=inote[h];
+        else
+          nu+=inote[h];
+
+      var data=[];
+      data[0]=nu;
+      data[1]=da;
+      renderDoughnutChart("myChart",titlu,legenda,data,labels);  
+    }
+
+
   }
   else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&_trecut_picat==false)
   {
@@ -665,7 +713,7 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
   	for(var i=0;i<=15;i++)
 	  	labels[i]=i;
   	titlu="Punctaje";
-	  legenda="No of Students"
+	  legenda="No of Students";
 
 	  renderChart("myChart",titlu,legenda,data,labels);
   }
