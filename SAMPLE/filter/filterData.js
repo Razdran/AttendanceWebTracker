@@ -610,67 +610,27 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
             )//trebuie adaugata conditia pentru timp
 			      {
               console.log("Am gasit o nota care se potriveste");
-			        if(sessions[i].participants[0].grade=="0")
-		          	note[0]+=1;
-			
-		        	if(sessions[i].participants[0].grade=="1")
-			          note[1]+=1;
-			
-		        	if(sessions[i].participants[0].grade=="2")
-			          note[2]+=1;
-			
-			        if(sessions[i].participants[0].grade=="3")
-			          note[3]+=1;
-			
-			        if(sessions[i].participants[0].grade=="4")
-			          note[4]+=1;
-			
-			        if(sessions[i].participants[0].grade=="5")
-			          note[5]+=1;
-			
-			        if(sessions[i].participants[0].grade=="6")
-			          note[6]+=1;
-			
-			        if(sessions[i].participants[0].grade=="7")
-			          note[7]+=1;
-			
-			        if(sessions[i].participants[0].grade=="8")
-			          note[8]+=1;
-			
-        			if(sessions[i].participants[0].grade=="9")
-		          	note[9]+=1;
-			
-		        	if(sessions[i].participants[0].grade=="10")
-		          	note[10]+=1;
-			
-		        	if(sessions[i].participants[0].grade=="11")
-			          note[11]+=1;
-		        	if(sessions[i].participants[0].grade=="12")
-			          note[12]+=1;
-			        if(sessions[i].participants[0].grade=="13")
-			          note[13]+=1;
-        			if(sessions[i].participants[0].grade=="14")
-		          	note[14]+=1;
-			        if(sessions[i].participants[0].grade=="15")
-		      	    note[15]+=1;
+			        note[parseInt(sessions[i].participants[0].grade)]+=1;
             }
         }
       }
     }
     else
-    {
-      console.log("intru aici");
-      if(sessions[i].titlu in i_sesiuniMarcate )
+    { ok=0;
+      for(var j=0;j<i_sesiuniMarcate.length;j++)
+        if(sessions[i].titlu==i_sesiuniMarcate[j])
+          ok=1;
+      if(ok==1)
       {
         console.log("intru aici");
         if(sessions[i].participants!=undefined)
         {
           if(sessions[i].participants[0].grade!=0)
           {
-            if(sessions[i].participants[0].grade>=min_nota&&
-              sessions[i].participants[0].grade<=max_nota
+            if(parseInt(sessions[i].participants[0].grade)>=min_nota&&
+              parseInt(sessions[i].participants[0].grade)<=max_nota
               )//trebuie adaugata conditia pentru timp
-              note[sessions[i].participants[0].grade]+=1;
+              note[parseInt(sessions[i].participants[0].grade)]+=1;
           }
         } 
       }
@@ -695,7 +655,7 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
   {
     //predefined charts
   }
-  else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&trecut_picat==false)
+  else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&_trecut_picat==false)
   {
 	  datas=createArraysForChartNothingSelected(sessions);
 	  data=datas.note;
