@@ -791,3 +791,23 @@ async function chart(){
 	renderChart("myChart",titlu,legenda,data,labels);
 	  
 }
+
+
+/*
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } 
+      }
+      function showPosition(position) {
+    if(position.coords.latitude>47.173720&&
+      position.coords.latitude<47.174336&&
+      position.coords.longitude>27.574524&&
+      position.coords.longitude<27.575696)
+          return true;
+    else
+          return false;
+          
+      
+  }
+*/ 
