@@ -392,14 +392,63 @@ function getCheckedSessions(){
   return result;
 }
 
+function getMarkInterval(){
+  var result=[];
+  result[0]=document.getElementById("minGrade").value;
+  result[1]=document.getElementById("maxGrade").value;
+  if(result[0]==null||result[0]=="")
+    result[0]=0;
+  if(result[1]==null||result[1]=="")
+    result[1]=20;
+
+  return result;
+}
+
+function getTimeInterval(){
+  var time=new Date().getTime();
+  var result=[];
+
+  result[0]=document.getElementById("startTime").value;
+  result[1]=document.getElementById("endTime").value;
+
+  if(result[0]==null||result[0]=="")
+    result[0]=0;
+  if(result[1]==null||result[1]=="")
+    result[1]=time;
+  
+  return result;
+}
+
+function getPassed(){
+result= document.getElementById("isPassed");
+if(result.checked==true)
+  return true;
+  else
+  return false;
+}
 
 async function doit()
 {
-	var result=await getCheckedSessions();
-  
+	var sesiuniMarcate=await getCheckedSessions();
+  var intervalNote=await getMarkInterval();
+  var intervalTimp=await getTimeInterval();
+  var trecut_picat=await getPassed();
   console.log("checkboxuri marcate: ");
-  console.log(result.length);
-  
+  console.log(sesiuniMarcate.length);
   console.log("si anume:");
-  console.log(result);
+  console.log(sesiuniMarcate);
+
+  console.log("interval note: ");
+  console.log(intervalNote[0]);
+  console.log(", ");
+  console.log(intervalNote[1]);
+
+  
+  console.log("interval timp: ");
+  console.log(intervalTimp[0]);
+  console.log(", ");
+  console.log(intervalTimp[1]);
+
+  console.log("afiseaza doar studentii trecuti:");
+  console.log(trecut_picat);    
 }
