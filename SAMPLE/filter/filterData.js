@@ -345,12 +345,17 @@ function prepareFilters(iname,_id){
   {
     for(var j=0;j<=k;j++)
     { console.log("aici e o sessiune");
-      addbtn=document.createElement("button");
-	    addbtn.className="button";
-	    addbtn.id="selectClass";
-	    addbtn.style.width="auto";
-	    addbtn.innerHTML=avSessions[j];
-    	id.appendChild(addbtn);
+      addbtn=document.createElement("input");
+	    addbtn.type="checkbox";
+      addbtn.id=avSessions[j];
+      addbtn.className="checkBox";
+      paragraf=document.createElement("p")
+      paragraf.innerHTML=avSessions[j];
+      paragraf.style.width="auto";
+      paragraf.style.display="inline-block";
+      paragraf.style.marginLeft="20px";
+      id.appendChild(paragraf);
+      id.appendChild(addbtn);
     }
   }
 }
@@ -368,8 +373,33 @@ function closePopUp(){
 }
 
 
-function doit()
+function getCheckedSessions(){
+  var lista=[];
+  var result=[];
+  var k=-1;
+  lista=document.getElementsByClassName("checkBox");
+  
+  for (var i=0;i<lista.length;i++)
+  {
+    if(lista[i].checked==true)
+    {
+      
+      k++;
+      result[k]=lista[i].id;
+    }
+  }
+  
+  return result;
+}
+
+
+async function doit()
 {
-	
-	
+	var result=await getCheckedSessions();
+  
+  console.log("checkboxuri marcate: ");
+  console.log(result.length);
+  
+  console.log("si anume:");
+  console.log(result);
 }
