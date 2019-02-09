@@ -521,6 +521,80 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
       }
     });
 }
+function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
+{
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+      
+        labels:_labels,
+        datasets:[{
+          label:_legend,
+          data:_data,
+          borderWidth:3,
+          borderColor:'rgb(0,134,99)',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        },
+         {
+          label:'Gauss',
+          data:[0.001*_noGrades,0.005*_noGrades,0.02*_noGrades,0.05*_noGrades,0.1*_noGrades,
+            0.15*_noGrades,0.2*_noGrades,0.2*_noGrades,0.15*_noGrades,
+            0.1*_noGrades,0.05*_noGrades,0.02*_noGrades,0.005*_noGrades,0.001*_noGrades],
+          borderWidth:3,
+          borderColor:'red',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:_titlu,
+          fontSize:25
+        },
+        legend:{
+          display:true,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        scales: {
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Grade'
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Number of students'
+            }
+          }],
+        },     
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+}
 
 
 function renderDoughnutChart(_idChart,_titlu,_legend,_data,_labels)
@@ -579,7 +653,7 @@ function createArraysForChartNothingSelected(sessions)
 
 	rezultat={};
 	note=[];
-	for (var j=0;j<=15;j++)
+	for (var j=0;j<=12;j++)
 		note[j]=0;
 	for(var i=0;i<sessions.length;i++)
 	{	
@@ -731,7 +805,7 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
       renderDoughnutChart("myChart",titlu,legenda,data,labels);  
     }
   
-    else if(_predefinedChart="NotePuseAcumOORA")
+    else if(_predefinedChart=="NotePuseAcumOORA")
     {
       var d = new Date();
       var n = d.getTime();
@@ -755,6 +829,25 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
 
       renderChart("myChart",titlu,legenda,data,labels); 
     }
+
+    else if(_predefinedChart=="CompareGauss")
+    {
+      
+	  datas=createArraysForChartNothingSelected(sessions);
+	  data=datas.note;
+    //data are toate notele ;
+
+    labels=[];
+  	for(var i=0;i<=12;i++)
+	  	labels[i]=i;
+  	titlu="Punctaje";
+	  legenda="No of Students";
+    var i_noGrades=0;
+    for(var j=0;j<data.length;j++)
+      i_noGrades+=parseInt(data[j]);
+	  renderLineChart("myChart",titlu,legenda,data,labels,i_noGrades);
+    }
+
   }
 
   else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&_trecut_picat==false)
@@ -764,7 +857,7 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
     //data are toate notele ;
 
     labels=[];
-  	for(var i=0;i<=15;i++)
+  	for(var i=0;i<=12;i++)
 	  	labels[i]=i;
   	titlu="Punctaje";
 	  legenda="No of Students";
