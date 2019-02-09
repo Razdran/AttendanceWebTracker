@@ -279,7 +279,8 @@ var sessions=[
         "grade": "8",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
         "name": "cristian stefan",
-        "time": 1549224882174
+        "time": 1549752263103
+                
       }
     ],
     "prezente": 1,
@@ -810,6 +811,8 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
       var d = new Date();
       var n = d.getTime();
       _intervalTimp[1]=d-3600000;
+      _intervalTimp[0]=0;
+      
       datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
       inote=datas.note;
       min=parseInt(datas.intervalNotaremin);
