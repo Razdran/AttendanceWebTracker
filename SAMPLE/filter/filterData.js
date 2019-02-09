@@ -559,11 +559,12 @@ function createArraysForChartNothingSelected(sessions)
 	{	
 		if(sessions[i].participants!=undefined)
 		{
-		if(sessions[i].participants[0].grade!=0)
-		{
-			note[parseInt(sessions[i].participants[0].grade)]+=1;
-		}
-	}
+      for(var o=0;o<sessions[i].participants.length;o++)
+		    if(sessions[i].participants[o].grade!=0)
+		    {
+			    note[parseInt(sessions[i].participants[o].grade)]+=1;
+		    }
+	  }
 	}
 	rezultat["note"]=note;
 	console.log(rezultat);
@@ -615,15 +616,16 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 		{
       if(sessions[i].participants!=undefined)
 		  {
-		    if(sessions[i].participants[0].grade!=0)
+        for(var o=0;o<sessions[i].participants.length;o++)
+		    if(sessions[i].participants[o].grade!=0)
 		    {
           
-          if(parseInt(sessions[i].participants[0].grade)>=min_nota&&
-            parseInt(sessions[i].participants[0].grade)<=max_nota
+          if(parseInt(sessions[i].participants[o].grade)>=min_nota&&
+            parseInt(sessions[i].participants[o].grade)<=max_nota
             )//trebuie adaugata conditia pentru timp
 			      {
               console.log("Am gasit o nota care se potriveste");
-			        note[parseInt(sessions[i].participants[0].grade)]+=1;
+			        note[parseInt(sessions[i].participants[o].grade)]+=1;
             }
         }
       }
