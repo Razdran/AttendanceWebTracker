@@ -324,7 +324,7 @@ var dataBase=[
     "titlu": "",
     "key": "-LYE9YNhTIZwOM227B1l"
   }
-]
+];
 function do()
 {
 	
