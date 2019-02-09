@@ -605,11 +605,55 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 		    if(sessions[i].participants[0].grade!=0)
 		    {
           
-          console.log(sessions[i].participants[0]);
-          if(sessions[i].participants[0].grade>=min_nota&&
-            sessions[i].participants[0].grade<=max_nota
+          if(parseInt(sessions[i].participants[0].grade)>=min_nota&&
+            parseInt(sessions[i].participants[0].grade)<=max_nota
             )//trebuie adaugata conditia pentru timp
-			      note[sessions[i].participants[0].grade]++;
+			      {
+              console.log("Am gasit o nota care se potriveste");
+			        if(sessions[i].participants[0].grade=="0")
+		          	note[0]+=1;
+			
+		        	if(sessions[i].participants[0].grade=="1")
+			          note[1]+=1;
+			
+		        	if(sessions[i].participants[0].grade=="2")
+			          note[2]+=1;
+			
+			        if(sessions[i].participants[0].grade=="3")
+			          note[3]+=1;
+			
+			        if(sessions[i].participants[0].grade=="4")
+			          note[4]+=1;
+			
+			        if(sessions[i].participants[0].grade=="5")
+			          note[5]+=1;
+			
+			        if(sessions[i].participants[0].grade=="6")
+			          note[6]+=1;
+			
+			        if(sessions[i].participants[0].grade=="7")
+			          note[7]+=1;
+			
+			        if(sessions[i].participants[0].grade=="8")
+			          note[8]+=1;
+			
+        			if(sessions[i].participants[0].grade=="9")
+		          	note[9]+=1;
+			
+		        	if(sessions[i].participants[0].grade=="10")
+		          	note[10]+=1;
+			
+		        	if(sessions[i].participants[0].grade=="11")
+			          note[11]+=1;
+		        	if(sessions[i].participants[0].grade=="12")
+			          note[12]+=1;
+			        if(sessions[i].participants[0].grade=="13")
+			          note[13]+=1;
+        			if(sessions[i].participants[0].grade=="14")
+		          	note[14]+=1;
+			        if(sessions[i].participants[0].grade=="15")
+		      	    note[15]+=1;
+            }
         }
       }
     }
@@ -646,7 +690,7 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 
 
 async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat){
-
+  var l;
   if(_predefinedChart!="SelectValue")
   {
     //predefined charts
@@ -667,14 +711,19 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
   }
   else 
   {
+    
     //All the oder cases!!!
-    console.log("Creaza chart unde trebuie");
     datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
-    data=datas.note;
+    inote=datas.note;
+    min=parseInt(datas.intervalNotaremin);
+    var data=[];
 
+    for(l=0;l<=parseInt(datas.intervalNotaremax)-parseInt(datas.intervalNotaremin);l++)
+      {data[l]=inote[l+min];
+      }
     labels=[];
     k=0;
-    for(var i=datas.intervalNotaremin;i<=datas.intervalNotaremax;i++)
+    for(var i=parseInt(datas.intervalNotaremin);i<=parseInt(datas.intervalNotaremax);i++)
       labels[k++]=i;
     
     titlu="Punctaje";
