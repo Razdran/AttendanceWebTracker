@@ -1,4 +1,4 @@
-var dataBase=[
+var sessions=[
   {
     "active": 1,
     "maxPrezente": 20,
@@ -325,7 +325,50 @@ var dataBase=[
     "key": "-LYE9YNhTIZwOM227B1l"
   }
 ];
-function do()
+
+function prepareFilters(iname,_id){
+  console.log("da");
+  var avSessions=[];
+  var k=-1;
+  id=document.getElementById(_id);
+  for (var i=0;i<sessions.length;i++)
+  {
+    console.log(sessions[i].organizatorName);
+    if(sessions[i].organizatorName==iname)
+    {
+      console.log("aici e cosmin");
+      k++;
+      avSessions[k]=sessions[i].titlu;
+    }
+  }
+  if(k!=-1)
+  {
+    for(var j=0;j<=k;j++)
+    { console.log("aici e o sessiune");
+      addbtn=document.createElement("button");
+	    addbtn.className="button";
+	    addbtn.id="selectClass";
+	    addbtn.style.width="auto";
+	    addbtn.innerHTML=avSessions[j];
+    	id.appendChild(addbtn);
+    }
+  }
+}
+
+
+
+function popUp(){
+  prepareFilters("cosmin stefan","availableSessions");
+  document.getElementById('createChart').style.display='block';
+  
+}
+function closePopUp(){
+  document.getElementById('createChart').style.display='none';
+  
+}
+
+
+function doit()
 {
 	
 	
