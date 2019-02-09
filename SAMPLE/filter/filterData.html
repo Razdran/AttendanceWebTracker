@@ -16,7 +16,16 @@
                 <span onclick="closePopUp()" class="close" title="Close">&times;</span>
 
                 <h1>Create Chart</h1>
-                <p>You can filter the data by the following criteria:</p>
+                <p>You can select a predefined chart</p>
+                <hr>
+                <select id="predefinedChart">
+                    <option value="SelectValue">--Select value--</option>
+                    <option value="StudentiTrecuti">Studenti Trecuti</option>
+                    <option value="SumaPunctajelor">Suma punctajelor</option>
+                    <option value="MediaPunctajelor">media Punctajelor</option>
+                </select>
+                <hr>
+                <p>And you can filter the data by the following criteria:</p>
                 <hr>
                 <p>Grade</p>
 
@@ -66,4 +75,6 @@
 </body>
 
 <script src="filterData.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 </html>

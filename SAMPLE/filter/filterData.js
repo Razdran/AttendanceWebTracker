@@ -326,17 +326,15 @@ var sessions=[
   }
 ];
 
-function prepareFilters(iname,_id){
-  console.log("da");
+function prepareFilters(iname,_id)
+{  
   var avSessions=[];
   var k=-1;
   id=document.getElementById(_id);
   for (var i=0;i<sessions.length;i++)
   {
-    console.log(sessions[i].organizatorName);
     if(sessions[i].organizatorName==iname)
     {
-      console.log("aici e cosmin");
       k++;
       avSessions[k]=sessions[i].titlu;
     }
@@ -344,7 +342,7 @@ function prepareFilters(iname,_id){
   if(k!=-1)
   {
     for(var j=0;j<=k;j++)
-    { console.log("aici e o sessiune");
+    { 
       addbtn=document.createElement("input");
 	    addbtn.type="checkbox";
       addbtn.id=avSessions[j];
@@ -394,12 +392,18 @@ function getCheckedSessions(){
 
 function getMarkInterval(){
   var result=[];
-  result[0]=document.getElementById("minGrade").value;
-  result[1]=document.getElementById("maxGrade").value;
-  if(result[0]==null||result[0]=="")
+  result[1]=document.getElementById("minGrade").value;
+  result[2]=document.getElementById("maxGrade").value;
+  if((result[1]==null||result[1]=="")&&(result[2]==null||result[2]==""))
+    result[0]=1;//used to see which intervals are default
+  else
     result[0]=0;
+  
   if(result[1]==null||result[1]=="")
-    result[1]=20;
+    result[1]=0;
+  if(result[2]==null||result[2]=="")
+    result[2]=20;
+
 
   return result;
 }
@@ -408,14 +412,19 @@ function getTimeInterval(){
   var time=new Date().getTime();
   var result=[];
 
-  result[0]=document.getElementById("startTime").value;
-  result[1]=document.getElementById("endTime").value;
+  result[1]=document.getElementById("startTime").value;
+  result[2]=document.getElementById("endTime").value;
 
-  if(result[0]==null||result[0]=="")
+  if((result[1]==null||result[1]=="")&&(result[2]==null||result[2]==""))
+    result[0]=1;//used to see which intervals are default
+  else
     result[0]=0;
-  if(result[1]==null||result[1]=="")
-    result[1]=time;
   
+  if(result[1]==null||result[1]=="")
+    result[1]=0;
+  if(result[2]==null||result[2]=="")
+    result[2]=time;
+
   return result;
 }
 
@@ -427,8 +436,258 @@ if(result.checked==true)
   return false;
 }
 
+function getPredefinedChart(){
+  var selection=document.getElementById("predefinedChart");
+
+  return selection.options[selection.selectedIndex].value;
+}
+
+function renderChart(_idChart,_titlu,_legend,_data,_labels)
+{
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:_labels,
+        datasets:[{
+          label:_legend,
+          data:_data,
+          backgroundColor:'rgb(0,134,99)',
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:_titlu,
+          fontSize:25
+        },
+        legend:{
+          display:true,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+}
+
+
+function createArraysForChartNothingSelected(sessions){
+
+	rezultat={};
+	note=[];
+	for (var j=0;j<=15;j++)
+		note[j]=0;
+	for(var i=0;i<sessions.length;i++)
+	{	
+		if(sessions[i].participants!=undefined)
+		{
+		if(sessions[i].participants[0].grade!=0)
+		{
+			if(sessions[i].participants[0].grade=="0")
+			note[0]+=1;
+			
+			if(sessions[i].participants[0].grade=="1")
+			note[1]+=1;
+			
+			if(sessions[i].participants[0].grade=="2")
+			note[2]+=1;
+			
+			if(sessions[i].participants[0].grade=="3")
+			note[3]+=1;
+			
+			if(sessions[i].participants[0].grade=="4")
+			note[4]+=1;
+			
+			if(sessions[i].participants[0].grade=="5")
+			note[5]+=1;
+			
+			if(sessions[i].participants[0].grade=="6")
+			note[6]+=1;
+			
+			if(sessions[i].participants[0].grade=="7")
+			note[7]+=1;
+			
+			if(sessions[i].participants[0].grade=="8")
+			note[8]+=1;
+			
+			if(sessions[i].participants[0].grade=="9")
+			note[9]+=1;
+			
+			if(sessions[i].participants[0].grade=="10")
+			note[10]+=1;
+			
+			if(sessions[i].participants[0].grade=="11")
+			note[11]+=1;
+			if(sessions[i].participants[0].grade=="12")
+			note[12]+=1;
+			if(sessions[i].participants[0].grade=="13")
+			note[13]+=1;
+			if(sessions[i].participants[0].grade=="14")
+			note[14]+=1;
+			if(sessions[i].participants[0].grade=="15")
+			note[15]+=1;
+		}
+	}
+	}
+	rezultat["note"]=note;
+	console.log(rezultat);
+	
+	return rezultat;
+}
+
+function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_intervalTimp,i_trecut_picat)
+{
+  rezultat={};
+  note=[];
+  min_nota=0;
+  max_nota=20;
+  min_timp=0;
+  max_timp=new Date().getTime(); 
+  if(i_intervalNote[0]==0)
+  {
+    
+
+    min_nota=i_intervalNote[1];
+    max_nota=i_intervalNote[2];
+    //filtru pe interval note
+  
+    
+    console.log("interval note in chart:");
+    console.log(min_nota);
+    console.log(max_nota);
+  }
+  if(i_trecut_picat==true&&min_nota<5)
+    min_nota=5;
+    //filtru studenti trecuti
+  if(i_intervalTimp[0]==0)
+  {
+    min_timp=i_intervalTimp[1];
+    max_timp=i_intervalTimp[2];
+    //filtru timp
+  }
+
+
+
+
+
+  for (var j=0;j<=20;j++)
+    note[j]=0;
+    
+	for(var i=0;i<sessions.length;i++)
+	{	
+    if(i_sesiuniMarcate.length==0)
+		{
+      if(sessions[i].participants!=undefined)
+		  {
+		    if(sessions[i].participants[0].grade!=0)
+		    {
+          
+          console.log(sessions[i].participants[0]);
+          if(sessions[i].participants[0].grade>=min_nota&&
+            sessions[i].participants[0].grade<=max_nota
+            )//trebuie adaugata conditia pentru timp
+			      note[sessions[i].participants[0].grade]++;
+        }
+      }
+    }
+    else
+    {
+      console.log("intru aici");
+      if(sessions[i].titlu in i_sesiuniMarcate )
+      {
+        console.log("intru aici");
+        if(sessions[i].participants!=undefined)
+        {
+          if(sessions[i].participants[0].grade!=0)
+          {
+            if(sessions[i].participants[0].grade>=min_nota&&
+              sessions[i].participants[0].grade<=max_nota
+              )//trebuie adaugata conditia pentru timp
+              note[sessions[i].participants[0].grade]+=1;
+          }
+        } 
+      }
+    }
+  }
+  
+  rezultat["note"]=note;
+  rezultat["intervalNotaremin"]=min_nota;
+  rezultat["intervalNotaremax"]=max_nota;
+   
+	console.log(rezultat);
+	
+	return rezultat;
+
+}
+
+
+
+async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat){
+
+  if(_predefinedChart!="SelectValue")
+  {
+    //predefined charts
+  }
+  else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&trecut_picat==false)
+  {
+	  datas=createArraysForChartNothingSelected(sessions);
+	  data=datas.note;
+    //data are toate notele ;
+
+    labels=[];
+  	for(var i=0;i<=15;i++)
+	  	labels[i]=i;
+  	titlu="Punctaje";
+	  legenda="No of Students"
+
+	  renderChart("myChart",titlu,legenda,data,labels);
+  }
+  else 
+  {
+    //All the oder cases!!!
+    console.log("Creaza chart unde trebuie");
+    datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
+    data=datas.note;
+
+    labels=[];
+    k=0;
+    for(var i=datas.intervalNotaremin;i<=datas.intervalNotaremax;i++)
+      labels[k++]=i;
+    
+    titlu="Punctaje";
+    legenda="No of students";
+
+    renderChart("myChart",titlu,legenda,data,labels);
+  }
+}
+
+
 async function doit()
 {
+  var predefinedChart=await getPredefinedChart();
 	var sesiuniMarcate=await getCheckedSessions();
   var intervalNote=await getMarkInterval();
   var intervalTimp=await getTimeInterval();
@@ -439,16 +698,21 @@ async function doit()
   console.log(sesiuniMarcate);
 
   console.log("interval note: ");
-  console.log(intervalNote[0]);
-  console.log(", ");
   console.log(intervalNote[1]);
+  console.log(", ");
+  console.log(intervalNote[2]);
 
   
   console.log("interval timp: ");
-  console.log(intervalTimp[0]);
-  console.log(", ");
   console.log(intervalTimp[1]);
+  console.log(", ");
+  console.log(intervalTimp[2]);
 
   console.log("afiseaza doar studentii trecuti:");
   console.log(trecut_picat);    
+
+  console.log("predefined:");
+  console.log(predefinedChart); //if the value is SelectValue do nothing!!
+
+  chart(predefinedChart,sesiuniMarcate,intervalNote,intervalTimp,trecut_picat);
 }
