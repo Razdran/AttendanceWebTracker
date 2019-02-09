@@ -501,6 +501,20 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
             top:0
           }
         },
+        scales: {
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Grade'
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Number of students'
+            }
+          }],
+        },     
         tooltips:{
           enabled:true
         }
