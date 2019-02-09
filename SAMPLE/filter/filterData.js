@@ -49,7 +49,8 @@ var sessions=[
         "feedback": "smecher",
         "grade": "2",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -87,7 +88,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -105,7 +107,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -123,7 +126,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -141,7 +145,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -159,7 +164,8 @@ var sessions=[
         "feedback": "zzc",
         "grade": "10",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -177,7 +183,8 @@ var sessions=[
         "feedback": "zzc",
         "grade": "10",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -195,7 +202,8 @@ var sessions=[
         "feedback": "smec",
         "grade": "4",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -213,7 +221,8 @@ var sessions=[
         "feedback": "sme",
         "grade": "3",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -231,7 +240,8 @@ var sessions=[
         "feedback": "smec",
         "grade": "3",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -249,7 +259,8 @@ var sessions=[
         "feedback": "smemmm",
         "grade": "5",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -267,7 +278,8 @@ var sessions=[
         "feedback": "ia si mai invata",
         "grade": "8",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -361,7 +373,7 @@ function prepareFilters(iname,_id)
 
 
 function popUp(){
-  prepareFilters("cosmin stefan","availableSessions");
+  prepareFilters("cosmin stefan","availableSessions");//Aici trebuie pus id-ul profesorului logat
   document.getElementById('createChart').style.display='block';
   
 }
@@ -560,7 +572,7 @@ function createArraysForChartNothingSelected(sessions)
 		if(sessions[i].participants!=undefined)
 		{
       for(var o=0;o<sessions[i].participants.length;o++)
-		    if(sessions[i].participants[o].grade!=0)
+		    if(sessions[i].participants[o].grade!=0&& sessions[i].participants[o].time!=0 )
 		    {
 			    note[parseInt(sessions[i].participants[o].grade)]+=1;
 		    }
@@ -617,11 +629,13 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
       if(sessions[i].participants!=undefined)
 		  {
         for(var o=0;o<sessions[i].participants.length;o++)
-		    if(sessions[i].participants[o].grade!=0)
+		    if(sessions[i].participants[o].grade!=0 && sessions[i].participants[o].time!=0 )
 		    {
           
           if(parseInt(sessions[i].participants[o].grade)>=min_nota&&
-            parseInt(sessions[i].participants[o].grade)<=max_nota
+            parseInt(sessions[i].participants[o].grade)<=max_nota&&
+            sessions[i].participants[o].time>=min_timp&&
+            sessions[i].participants[o].time<=max_timp
             )//trebuie adaugata conditia pentru timp
 			      {
               console.log("Am gasit o nota care se potriveste");
@@ -702,9 +716,33 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
       data[1]=da;
       renderDoughnutChart("myChart",titlu,legenda,data,labels);  
     }
+  
+    else if(_predefinedChart="NotePuseAcumOORA")
+    {
+      var d = new Date();
+      var n = d.getTime();
+      _intervalTimp[1]=d-3600000;
+      datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
+      inote=datas.note;
+      min=parseInt(datas.intervalNotaremin);
+      var data=[];
 
+      for(l=0;l<=parseInt(datas.intervalNotaremax)-parseInt(datas.intervalNotaremin);l++)
+        {
+          data[l]=inote[l+min];
+        }
+      labels=[];
+      k=0;
+      for(var i=parseInt(datas.intervalNotaremin);i<=parseInt(datas.intervalNotaremax);i++)
+       labels[k++]=i;
+    
+      titlu="Note puse in urma cu maxim 1h";
+      legenda="No of students";
 
+      renderChart("myChart",titlu,legenda,data,labels); 
+    }
   }
+
   else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&_trecut_picat==false)
   {
 	  datas=createArraysForChartNothingSelected(sessions);
