@@ -517,7 +517,7 @@ if(mainApp.permission==1)
 	importbtn=document.createElement("button");
 	importbtn.className="button";
 	importbtn.id="import";
-	importbtn.setAttribute("onclick","downloadJSON()");
+	importbtn.setAttribute("onclick","popUpImport()");
 	importbtn.style.width="auto";
 	importbtn.innerHTML="Import";
 	btngroup.appendChild(importbtn);
@@ -525,7 +525,7 @@ if(mainApp.permission==1)
 	exportbtn=document.createElement("button");
 	exportbtn.className="button";
 	exportbtn.id="export";
-	exportbtn.setAttribute("onclick","downloadHTML5()");
+	exportbtn.setAttribute("onclick","popUpExport()");
 	exportbtn.style.width="auto";
 	exportbtn.innerHTML="Export";
 	btngroup.appendChild(exportbtn);
@@ -568,9 +568,9 @@ async function getJSON()
 async function downloadJSON()
 	//var Dropbox = require('dropbox').Dropbox;
 {
-	driveApi();
+	//driveApi();
 	//getAccesTokenDropBox()
-	/*data=await getJSON();
+	data=await getJSON();
 	var blob=new Blob([data],{type:"text/plain"});
 	a=document.createElement('a');
 	a.href=window.URL.createObjectURL(blob);
@@ -578,7 +578,7 @@ async function downloadJSON()
 	document.body.appendChild(a);
 	a.click();
 	a.remove();
-	*/
+	
 }
 
 function getHTML5(data)
@@ -709,6 +709,14 @@ function popUpfilter(){
   prepareFilters(mainApp.user.displayName,"availableSessions");//Aici trebuie pus id-ul profesorului logat
   document.getElementById('createChart').style.display='block';
   
+}
+
+function popUpExport(){
+	document.getElementById('exportForm').style.display='block';
+}
+function popUpImport(){
+	document.getElementById('importForm').style.display='block';
+	prepareImportSessions();
 }
 function closePopUpfilter(){
   document.getElementById('createChart').style.display='none';
@@ -1338,6 +1346,54 @@ async function doit()
   chart(predefinedChart,sesiuniMarcate,intervalNote,intervalTimp,trecut_picat);
 }
 
+function downloadButtonFunction(){
+	jsonchecked=document.getElementById('checkToExportJson');
+	htmlchecked=document.getElementById('checkToExportHtml');
+
+	if(jsonchecked.checked==true)
+	{
+		downloadJSON();
+	}
+
+	if(htmlchecked.checked==true)
+	{
+		downloadHTML5();
+	}
+
+}
+
+async function prepareImportSessions(){
+	json=await getJSON();
+	sessions=JSON.parse(json);
+		
+	var avSessions=[];
+  var k=-1;
+  for (var i=0;i<sessions.length;i++)
+  {
+    if(sessions[i].organizatorName==mainApp.user.displayName)
+    {
+      k++;
+      avSessions[k]=sessions[i].titlu;
+    }
+	}
+	
+  id=document.getElementById('selectSessionsToImport');
+  if(k!=-1)
+  {
+    for(var j=0;j<=k;j++)
+    { 
+      option=document.createElement("option");
+			option.value=avSessions[j];
+			option.innerHTML=avSessions[j];
+			
+			
+			id.appendChild(option);
+    }
+	}
+	
+
+
+}
 
 /*
       function getLocation() {

@@ -232,12 +232,33 @@ p{
 	width:48px;
 	height:48px;
 	
-<<<<<<< HEAD
 }
-=======
+
+.wrapperExportForm{
+  
+}
+.createExport{
+  display: block;
+  margin-left:45%;
 }
 
 .chart_showFilteredChartBtn{
     margin-left:45%;
 }
->>>>>>> 873cab726bc4cd61bfcae5814a7be465039976c4
+
+.sessionSelectionForImport{
+
+  display: block;
+
+}
+.googleDriveFilesselection{
+  display:block;
+}
+.selectp{
+  display:inline-block;
+}
+.createImport{
+
+  display: block;
+  margin-left:45%;
+}

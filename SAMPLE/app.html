@@ -192,6 +192,29 @@
         </div>
     </div>
 
+    <div id='exportForm' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('createClass')" class="close" title="Close">&times;</span>
+
+                <h1>EXPORT</h1>
+                <p>Please check one of the options in order to export</p>
+                <hr>
+                <div class="wrapperForm">
+                    <p style="display:inline-block">Json</p>
+                    <input id="checkToExportJson" type="checkbox" >
+                    <p style="display:inline-block">Html</p>
+                    <input id="checktoExportHtml" type="checkbox" >
+                    
+                    <button id="performExport" class="create">EXPORT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script src="fireBase.js"></script>
     <script src="app.js"></script>
     <script src="popUp.js"></script>

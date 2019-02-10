@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/header.css">
     <link rel="stylesheet" type="text/css" href="app.css">
     <link rel="stylesheet" type="text/css" href="mySpinner.css">
-	<script type="module" src="./require.js"></script>
+    <script type="module" src="./require.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <link rel="stylesheet" href="card.css">
     </link>
@@ -128,7 +128,7 @@
         </div>
     </div>
 
-    
+
     <div id='createChart' class="modal">
         <div class="modal-content">
             <div class="formContainer" id="formContainerChart">
@@ -165,19 +165,19 @@
                 </div>
                 <hr>
                 <div id="isPassedDiv">
-                    Select just passed students 
+                    Select just passed students
                     <input id="isPassed" type="checkbox">
                 </div>
                 <hr>
                 <div id="availableSessions">
                     Available sessions:
 
-                </div>    
+                </div>
                 <hr>
                 <button id="chart_createFiltered" type="submit" onclick="doit()">Show
                     Filtered Chart</button>
-                <hr>              
-                
+                <hr>
+
                 <div class="chartContainer" id="chartContainer">
                     <canvas id="myChart" class="myChart"></canvas>
                 </div>
@@ -189,12 +189,60 @@
         </div>
     </div>
 
+
+    <div id='exportForm' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('exportForm')" class="close" title="Close">&times;</span>
+
+                <h1>EXPORT</h1>
+                <p>Please check one of the options in order to export</p>
+                <hr>
+                <div class="wrapperExportForm">
+                    <p style="display:inline-block">Json</p>
+                    <input id="checkToExportJson" type="checkbox">
+                    <p style="display:inline-block">Html</p>
+                    <input id="checkToExportHtml" type="checkbox">
+
+                    <button id="performExport" class="createExport" onclick="downloadButtonFunction()">EXPORT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id='importForm' class="modal">
+        <div class="modal-content">
+            <div class="formContainer">
+                <span onclick="closePopUpById('importForm')" class="close" title="Close">&times;</span>
+
+                <h1>Import</h1>
+                <p>Please fill the form in order to import</p>
+                <hr>
+                <div class="wrapperImportForm">
+                    <div class="googleDriveFilesselection">
+                        <p class="selectp">Select the file:</p>
+                        <select id="googleDriveFiles">
+                            <option value="SelectValue">--Select value--</option>
+                        </select>
+                    </div>
+                    <div class="sessionSelectionForImport">
+                        <p class="selectp">Select for which session you upload the file:</p>
+                        <select id="selectSessionsToImport">
+                            <option value="SelectValue">--Select value--</option>
+                        </select>
+                    </div>
+                    <button id="performImport" class="createImport" onclick="downloadButtonFunction()">IMPORT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="fireBase.js"></script>
     <script src="app.js"></script>
     <script src="popUp.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-	<script defer src="https://apis.google.com/js/api.js?onload=onLoadCallback"></script>
+    <script defer src="https://apis.google.com/js/api.js?onload=onLoadCallback"></script>
 
 </body>
 
