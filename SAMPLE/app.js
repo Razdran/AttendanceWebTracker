@@ -1280,7 +1280,7 @@ async function sendAuthorizedApiRequest(searchTitle) {
 function getFilesGoogleDriveAPI(isSignedIn) {
   if (isSignedIn) {
     mainApp.drive.isAuthorized = true;
-    sendAuthorizedApiRequest("Read Me.txt");
+    sendAuthorizedApiRequest("fisier.csv");
   } else {
     mainApp.drive.isAuthorized = false;
   }
