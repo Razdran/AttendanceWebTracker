@@ -803,7 +803,7 @@ function driveApi()
     if (mainApp.drive.GoogleAuth.isSignedIn.get()) {
 	  getFilesGoogleDriveAPI(true);
     } else {
-      GoogleAuth.signIn();
+      mainApp.drive.GoogleAuth.signIn();
     }	
 }
 function initClient() {
@@ -841,13 +841,13 @@ async function sendAuthorizedApiRequest(searchTitle) {
 		})
 	})
   } else {
-    GoogleAuth.signIn();
+    mainApp.drie.GoogleAuth.signIn();
   }
 }
 function getFilesGoogleDriveAPI(isSignedIn) {
   if (isSignedIn) {
     mainApp.drive.isAuthorized = true;
-    sendAuthorizedApiRequest("ceva.c");
+    sendAuthorizedApiRequest("fisier.csv");
   } else {
     mainApp.drive.isAuthorized = false;
   }
