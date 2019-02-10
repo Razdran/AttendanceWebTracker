@@ -47,9 +47,10 @@ var sessions=[
     "participants": [
       {
         "feedback": "smecher",
-        "grade": "12",
+        "grade": "2",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -87,7 +88,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -105,7 +107,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -123,7 +126,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -141,7 +145,8 @@ var sessions=[
         "feedback": "200",
         "grade": "11",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -159,7 +164,8 @@ var sessions=[
         "feedback": "zzc",
         "grade": "10",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -177,7 +183,8 @@ var sessions=[
         "feedback": "zzc",
         "grade": "10",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -193,9 +200,10 @@ var sessions=[
     "participants": [
       {
         "feedback": "smec",
-        "grade": "12",
+        "grade": "4",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -211,9 +219,10 @@ var sessions=[
     "participants": [
       {
         "feedback": "sme",
-        "grade": "12",
+        "grade": "3",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -229,9 +238,10 @@ var sessions=[
     "participants": [
       {
         "feedback": "smec",
-        "grade": "12",
+        "grade": "3",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -247,9 +257,10 @@ var sessions=[
     "participants": [
       {
         "feedback": "smemmm",
-        "grade": "12",
+        "grade": "5",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549224882174
       }
     ],
     "prezente": 1,
@@ -267,7 +278,9 @@ var sessions=[
         "feedback": "ia si mai invata",
         "grade": "8",
         "id": "yARRnkFD9KQpeakT4Jth1Vimmur2",
-        "name": "cristian stefan"
+        "name": "cristian stefan",
+        "time": 1549752263103
+                
       }
     ],
     "prezente": 1,
@@ -361,7 +374,7 @@ function prepareFilters(iname,_id)
 
 
 function popUp(){
-  prepareFilters("cosmin stefan","availableSessions");
+  prepareFilters("cosmin stefan","availableSessions");//Aici trebuie pus id-ul profesorului logat
   document.getElementById('createChart').style.display='block';
   
 }
@@ -371,7 +384,8 @@ function closePopUp(){
 }
 
 
-function getCheckedSessions(){
+function getCheckedSessions()
+{
   var lista=[];
   var result=[];
   var k=-1;
@@ -390,7 +404,8 @@ function getCheckedSessions(){
   return result;
 }
 
-function getMarkInterval(){
+function getMarkInterval()
+{
   var result=[];
   result[1]=document.getElementById("minGrade").value;
   result[2]=document.getElementById("maxGrade").value;
@@ -436,7 +451,8 @@ if(result.checked==true)
   return false;
 }
 
-function getPredefinedChart(){
+function getPredefinedChart()
+{
   var selection=document.getElementById("predefinedChart");
 
   return selection.options[selection.selectedIndex].value;
@@ -486,6 +502,94 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
             top:0
           }
         },
+        scales: {
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Grade'
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Number of students'
+            }
+          }],
+        },     
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+}
+function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
+{
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+      
+        labels:_labels,
+        datasets:[{
+          label:_legend,
+          data:_data,
+          borderWidth:3,
+          borderColor:'rgb(0,134,99)',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        },
+         {
+          label:'Gauss',
+          data:[0.001*_noGrades,0.005*_noGrades,0.02*_noGrades,0.05*_noGrades,0.1*_noGrades,
+            0.15*_noGrades,0.2*_noGrades,0.2*_noGrades,0.15*_noGrades,
+            0.1*_noGrades,0.05*_noGrades,0.02*_noGrades,0.005*_noGrades,0.001*_noGrades],
+          borderWidth:3,
+          borderColor:'red',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:_titlu,
+          fontSize:25
+        },
+        legend:{
+          display:true,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        scales: {
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Grade'
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Number of students'
+            }
+          }],
+        },     
         tooltips:{
           enabled:true
         }
@@ -494,63 +598,74 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
 }
 
 
-function createArraysForChartNothingSelected(sessions){
+function renderDoughnutChart(_idChart,_titlu,_legend,_data,_labels)
+{
+	let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:_labels,
+        datasets:[{
+          label:_legend,
+          data:_data,
+          backgroundColor:['rgb(0,134,99)','#00989a'],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:_titlu,
+          fontSize:25
+        },
+        legend:{
+          display:true,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+}
+
+function createArraysForChartNothingSelected(sessions)
+{
 
 	rezultat={};
 	note=[];
-	for (var j=0;j<=15;j++)
+	for (var j=0;j<=12;j++)
 		note[j]=0;
 	for(var i=0;i<sessions.length;i++)
 	{	
 		if(sessions[i].participants!=undefined)
 		{
-		if(sessions[i].participants[0].grade!=0)
-		{
-			if(sessions[i].participants[0].grade=="0")
-			note[0]+=1;
-			
-			if(sessions[i].participants[0].grade=="1")
-			note[1]+=1;
-			
-			if(sessions[i].participants[0].grade=="2")
-			note[2]+=1;
-			
-			if(sessions[i].participants[0].grade=="3")
-			note[3]+=1;
-			
-			if(sessions[i].participants[0].grade=="4")
-			note[4]+=1;
-			
-			if(sessions[i].participants[0].grade=="5")
-			note[5]+=1;
-			
-			if(sessions[i].participants[0].grade=="6")
-			note[6]+=1;
-			
-			if(sessions[i].participants[0].grade=="7")
-			note[7]+=1;
-			
-			if(sessions[i].participants[0].grade=="8")
-			note[8]+=1;
-			
-			if(sessions[i].participants[0].grade=="9")
-			note[9]+=1;
-			
-			if(sessions[i].participants[0].grade=="10")
-			note[10]+=1;
-			
-			if(sessions[i].participants[0].grade=="11")
-			note[11]+=1;
-			if(sessions[i].participants[0].grade=="12")
-			note[12]+=1;
-			if(sessions[i].participants[0].grade=="13")
-			note[13]+=1;
-			if(sessions[i].participants[0].grade=="14")
-			note[14]+=1;
-			if(sessions[i].participants[0].grade=="15")
-			note[15]+=1;
-		}
-	}
+      for(var o=0;o<sessions[i].participants.length;o++)
+		    if(sessions[i].participants[o].grade!=0&& sessions[i].participants[o].time!=0 )
+		    {
+			    note[parseInt(sessions[i].participants[o].grade)]+=1;
+		    }
+	  }
 	}
 	rezultat["note"]=note;
 	console.log(rezultat);
@@ -602,31 +717,38 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 		{
       if(sessions[i].participants!=undefined)
 		  {
-		    if(sessions[i].participants[0].grade!=0)
+        for(var o=0;o<sessions[i].participants.length;o++)
+		    if(sessions[i].participants[o].grade!=0 && sessions[i].participants[o].time!=0 )
 		    {
           
-          console.log(sessions[i].participants[0]);
-          if(sessions[i].participants[0].grade>=min_nota&&
-            sessions[i].participants[0].grade<=max_nota
+          if(parseInt(sessions[i].participants[o].grade)>=min_nota&&
+            parseInt(sessions[i].participants[o].grade)<=max_nota&&
+            sessions[i].participants[o].time>=min_timp&&
+            sessions[i].participants[o].time<=max_timp
             )//trebuie adaugata conditia pentru timp
-			      note[sessions[i].participants[0].grade]++;
+			      {
+              console.log("Am gasit o nota care se potriveste");
+			        note[parseInt(sessions[i].participants[o].grade)]+=1;
+            }
         }
       }
     }
     else
-    {
-      console.log("intru aici");
-      if(sessions[i].titlu in i_sesiuniMarcate )
+    { ok=0;
+      for(var j=0;j<i_sesiuniMarcate.length;j++)
+        if(sessions[i].titlu==i_sesiuniMarcate[j])
+          ok=1;
+      if(ok==1)
       {
         console.log("intru aici");
         if(sessions[i].participants!=undefined)
         {
           if(sessions[i].participants[0].grade!=0)
           {
-            if(sessions[i].participants[0].grade>=min_nota&&
-              sessions[i].participants[0].grade<=max_nota
+            if(parseInt(sessions[i].participants[0].grade)>=min_nota&&
+              parseInt(sessions[i].participants[0].grade)<=max_nota
               )//trebuie adaugata conditia pentru timp
-              note[sessions[i].participants[0].grade]+=1;
+              note[parseInt(sessions[i].participants[0].grade)]+=1;
           }
         } 
       }
@@ -646,35 +768,120 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 
 
 async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat){
-
+  var l;
   if(_predefinedChart!="SelectValue")
   {
-    //predefined charts
+    if(_predefinedChart=="StudentiTrecuti")
+    {
+      var a_intervalNote=[];
+      var a_intervalTimp=0;
+      var a_trecut_picat;
+      a_intervalNote[0]=1;
+      a_intervalTimp[0]=1;
+      a_trecut_picat=false;
+
+      var labels=[];
+      var titlu;
+      var legenda;
+
+
+      datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,a_intervalNote,a_intervalTimp,a_trecut_picat);
+      inote=datas.note;
+      labels[0]="Picati";
+      labels[1]="trecuti";
+      titlu="studenti trecuti/picati";
+      legenda="No of students";
+
+      var da=0;
+      var nu=0;
+      for(var h=0;h<inote.length;h++)
+        if(h>=5)
+          da+=inote[h];
+        else
+          nu+=inote[h];
+
+      var data=[];
+      data[0]=nu;
+      data[1]=da;
+      renderDoughnutChart("myChart",titlu,legenda,data,labels);  
+    }
+  
+    else if(_predefinedChart=="NotePuseAcumOORA")
+    {
+      var d = new Date();
+      var n = d.getTime();
+      _intervalTimp[1]=d-3600000;
+      _intervalTimp[0]=0;
+      
+      datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
+      inote=datas.note;
+      min=parseInt(datas.intervalNotaremin);
+      var data=[];
+
+      for(l=0;l<=parseInt(datas.intervalNotaremax)-parseInt(datas.intervalNotaremin);l++)
+        {
+          data[l]=inote[l+min];
+        }
+      labels=[];
+      k=0;
+      for(var i=parseInt(datas.intervalNotaremin);i<=parseInt(datas.intervalNotaremax);i++)
+       labels[k++]=i;
+    
+      titlu="Note puse in urma cu maxim 1h";
+      legenda="No of students";
+
+      renderChart("myChart",titlu,legenda,data,labels); 
+    }
+
+    else if(_predefinedChart=="CompareGauss")
+    {
+      
+	  datas=createArraysForChartNothingSelected(sessions);
+	  data=datas.note;
+    //data are toate notele ;
+
+    labels=[];
+  	for(var i=0;i<=12;i++)
+	  	labels[i]=i;
+  	titlu="Punctaje";
+	  legenda="No of Students";
+    var i_noGrades=0;
+    for(var j=0;j<data.length;j++)
+      i_noGrades+=parseInt(data[j]);
+	  renderLineChart("myChart",titlu,legenda,data,labels,i_noGrades);
+    }
+
   }
-  else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&trecut_picat==false)
+
+  else if(_sesiuniMarcate.length==0&&_intervalNote[0]==1&&_intervalTimp[0]==1&&_trecut_picat==false)
   {
 	  datas=createArraysForChartNothingSelected(sessions);
 	  data=datas.note;
     //data are toate notele ;
 
     labels=[];
-  	for(var i=0;i<=15;i++)
+  	for(var i=0;i<=12;i++)
 	  	labels[i]=i;
   	titlu="Punctaje";
-	  legenda="No of Students"
+	  legenda="No of Students";
 
 	  renderChart("myChart",titlu,legenda,data,labels);
   }
   else 
   {
+    
     //All the oder cases!!!
-    console.log("Creaza chart unde trebuie");
     datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
-    data=datas.note;
+    inote=datas.note;
+    min=parseInt(datas.intervalNotaremin);
+    var data=[];
 
+    for(l=0;l<=parseInt(datas.intervalNotaremax)-parseInt(datas.intervalNotaremin);l++)
+      {data[l]=inote[l+min];
+      }
     labels=[];
     k=0;
-    for(var i=datas.intervalNotaremin;i<=datas.intervalNotaremax;i++)
+    for(var i=parseInt(datas.intervalNotaremin);i<=parseInt(datas.intervalNotaremax);i++)
       labels[k++]=i;
     
     titlu="Punctaje";
