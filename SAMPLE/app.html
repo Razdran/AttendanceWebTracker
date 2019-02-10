@@ -132,9 +132,19 @@
         <div class="modal-content">
             <div class="formContainer">
                 <span onclick="closePopUpById('createChart')" class="close" title="Close">&times;</span>
+                <span onclick="closePopUp()" class="close" title="Close">&times;</span>
 
                 <h1>Create Chart</h1>
-                <p>You can filter the data by the following criteria:</p>
+                <p>You can select a predefined chart</p>
+                <hr>
+                <select id="predefinedChart">
+                    <option value="SelectValue">--Select value--</option>
+                    <option value="StudentiTrecuti">Studenti Trecuti</option>
+                    <option value="NotePuseAcumOORA">Note puse in urma cu maxim 1h</option>
+                    <option value="CompareGauss">Comparatie note/Gauss</option>
+                </select>
+                <hr>
+                <p>And you can filter the data by the following criteria:</p>
                 <hr>
                 <p>Grade</p>
 
@@ -154,7 +164,20 @@
                     <input id="endTime" type="number" class="timeFilter" placeholder="end time" name="endTime">
                 </div>
                 <hr>
-                <button id="chart_createFiltered" class="chart_showFilteredChartBtn" type="submit" onclick="chart()">Show
+                <div id="isPassedDiv">
+                    Select just passed students 
+                    <input id="isPassed" type="checkbox">
+                </div>
+                <hr>
+                <div id="availableSessions">
+                    Available sessions:
+
+                </div>                  
+                <hr>
+
+
+
+                <button id="chart_createFiltered" class="chart_showFilteredChartBtn" type="submit" onclick="doit()">Show
                     Filtered Chart</button>
                 <hr>
 
