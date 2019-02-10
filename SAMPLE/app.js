@@ -706,7 +706,7 @@ async function prepareFilters(iname,_id)
 
 
 function popUpfilter(){
-  prepareFilters("cosmin stefan","availableSessions");//Aici trebuie pus id-ul profesorului logat
+  prepareFilters(mainApp.user.displayName,"availableSessions");//Aici trebuie pus id-ul profesorului logat
   document.getElementById('createChart').style.display='block';
   
 }
