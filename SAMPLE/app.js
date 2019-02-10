@@ -1,4 +1,3 @@
-
 var mainApp = {};
 var database = firebase.database();
 
@@ -565,9 +564,12 @@ async function getJSON()
 	sessionsJSON=JSON.stringify(infos,null,2);
 	return sessionsJSON;	
 }
+
 async function downloadJSON()
+	//var Dropbox = require('dropbox').Dropbox;
 {
 	driveApi();
+	//getAccesTokenDropBox()
 	/*data=await getJSON();
 	var blob=new Blob([data],{type:"text/plain"});
 	a=document.createElement('a');
@@ -635,6 +637,8 @@ async function mainFlow() {
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
 	//createSession("test",15,generateSessionCode());
+	//gapi.load('client',initClient);
+	driveApiSetUp();
 	setup();
 	renderAllSessions();
 	//driveApi();
@@ -787,29 +791,66 @@ async function chart(){
 	titlu="Punctaje";
 	legenda="No of Students"
 
-
-
-
 	renderChart("myChart",titlu,legenda,data,labels);
-	  
+}
+function driveApiSetUp()
+{
+	gapi.load('client',initClient);
+	mainApp.drive={};
 }
 function driveApi()
 {
-	gapi.load('client',driveApiStart);
-		
+    if (mainApp.drive.GoogleAuth.isSignedIn.get()) {
+	  getFilesGoogleDriveAPI(true);
+    } else {
+      GoogleAuth.signIn();
+    }	
 }
-function driveApiStart()
-{
-	gapi.client.init({
-			'apiKey': 'AIzaSyBIyNqDsAM89uWl0XkYLo4g3c_bSUjxBK4',
-			// Your API key will be automatically added to the Discovery Document URLs.
-			'discoveryDocs': ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-			// clientId and scope are optional if auth is not required.
-			'clientId': '47040115686-sra0smn2lont5nqqqv3d98dj1s4pkfqs.apps.googleusercontent.com',
-			'scope': "https://www.googleapis.com/auth/drive.readonly",
-		}).then(()=>{
-			console.log("intru");
-		});
+function initClient() {
+  gapi.client.init({
+      'apiKey': 'AIzaSyBIyNqDsAM89uWl0XkYLo4g3c_bSUjxBK4',
+      'clientId': '47040115686-1j6puaaii11gsoklbndo1la91hv739qf.apps.googleusercontent.com',
+      'scope': 'https://www.googleapis.com/auth/drive.readonly',
+      'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v2/rest']
+  }).then(function () {
+      mainApp.drive.GoogleAuth = gapi.auth2.getAuthInstance();
+      mainApp.drive.GoogleAuth.isSignedIn.listen(getFilesGoogleDriveAPI);
+  });
+}
+async function sendAuthorizedApiRequest(searchTitle) {
+  if (mainApp.drive.isAuthorized) {
+	gapi.client.drive.files.list().then((response)=>{
+		var googleDriveFiles=response.result.items;
+		console.log(googleDriveFiles);
+		for(var i=0;i<googleDriveFiles.length;i++)
+		{
+			if(googleDriveFiles[i].title==searchTitle)
+			{
+				searchedId=googleDriveFiles[i].id;
+				console.log(googleDriveFiles[i].id,googleDriveFiles[i].title);
+				break;
+			}
+		}
+		var accessToken = gapi.auth.getToken().access_token;
+		gapi.client.drive.files.get({
+			fileId:searchedId,
+			alt:"media",
+		}).then((response)=>{
+			console.log(response.body);
+			//downloadFile(response.result,console.log);
+		})
+	})
+  } else {
+    GoogleAuth.signIn();
+  }
+}
+function getFilesGoogleDriveAPI(isSignedIn) {
+  if (isSignedIn) {
+    mainApp.drive.isAuthorized = true;
+    sendAuthorizedApiRequest("ceva.c");
+  } else {
+    mainApp.drive.isAuthorized = false;
+  }
 }
 
 /*
@@ -829,4 +870,4 @@ function driveApiStart()
           
       
   }
-*/ 
+*/

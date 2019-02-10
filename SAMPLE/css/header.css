@@ -1,0 +1,242 @@
+body{
+  margin:0;
+  background-color:#f6f6f6;
+}
+.header{
+    position:sticky;
+    width: 100%;
+    top:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    background-color:rgb(0, 134, 99);
+    display:grid;
+    grid-template-columns:1.3fr 32px 1fr 1fr;
+    grid-template-areas: "l c c2 r";
+    z-index:10;
+    margin-bottom:10px;
+
+}
+
+.header_siteName{
+    grid-area: c2;
+    margin-left:0px;
+    margin-right:auto;	
+    font-size: 10px;
+    color:#fff;
+}
+.header_siteName h1{
+    margin-top:15px;;
+
+}
+.header_right {
+    grid-area: r;
+    float:right;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "rl rr";
+}
+.header_right input{
+    grid-area: rr;
+    margin-top:5px;
+    margin-bottom:5px;
+    border-color: #fff;
+
+}
+.header_right_home{
+    grid-area: rl;
+    color:#fff;
+    font-size:20px;
+    margin:auto auto;
+}
+.header_logo_img{
+    margin-top:auto;
+    margin-bottom:auto;
+    grid-area: c;
+    animation-name:logo_animation;
+    animation-duration: 3s;
+    animation-iteration-count: 5;
+
+}
+@keyframes logo_animation{
+    0% {
+        transform: rotate(0deg);
+    }
+    18%{
+        transform: rotate(30deg);
+
+    }
+    36%{
+        transform: rotate(0deg);
+        transform: scale(1.1);
+
+    }
+    54%{
+        transform: rotate(-30deg);
+    }
+    70%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform:rotate(0deg); /*animation delay between itterations*/
+    }
+}
+.header_left{
+    grid-area: l;
+    color:white;
+    font-size: 32px;
+    margin-left:15px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.sidenav{
+    padding-top: 50px;
+    height:100%;
+    width:0;
+    position:fixed;
+    background-color: #394263;
+    overflow: hidden; /*no horizontal scroll*/
+    transition: 0.5s;
+    display:grid;
+    grid-template-rows: repeat(10,1fr);
+    grid-template-columns: 1fr;
+    grid-template-areas: "one"
+                         "two"
+                         "three"
+                         "four"
+                         "five"
+                         "six"
+                         "seven"
+                         "eight"
+                         "nine"
+                         "ten";
+    
+}
+.sidenav a{
+    padding: 8px 8px 8px 32px;
+    font-size:20px;
+    color:white;
+    transition:0.3s; 
+}
+
+.sidenav .top-sidenav a:hover{
+    color:yellow;
+}
+.top-sidenav{
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "photo name close";
+    grid-area: one;
+}
+.top-sidenav .photo{
+    grid-area: photo;
+    margin: auto;
+}
+.sidenav .top-sidenav .photo img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.top-sidenav .name{
+    grid-area: name;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+.sidenav .close_nav_button{
+    right:25px;
+    font-size:30px;
+    grid-area: close;
+}
+.container{
+    transition: margin-left .5s;
+}
+.sidenav_myclasses{
+    grid-area: two;
+}
+.sidenav_schedule{
+    grid-area: three;
+}
+
+.sidenav_teachers{
+    grid-area: four;
+}
+.sidenav_users{
+    grid-area: five;
+}
+.sidenav_grades{
+    grid-area: six;
+}
+.sidenav_profile{
+    grid-area: seven;
+}
+.sidenav_contactUs{
+    grid-area: eight;
+}
+.sidenav_logOut{
+    grid-area: nine;
+}
+.header_right input[type=text]{
+    align-items: end;
+    width:130px; 
+    grid-area: rr;
+    margin-top:5px;
+    color:white;
+    margin-left: auto;
+    margin-right: 5px;
+    margin-bottom:5px;
+    border-radius: 25px;
+    border-color:white;
+    transition:width 0.4s ease-in-out;
+    background-color: #394263;
+    outline: none;
+}
+.header_right input[type=text]:focus{
+    width:95%;
+    grid-area: rr;
+    margin-right: 5px;
+    margin-top:5px;
+    margin-bottom:5px;
+    border-color: #fff;
+
+}
+::placeholder{
+text-align: center;
+color:white;
+}
+
+html{
+    height:100%;
+    max-width: 100%;/*this*/
+    overflow-x: hidden;/*+this =prevent horizontal scroll*/
+}
+body{
+    height:100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+@media (max-width:800px){
+    .header_left{
+        font-size: 0;
+    }
+    .header_left i{
+        font-size: 30px;
+    }
+    .header{
+        grid-template-rows: 50px;
+        grid-template-columns: 1fr 32px 1fr 1fr;
+    }
+    .header_siteName{
+        font-size: 8px;
+    }
+    .header_right_home{
+        font-size: 0px;
+    }
+}
+@media (max-width:350px){
+    .header_siteName{
+        font-size: 6px;
+    }
+}

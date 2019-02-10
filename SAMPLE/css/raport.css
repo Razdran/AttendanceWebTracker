@@ -1,0 +1,20 @@
+.container{
+    display:flex;
+    align-items:center;
+    flex-direction: column
+}
+.container input::placeholder{
+    color:black;
+}
+.container input{
+    background-color: grey;
+    margin:5px;
+}
+.container button{
+    margin:5px;
+}
+.raport_image{
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}

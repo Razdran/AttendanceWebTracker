@@ -1,0 +1,193 @@
+.container{
+    height:calc(100% - 50px);
+    position: relative;
+    display:grid;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr;
+}
+html{
+    height:100%;
+    max-width: 100%;/*this*/
+    overflow-x: hidden;/*+this =prevent horizontal scroll*/
+}
+body{
+    height:100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.myClassesTitle{
+    grid-row: 1/2;
+    grid-column: 1/5;   
+    background-color:black;
+    text-align:center;
+    color:white;
+    padding-top: 30px;
+}
+.spanMyClasses{
+    font-size:30px;
+}
+.myClassesList{
+    grid-row: 2/3;
+    grid-column: 2/3;
+
+}
+.myClassesNotes{
+    
+    grid-row: 2/3;
+    grid-column: 3/4;
+    width: 100%;
+    height: 90%;
+    margin-left:0px;
+    margin-right:0px;
+    
+}
+.submitNotesButton{
+    width: 100px;
+    height: 30px;;
+    color:white;
+    border-radius: 25px;
+    border-color:yellow;
+    background-color: #394263;
+    margin-left: 80%;
+}
+.notebookStyle{
+    box-sizing:border-box;/*prevent textarea > its div */
+    width: 80%;
+    font-size: 18px;
+    border-radius: 25px;
+    font-family:cursive;
+    margin-left:5%;
+    margin-right: 5%; 
+    margin-top:5%;
+    resize: vertical;
+    background:url("../html/lines.png") repeat-y;
+    line-height: 25px;
+    outline: none;
+    padding-left:100px;
+    text-align: left;
+    overflow: hidden;
+}
+.collapsible{
+    background-color: #394263;
+    color:white;
+    cursor:pointer;
+    padding:10px;
+    width:100%;
+    text-align:left;
+    outline:none;
+    font-size: 14px;
+}
+.active .collapsible:hover{
+    background-color: #313854;
+}
+.content{
+    padding-left: 20px;
+    display: none;
+    transition: max-height 0.5s ease-out;
+    max-height: 0;
+    overflow: hidden;
+ }
+ @media (max-width:1100px){
+    .container{
+        height:calc(100% - 50px);
+        position: relative;
+        display:grid;
+        grid-template-rows: 100px 1fr;
+        grid-template-columns: 1fr 3fr ;
+    }
+
+    .myClassesTitle{
+        grid-row: 1/2;
+        grid-column: 1/3;   
+        background-color:black;
+        text-align:center;
+        color:white;
+        padding-top: 30px;
+    }
+
+    .myClassesList{
+        grid-row: 2/3;
+        grid-column: 1/2;
+    
+    }
+    
+    .myClassesNotes{
+    
+        grid-row: 2/3;
+        grid-column: 2/3;
+        width: 100%;
+        height: 90%;
+        margin-left:0px;
+        margin-right:0px;
+    
+    } 
+}
+@media (max-width:800px){
+    .container{
+        height:calc(100% - 50px);
+        position: relative;
+        display:grid;
+        grid-template-rows: 100px 1fr 9fr;
+        grid-template-columns: 1fr ;
+    }
+
+    .myClassesTitle{
+        grid-row: 1/2;
+        grid-column: 1/2;   
+        background-color:black;
+        text-align:center;
+        color:white;
+        padding-top: 30px;
+        
+    }
+
+    .myClassesList{
+        grid-row: 2/3;
+        grid-column: 1/2;
+    
+    }
+    
+    .myClassesNotes{
+    
+        grid-row: 3/4;
+        grid-column: 1/2;
+        width: 100%;
+        height: 90%;
+        margin-left:0px;
+        margin-right:0px;
+    
+    } 
+    
+    .collapsible{
+        background-color: #394263;
+        color:white;
+        cursor:pointer;
+        padding:10px;
+        margin-left:25%;
+        margin-right:25%;
+        width:50%;
+        text-align:center;
+        outline:none;
+        font-size: 14px;
+    }
+    
+    .content{
+        padding-left: 20px;
+        display: none;
+        
+        margin-left:25%;
+        margin-right:25%;
+        transition: max-height 0.5s ease-out;
+        max-height: 0;
+        overflow: hidden;
+     }
+     .notebookStyle{
+        width: 90%;
+         }
+    
+}
+@media (max-width:520px){
+    .submitNotesButton{
+    margin-left: 60%;
+    }
+}
