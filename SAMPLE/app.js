@@ -792,9 +792,15 @@ function getPredefinedChart()
 
 function renderChart(_idChart,_titlu,_legend,_data,_labels)
 {
+	let canvas=document.getElementById('myChart');
+  var form=document.getElementById('chartContainer');
+	canvas.remove();
+	var canvas1=document.createElement('canvas');
+  canvas1.id='myChart';
+  form.appendChild(canvas1);
 	let myChart = document.getElementById('myChart').getContext('2d');
-
-    // Global Options
+	
+	// Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 18;
     Chart.defaults.global.defaultFontColor = '#777';
@@ -856,9 +862,16 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
 }
 function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
 {
+	
+	let canvas=document.getElementById('myChart');
+  var form=document.getElementById('chartContainer');
+	canvas.remove();
+	var canvas1=document.createElement('canvas');
+  canvas1.id='myChart';
+  form.appendChild(canvas1);
 	let myChart = document.getElementById('myChart').getContext('2d');
-
-    // Global Options
+		
+	// Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 18;
     Chart.defaults.global.defaultFontColor = '#777';
@@ -932,9 +945,15 @@ function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
 
 function renderDoughnutChart(_idChart,_titlu,_legend,_data,_labels)
 {
+	
+	let canvas=document.getElementById('myChart');
+  var form=document.getElementById('chartContainer');
+	canvas.remove();
+	var canvas1=document.createElement('canvas');
+  canvas1.id='myChart';
+  form.appendChild(canvas1);
 	let myChart = document.getElementById('myChart').getContext('2d');
-
-    // Global Options
+		// Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 18;
     Chart.defaults.global.defaultFontColor = '#777';
@@ -1314,6 +1333,7 @@ async function doit()
 
   console.log("predefined:");
   console.log(predefinedChart); //if the value is SelectValue do nothing!!
+	
 
   chart(predefinedChart,sesiuniMarcate,intervalNote,intervalTimp,trecut_picat);
 }

@@ -460,7 +460,16 @@ function getPredefinedChart()
 
 function renderChart(_idChart,_titlu,_legend,_data,_labels)
 {
-	let myChart = document.getElementById('myChart').getContext('2d');
+  
+	let canvas=document.getElementsByClassName('myChart')[0];
+  var form=document.getElementById('chartContainer');
+  console.log("form");
+   form.removeChild(canvas);
+  var canvas1=document.createElement('canvas');
+  canvas1.id='myChart';
+  form.appendChild(canvas1);
+
+  let myChart = document.getElementById('myChart').getContext('2d');
 
     // Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -524,7 +533,15 @@ function renderChart(_idChart,_titlu,_legend,_data,_labels)
 }
 function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
 {
-	let myChart = document.getElementById('myChart').getContext('2d');
+
+	let canvas=document.getElementsByClassName('myChart')[0];
+  var form=document.getElementById('chartContainer');
+  console.log("form",form);
+ form.removeChild(canvas);
+  var canvas2=document.createElement('canvas');
+  canvas2.id='myChartLine';
+  form.appendChild(canvas2);
+  let myChart = document.getElementById('myChartLine').getContext('2d');
 
     // Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -600,7 +617,15 @@ function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
 
 function renderDoughnutChart(_idChart,_titlu,_legend,_data,_labels)
 {
-	let myChart = document.getElementById('myChart').getContext('2d');
+	let canvas=document.getElementsByClassName('myChart')[0];
+  var form=document.getElementById('chartContainer');
+  console.log("form",form);
+ 
+  form.removeChild(canvas);
+  var canvas3=document.createElement('canvas');
+  canvas3.id='myChartDoughnut';
+  form.appendChild(canvas3);
+  let myChart = document.getElementById('myChartDoughnut').getContext('2d');
 
     // Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -768,6 +793,14 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 
 
 async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat){
+  let canvas=document.getElementsByClassName('myChart')[0];
+  var form=document.getElementById('chartContainer');
+  console.log("form");
+   form.removeChild(canvas);
+  var canvas1=document.createElement('canvas');
+  canvas1.id='myChart';
+  form.appendChild(canvas1);
+
   var l;
   if(_predefinedChart!="SelectValue")
   {
@@ -803,6 +836,7 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
       var data=[];
       data[0]=nu;
       data[1]=da;
+      
       renderDoughnutChart("myChart",titlu,legenda,data,labels);  
     }
   

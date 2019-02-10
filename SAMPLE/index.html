@@ -131,8 +131,8 @@
     
     <div id='createChart' class="modal">
         <div class="modal-content">
-            <div class="formContainer">
-                <span onclick="closePopUp()" class="close" title="Close">&times;</span>
+            <div class="formContainer" id="formContainerChart">
+                <span onclick="closePopUpfilter()" class="close" title="Close">&times;</span>
 
                 <h1>Create Chart</h1>
                 <p>You can select a predefined chart</p>
@@ -178,8 +178,8 @@
                     Filtered Chart</button>
                 <hr>              
                 
-                <div class="chartContainer">
-                    <canvas id="myChart"></canvas>
+                <div class="chartContainer" id="chartContainer">
+                    <canvas id="myChart" class="myChart"></canvas>
                 </div>
 
                 <hr>
