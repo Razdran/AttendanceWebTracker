@@ -191,7 +191,7 @@ function importStudentFromCSV(_sessionId,_dateCSV)
 		
 		keyForSession = result.key;
 		delete result.key;
-		console.log("kfs",keyForSession);
+		document.getElementById(keyForSession).childNodes[2].childNodes[0].innerHTML = updatedSession.prezente + "/" + updatedSession.maxPrezente;
 		updates['/sessions/' + keyForSession] = updatedSession;
 		return firebase.database().ref().update(updates);
 		
@@ -489,6 +489,7 @@ function sessionPopUp(_sessionId) {
 					
 					if (document.getElementById('code').value == session.sessionCode) {
 						participate(getSessionById(_sessionId));
+						showSnackbar("Participated at "+session.titlu);
 						closePopUpById('submitPresence');
 					}
 						
@@ -1443,6 +1444,7 @@ function downloadButtonFunction(){
 	{
 		downloadHTML5();
 	}
+	showSnackbar("Data Downloaded");
 	closePopUpById("exportForm");
 }
 function processCSV(file,parameter)
@@ -1473,13 +1475,14 @@ function importButtonFunction(){
 	_drive_file_text=csvSelectId.options[csvSelectId.selectedIndex].value;
 	_drive_file_id=csvSelectId.options[csvSelectId.selectedIndex].id;
 	_session_id=sessionSelectId.options[sessionSelectId.selectedIndex].id;
+	_session_text=sessionSelectId.options[sessionSelectId.selectedIndex].value;
 	parameter={
 		drive_file_text:_drive_file_text,
 		drive_file_id:_drive_file_id,
 		session_id:_session_id
 	};
 	driveApi("file_content",parameter,processCSV);
-	
+	showSnackbar("File "+_drive_file_text+" imported into session "+_session_text);
 	closePopUpById("importForm");
 }
 
@@ -1526,6 +1529,13 @@ async function prepareImportSessions(){
 	
 
 
+}
+function showSnackbar(message)
+{
+	snackbar=document.getElementById("snackbar");
+	snackbar.innerHTML=message;
+	snackbar.className="show";
+	setTimeout(function(){snackbar.className ="";}, 3000);
 }
 
 /*
