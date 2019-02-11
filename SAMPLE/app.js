@@ -160,6 +160,43 @@ function evaluate(_uid,_sessionId,_grade,_feedback)
 	})
 	
 }
+function importStudentFromCSV(_sessionId,_dateCSV)
+{
+	_sessionId.then(function(result){
+		console.log(result);
+		console.log("r",result);
+		var updates={};
+		updatedSession=result;
+		updatedSession.prezente=updatedSession.prezente+_dateCSV.length;
+		console.log("prezente",updatedSession.prezente);
+		if (updatedSession.participants == undefined) {
+			updatedSession.participants = [];
+		}
+		console.log("up",updatedSession.participants);
+		for(var i=0;i<_dateCSV.length;i++)
+		{
+			_numeStudent=_dateCSV[i][0];
+			_gradeStudent=_dateCSV[i][1];
+			_feedbackStudent=_dateCSV[i][2];
+			console.log(_numeStudent,_gradeStudent,_feedbackStudent);
+			updatedSession.participants=updatedSession.participants.concat(
+			[{
+						id: "imported",
+						name: _numeStudent,
+						grade:_gradeStudent,
+						feedback:_feedbackStudent,
+						time: new Date().getTime()
+					}]);
+		}
+		
+		keyForSession = result.key;
+		delete result.key;
+		console.log("kfs",keyForSession);
+		updates['/sessions/' + keyForSession] = updatedSession;
+		return firebase.database().ref().update(updates);
+		
+	});
+}
 function participate(_sessionId) {
 	_sessionId.then(function (result) {
 		if (result.prezente < result.maxPrezente) {
@@ -1258,10 +1295,10 @@ function driveApiSetUp()
 	gapi.load('client',initClient);
 	mainApp.drive={};
 }
-function driveApi()
+function driveApi(request,parameter,callback)
 {
     if (mainApp.drive.GoogleAuth.isSignedIn.get()) {
-	  getFilesGoogleDriveAPI(true);
+	  getFilesGoogleDriveAPI(true,request,parameter,callback);
     } else {
       mainApp.drive.GoogleAuth.signIn();
     }	
@@ -1277,7 +1314,47 @@ function initClient() {
       mainApp.drive.GoogleAuth.isSignedIn.listen(getFilesGoogleDriveAPI);
   });
 }
-async function sendAuthorizedApiRequest(searchTitle) {
+async function getCSVFilesMetadataFromDrive()
+{
+		
+		if(mainApp.drive.isAuthorized)
+		{
+			gapi.client.drive.files.list().then((response)=>{
+				_items=response.result.items;
+				console.log(_items);
+				console.log(typeof(_items));
+				console.log(_items[0].title)
+				//console.log(_items.length);
+				
+				list_title=[];
+				list_id=[];
+				
+				for(var i=0;i<_items.length;i++)
+				{	
+					if(_items[i].fileExtension=="csv")
+					{
+						list_title[i]=_items[i].title;
+						list_id[i]=_items[i].id;
+					}
+				}
+				csvSelectId=document.getElementById('googleDriveFiles');
+				for(var i=0;i<list_title.length;i++)
+				{	
+					option=document.createElement("option");
+					option.value=list_title[i];
+					option.id=list_id[i];
+					option.innerHTML=list_title[i];
+					csvSelectId.appendChild(option);
+				}
+			});
+		}
+		else{
+			mainApp.drive.GoogleAuth.signIn();
+		}
+	
+}
+async function sendAuthorizedApiRequest(parameter,callback) {
+	searchTitle=parameter.drive_file_text;
   if (mainApp.drive.isAuthorized) {
 	gapi.client.drive.files.list().then((response)=>{
 		var googleDriveFiles=response.result.items;
@@ -1296,7 +1373,7 @@ async function sendAuthorizedApiRequest(searchTitle) {
 			fileId:searchedId,
 			alt:"media",
 		}).then((response)=>{
-			console.log(response.body);
+			callback(response.body,parameter);
 			//downloadFile(response.result,console.log);
 		})
 	})
@@ -1304,10 +1381,17 @@ async function sendAuthorizedApiRequest(searchTitle) {
     mainApp.drive.GoogleAuth.signIn();
   }
 }
-function getFilesGoogleDriveAPI(isSignedIn) {
+async function getFilesGoogleDriveAPI(isSignedIn,request,parameter,callback) {
   if (isSignedIn) {
     mainApp.drive.isAuthorized = true;
-    sendAuthorizedApiRequest("fisier.csv");
+	if(request=="file_content")
+	{
+		sendAuthorizedApiRequest(parameter,callback);
+	}
+	if(request=="csv_metadata")
+	{
+		getCSVFilesMetadataFromDrive();
+	}
   } else {
     mainApp.drive.isAuthorized = false;
   }
@@ -1359,14 +1443,61 @@ function downloadButtonFunction(){
 	{
 		downloadHTML5();
 	}
-
+	closePopUpById("exportForm");
+}
+function processCSV(file,parameter)
+{
+	/*console.log("file",file);
+	console.log("sesId",parameter.session_id);
+	console.log("file text",parameter.drive_file_text);
+	console.log("file id",parameter.drive_file_id);*/
+	var liniiCSV=file.split("\n");
+	var dateCSV=[];
+	for(var i=0;i<liniiCSV.length-1;i++)
+	{
+			var dateLinieCSV=liniiCSV[i].split(",");
+			if(dateLinieCSV!=[""])
+			{
+				dateCSV.push(dateLinieCSV);;
+				
+			}
+	}
+	//console.log("dateCSV",dateCSV);
+	importStudentFromCSV(getSessionById(parameter.session_id),dateCSV);
+		
+}
+function importButtonFunction(){
+	csvSelectId=document.getElementById('googleDriveFiles');
+	console.log(csvSelectId.options[csvSelectId.selectedIndex].value);
+	sessionSelectId=document.getElementById('selectSessionsToImport');
+	_drive_file_text=csvSelectId.options[csvSelectId.selectedIndex].value;
+	_drive_file_id=csvSelectId.options[csvSelectId.selectedIndex].id;
+	_session_id=sessionSelectId.options[sessionSelectId.selectedIndex].id;
+	parameter={
+		drive_file_text:_drive_file_text,
+		drive_file_id:_drive_file_id,
+		session_id:_session_id
+	};
+	driveApi("file_content",parameter,processCSV);
+	
+	closePopUpById("importForm");
 }
 
 async function prepareImportSessions(){
+	driveApi("csv_metadata",undefined,undefined);
+	/*csvFileMetadatas=await getCSVFilesMetadataFromDrive();
+	csvSelectId=document.getElementById('googleDriveFiles');
+	for(var j=0;j<csvFileMetadatas.length;j++)
+	{
+		option=document.createElement("option");
+		option.value=csvFileMetadatas[j].title;
+		option.innerHTML=csvFileMetadatas[j].title;
+		csvSe*/
 	json=await getJSON();
 	sessions=JSON.parse(json);
 		
 	var avSessions=[];
+	var bvSessions=[];
   var k=-1;
   for (var i=0;i<sessions.length;i++)
   {
@@ -1374,6 +1505,7 @@ async function prepareImportSessions(){
     {
       k++;
       avSessions[k]=sessions[i].titlu;
+	  bvSessions[k]=sessions[i].key;
     }
 	}
 	
@@ -1385,6 +1517,7 @@ async function prepareImportSessions(){
       option=document.createElement("option");
 			option.value=avSessions[j];
 			option.innerHTML=avSessions[j];
+			option.id=bvSessions[j];
 			
 			
 			id.appendChild(option);
