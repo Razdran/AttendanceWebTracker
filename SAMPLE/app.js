@@ -1139,13 +1139,14 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
       {
         console.log("intru aici");
         if(sessions[i].participants!=undefined)
-        {
-          if(sessions[i].participants[0].grade!=0)
+        {	
+					for(var o=0;o<sessions[i].participants.length;o++)
+          if(sessions[i].participants[o].grade!=0)
           {
-            if(parseInt(sessions[i].participants[0].grade)>=min_nota&&
-              parseInt(sessions[i].participants[0].grade)<=max_nota
+            if(parseInt(sessions[i].participants[o].grade)>=min_nota&&
+              parseInt(sessions[i].participants[o].grade)<=max_nota
               )//trebuie adaugata conditia pentru timp
-              note[parseInt(sessions[i].participants[0].grade)]+=1;
+              note[parseInt(sessions[i].participants[o].grade)]+=1;
           }
         } 
       }
@@ -1167,6 +1168,8 @@ function  getArrayforFilteredChart(sessions,i_sesiuniMarcate,i_intervalNote,i_in
 async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat){
 	json=await getJSON();
 	sessions=JSON.parse(json);
+	console.log("Aici e jsonul:");
+	console.log(sessions);
 	var l;
   if(_predefinedChart!="SelectValue")
   {
@@ -1234,8 +1237,9 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
 
     else if(_predefinedChart=="CompareGauss")
     {
-      
-	  datas=createArraysForChartNothingSelected(sessions);
+		_intervalTimp[0]=1;
+		_intervalNote[0]=1;
+		datas=getArrayforFilteredChart(sessions,_sesiuniMarcate,_intervalNote,_intervalTimp,_trecut_picat);
 	  data=datas.note;
     //data are toate notele ;
 
