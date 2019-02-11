@@ -9,7 +9,6 @@ var database = firebase.database();
 
 		if (user) {
 			uid = user.uid;
-
 		}
 		else {
 			uid = null;
@@ -25,7 +24,6 @@ var database = firebase.database();
 	}
 	mainApp.logout = logout;
 	console.log("am setat logout");
-
 })()
 
 function setPermissions(_uid, _permission) {
@@ -63,7 +61,6 @@ function checkPermissions() {
 	});
 
 	return promise;
-
 }
 function getGrades(_sessionId,_participantId){
 	let promise=new Promise((resolve,reject)=>
@@ -741,8 +738,6 @@ async function prepareFilters(iname,_id)
   }
 }
 
-
-
 function popUpfilter(){
   prepareFilters(mainApp.user.displayName,"availableSessions");//Aici trebuie pus id-ul profesorului logat
   document.getElementById('createChart').style.display='block';
@@ -760,8 +755,6 @@ function closePopUpfilter(){
   document.getElementById('createChart').style.display='none';
   
 }
-
-
 function getCheckedSessions()
 {
   var lista=[];
@@ -781,7 +774,6 @@ function getCheckedSessions()
   
   return result;
 }
-
 function getMarkInterval()
 {
   var result=[];

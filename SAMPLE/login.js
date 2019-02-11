@@ -32,8 +32,5 @@
   // Privacy policy url.
   privacyPolicyUrl: 'index.html'
 };
-
 ui.start('#firebaseui-auth-container', uiConfig);
-	
-	
 })()
