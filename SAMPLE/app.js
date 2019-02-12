@@ -668,6 +668,7 @@ async function downloadHTML5()
 }
 async function mainFlow() {
 	mainApp.permission = await checkPermissions();
+	mainApp.validLocation;
 	//createSession("test2",20,"carapace");	
 	//renderSession(id);
 	//updateSession(getSessionById('-LX-ao8-BBskH1UwAfTl'), 30, 'Cacat', 0);
@@ -676,6 +677,8 @@ async function mainFlow() {
 	driveApiSetUp();
 	setup();
 	renderAllSessions();
+	getLocation();
+	//console.log(mainApp.validLocation);
 	//driveApi();
 	//create a new session
 	btn=document.getElementById('create');
@@ -1534,10 +1537,10 @@ function showSnackbar(message)
 	setTimeout(function(){snackbar.className ="";}, 3000);
 }
 
-/*
-      function getLocation() {
+
+      async function getLocation() {
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
+          navigator.geolocation.getCurrentPosition(await showPosition);
         } 
       }
       function showPosition(position) {
@@ -1545,10 +1548,7 @@ function showSnackbar(message)
       position.coords.latitude<47.174336&&
       position.coords.longitude>27.574524&&
       position.coords.longitude<27.575696)
-          return true;
+          mainApp.validLocation=true;
     else
-          return false;
-          
-      
+          mainApp.validLocation=false;
   }
-*/
