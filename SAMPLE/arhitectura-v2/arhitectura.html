@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" vocab="http://schema.org/" typeof="schema:ScholarlyArticle"
+    property="https://github.com/Razdran/AttendanceWebTracker">
+
+<head>
+    <meta charset="utf-8">
+    <title> Doc</title>
+    <link href="arhitectura.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 property="http://purl.org/dc/terms/title">Attendance Web Tracker</h1>
+    </header>
+
+    <article>
+        <h1>Attendance Web Tracker - Arhitecture</h1>
+        <section>
+            Authors:
+            <ol>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a href="https://github.com/Razdran" property="schema:author" typeof="schema:Person">
+                        <span property="schema:givenName">Dragos-Razvan</span>
+                        <span property="schema:familyName">Anton</span>
+                    </a>
+                </li>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a href="https://github.com/constantinstefan" property="schema:author" typeof="schema:Person">
+                        <span property="schema:givenName">Stefan</span>
+                        <span property="schema:familyName">Constantin</span>
+                    </a>
+                </li>
+            </ol>
+        </section>
+
+        <hr>
+
+        <div>
+            <ol>
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="#abstract">1.Abstract</a>
+                </li>
+
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="#motivation">2.Motivation</a>
+                </li>
+
+
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="#services">3.Services used</a>
+                </li>
+
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="#componentsdetails">4.Components details</a>
+                </li>
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="#conclusion">5.Conclusion</a>
+                </li>
+
+            </ol>
+        </div>
+
+        <hr>
+
+        <section id="abstract" typeof="sa:Abstract">
+            <h1>Abstract</h1>
+            <p>
+                AttendanceWebTracker is an application that allows online presence on activities associated with an
+                academic program
+                - for example, course / laboratory / seminar classes for each discipline or participation in a contest.
+                The tool will support both participants (ie students) and people who want the presence (eg, lab, event
+                organizer).
+                Additionally, people present can be awarded scores and / or associate content terms (tags) or notes. To
+                appeal to
+                an effective method of preventing false presence. Generic, through data viewing techniques, intermediate
+                or
+                final
+                reports on the presence and scores accumulated by an individual / group, including statistics,
+                comparisons,
+                multi-criteria
+                filtering, etc. will be generated. The data will be imported from an external web storage source and
+                exported as JSON and
+                HTML5 + documents and related microdata schemes.
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="motivation" typeof="sa:Motivation">
+            <h1>Motivation</h1>
+            <p>
+                Teachers need a smart way to keep track of courses, grades and attendance. It is
+                a lot easier to just create a class on our app and ask the students to enter there
+                and mark themselfs as present. In this way, the teacher can give grades and feedback
+                to every student. Beside that, this Attendance Web Tracker is safe because
+                a student can mark himself present based on his geolocation ,unlike the old fashion
+                way where students have to write their name on a piece of paper because they canr write
+                as many names as they like.
+            </p>
+        </section>
+
+        <hr>
+
+
+
+        <section id="services">
+            <h1>Services used</h1>
+            <link property="itemListOrder" href="http://schema.org/ItemListOrderAscending" />
+            <ul>
+
+                <li property="itemListElement" typeof="ListItem">
+                    Firebase provides a realtime database and backend as a service. The service provides application
+                    developers an API
+                    that allows application data to be synchronized across clients and stored on Firebase's cloud
+                    We also use the Firebase hosting service.It is a good choice because the files are delivered through
+                    HTTPS and SSL encryption
+
+                </li>
+                <li property="itemListElement" typeof="ListItem">
+                    We are using chart.js library for generating statistics through data visualisation.We can create
+                    simple HTML5 Charts using canvas
+                    element. chart.js is the most download charting library and is very well documented.There are a lot
+                    of detailed informations for
+                    each feature provided. It offers responsive and interactive graphics.It also has only 11kb so its
+                    loading time and page impact
+                    are low.
+                </li>
+                <li property="itemListElement" typeof="ListItem">
+                    Geolocation property of the navigator object is used for tracking users location and to compare it
+                    to
+                    the
+                    desired location.
+                </li>
+                <li property="itemListElement" typeof="ListItem">
+                    Google Drive API v2 for importing data into session database. Our application will take all csv
+                    files from the logged
+                    in Google Drive account. The content of the selected file will be used for updating the database.
+                </li>
+            </ul>
+        </section>
+
+        <hr>
+        <section id="componentsdetails" typeof="sa:componentsDetails">
+            <h1>Components Details</h1>
+            <b>FIREBASE:</b>
+            <p>We store our data in a NOSQL database. There are two main fields in our database:</p>
+            <ul>
+                <li><code>permissions</code> - in which we store all user identifiers and the permissions associated
+                    with
+                    their account, permission 0 for participants and permission 1 for organizers
+                    <figure typeof="sa:Image">
+                        <img width="400" height="200" src="permissions.png" />
+                    </figure>
+                </li>
+                <li>
+                    <code>sessions</code> - in which we store the events , an unique identifier key and several details
+                    as: title, organizer's name,
+                    organizer's uid, session code, a list of the participants and their associated metadatas and also
+                    organizer's review(feedback and grade)
+                    <figure typeof="sa:Image">
+                        <img width="400" height="500" src="sessions.png" />
+                    </figure>
+                    <figure typeof="sa:Image">
+                        <img width="400" height="250" src="participants.PNG" />
+                    </figure>
+                </li>
+            </ul>
+
+
+            <b>Functions which work with Firebase:</b>
+            <ul>
+                <li>
+                    <code>
+                                var database = firebase.database();
+                    </code>
+                    - all the functions that get data or set data onto our database will use this object
+                </li>
+                <li>
+                    <code>
+                        firebase.auth().onAuthStateChanged(function (user) 
+                    </code>
+                    - verifies if the authentification state has changed
+                </li>
+                <li>
+                    <code>function setPermissions(_uid, _permission)</code>
+                    - updates the permission field, of the user with the uid=_uid, with filling in the value of
+                    _permission
+                </li>
+                <li>
+                    <code>function getGrades(_sessionId,_participantId)</code>
+                    - get the grades of the user _participantId from the event _sessionId
+                </li>
+                <li>
+                    <code>function createSession(_titlu, _maxPrezente, _sessionCode)</code>
+                    - this is a function which can be used only by organizers. This function
+                    is used for creating a new event (with the title=_titlu, the maximum number of presences =
+                    _maxPrezente
+                    and with the session code=_sessionCode ) and to push it into database
+                </li>
+                <li>
+                    <code>function getSessionById(_sessionId)</code>
+                    - returns the session with session id _sessionId from the database
+                </li>
+                <li>
+                    <code>function updateSession(_sessionId, _maxPrezente, _sessionCode, _active)</code>
+                    - updates the session _sessionId as follows:
+                    <p>updatedSession.maxPrezente = _maxPrezente;
+                    </p>
+                    <p>updatedSession.sessionCode = _sessionCode;
+                    </p>
+                    <p>updatedSession.active = _active;
+                    </p>
+                </li>
+                <li>
+                    <code>function generateSessionCode()</code>
+                    - this function generate a random code. This code is generated by the organizer . After generating
+                    the random code, the organizer will tell the code to the present people. Then, everybody,in order to
+                    mark
+                    themselfs present, has to use the code.
+                </li>
+                <li>
+                    <code>function createGrade(_participantId, _participantName, _sessionId, _feedback, _grade)</code>
+                    -this function is used just by the organizers in order to send feedback and grades to participants
+                </li>
+
+            </ul>
+
+            <b>Geolocation</b>
+            <p>Our application is using geolocation when an user tries to mark himself as
+                present on any event. If the user's geolocation is not in the building in which the
+                event takes place, then the user can't mark himself as present.
+            </p>
+            <p>
+                Our application uses geolocation as follows:
+            </p>
+            <ul>
+                <li>
+                    <code>function getLocation()</code>
+                    <p>{</p>
+                    <p> if (navigator.geolocation) {</p>
+                    <p> navigator.geolocation.getCurrentPosition(showPosition);</p>
+                    <p> }} </p>
+
+                </li>
+                <li>
+                    <code> function showPosition(position)</code>
+                    -this function verifies if the position of the user is in the faculty's building and returns true(if
+                    the user is in faculty's building)
+                    or false(if the user is not in the faculty's building)
+                </li>
+            </ul>
+
+
+            <b>Chart.js</b>
+            <p>Our application uses Chart.js for creating charts based on the informations from an event. Just the
+                organizers can create charts. Charts can be created by aplying filters on data or by selecting a
+                predefined
+                chart
+            </p>
+            <figure typeof="sa:Image">
+                <img width="800" height="400" src="capture.png" />
+            </figure>
+            <p>In order to create and display a chart we use the following functions:</p>
+            <ul>
+                <li>
+                    <code>async function doit()</code>
+                    - this function is triggered when the user clicks the "Show filtered chart" button
+                    - in this function we wait for the response of other 5 functions:
+                    <ul>
+                        <li>
+                            <code>
+                                var predefinedChart=await getPredefinedChart();
+                            </code>
+                            - this function checks if the user selected one of ours predefined charts
+                        </li>
+
+                        <li>
+                            <code>
+                                var sesiuniMarcate=await getCheckedSessions();
+                            </code>
+                            - this function verifies if the user selected some sessions from which he want to see
+                            the data in the chart and if the user did selected some data the function will scheck which
+                            are those sessions
+                        </li>
+
+                        <li>
+                            <code>
+                                var intervalNote=await getMarkInterval();
+                            </code>
+                            - this function gets the mark range that user selected. If the user didn't selected
+                            any mark interval, the function will use the range [0,20]
+                        </li>
+
+                        <li>
+                            <code>
+                                var intervalTimp=await getTimeInterval();
+                            </code>
+                            - this function gets the time filter input; this input is used by the organizer to see just
+                            datas from the users that were present in the selected time interval
+                        </li>
+
+                        <li>
+                            <code>
+                                var trecut_picat=await getPassed();
+                            </code>
+                            - this function checks if the organizer checked the filter "Select just passed students"
+                        </li>
+                    </ul>
+                    - then the functions calls
+                    <code>chart(predefinedChart,sesiuniMarcate,intervalNote,intervalTimp,trecut_picat);</code>
+                </li>
+                <li>
+                    <code>chart(predefinedChart,sesiuniMarcate,intervalNote,intervalTimp,trecut_picat)</code>
+                    - this function uses its parameters too see how the organizer filtered the chart in order
+                    to create a chart that fullfils the organizer's wishes
+                    - in this function we create datas that we need for creating the chart using the functions:
+                    <ul>
+
+                        <li>
+                            <code>
+                                createArraysForChartNothingSelected(sessions);
+                            </code>
+                            <p>- this function creates an array with all the grades that the logged in organizer accorded
+                            </p>
+                        </li>
+                        <li>
+                            <code>
+                                getArrayforFilteredChart(sessions,_sesiuniMarcate,a_intervalNote,a_intervalTimp,a_trecut_picat)
+                             </code>
+                             - this function creates an array with grades that:
+                             <ul>
+                                <li>were granted in _sesiuniMarcate</li>
+                                <li>are bigger than a_intervalNote[1]</li>
+                                <li>are lower than a_intervalNote[2]</li>
+                                <li>were granted between  a_intervalTimp[1] and a_intervalTimp[2]</li>
+                                <li>are bigger than 5 if a_trecut_picat==true</li>                                
+                             </ul> 
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    After the array was created we use on of the following functions in order to draw the chart:
+                    <ul>
+                        <li>
+                            <code>
+                                function renderChart(_idChart,_titlu,_legend,_data,_labels)
+                            </code>
+                            - draws a filtered bar chart
+                        </li>
+                        <li>
+                            <code>
+                                function renderLineChart(_idChart,_titlu,_legend,_data,_labels,_noGrades)
+                            </code>
+                            - draws a line chart to compare data with Gauss distribution
+                        </li>
+                        <li>
+                            <code>
+                                function renderDoughnutChart(_idChart,_titlu,_legend,_data,_labels)
+                            </code>
+                            - draws a Doughnut Chart with the passed/failed students
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <b>Google Drive</b>
+            <ul>
+
+            </ul>
+
+
+            <b>Other functions</b>
+            <ul>
+                <li>
+                    <code>function checkSubmited(uid, participants)</code>
+                    - participant = a list of participants from a session, uid = an user's uid;
+                    the function verifies if the user indentified by uid is in the perticipants list
+                </li>
+                <li>
+                    <code>function participate(_sessionId)</code>
+                    <p>
+                        - this function is used when a user tries to mark himself as present at one event.
+                    </p>
+                    <p>
+                        - the function allows the user to mark himself as present just if the maximum number
+                        of participants it's not reached yet.
+                    </p>
+                </li>
+
+                <li>
+                    <code>function setup()</code>
+                    - this function is used for displaying some buttons on the page("create a new session",
+                    "create chart", "import","export") just if the user logged in is an organizer.
+                </li>
+                <li>
+                    <code>function renderSession(sessionId)</code>
+                    - this fuction is used for creating a "card" for the sessionId in order to display it.
+                    - a "card" is an hmtl element in which users can see details about one session
+                </li>
+                <figure typeof="sa:Image">
+                    <img width="550" height="200" src="card.PNG" />
+                </figure>
+
+                <li>
+                    <code>
+                                async function getJSON()
+                        </code>
+                    - prepares the json that will be exported
+                </li>
+                <li>
+                    <code>async function downloadJSON()</code>
+                    - this function is used when an organizer want to export the data from an event.
+                    This function is using <code>async function getJSON()</code>
+                </li>
+                <li>
+                    <code>function getHTML5(_data)</code>
+                    - this function creates an html page with all the inormation from _data
+                </li>
+                <li>
+                    <code>async function downloadHTML5()</code>
+                    - this function is used when an organizer want to export data from an event in html format.
+                    This function is using<code>function getHTML5(_data)</code>
+                </li>
+                <li>
+                    <code>function popUp()</code>
+                    - this function is used for displaying a popUp when a button is clicked.
+                </li>
+                <li>
+                    <code>function closePopUpById(id)</code>
+                    - this function is used for closing a popUp
+                </li>
+            </ul>
+        </section>
+        <hr>
+        <section id="conclusion" typeof="sa:Conclusion">
+            <h1>Conclusion</h1>
+            <li property="itemListElement" typeof="ListItem">
+                We are very excited to work on this project and we hope that we will be able to provide
+                a top attendance track app which the users will be happy to use.
+            </li>
+        </section>
+    </article>
+
+
+</body>
+
+</html>
