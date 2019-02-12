@@ -142,7 +142,16 @@
         <hr>
         <section id="componentsdetails" typeof="sa:componentsDetails">
             <h1>Components Details</h1>
-            <b>FIREBASE:</b>
+			<b>FIREBASE AUTHENTIFICATION</b>
+				<p>We will use the firebase email authentication.The app will have two main pages:login.html and app.html.</p>
+				<ul>
+				<li>In login.js we set <code>var ui = new firebaseui.auth.AuthUI(firebase.auth());</code>and assign the ui to a "div" container in login.html <code>ui.start('#divId', uiConfig);</code></li>.The <code>uiConfig</code> object contains metadatas as redirect page and sign in providers.</li> 
+				<li>In the app.js we can check the authentication status with <code>firebase.auth().onAuthStateChanged(callback(user))</code> method. If user is undefined then we redirect to login.js page. Also in callback function we can get infos about user as User UID and his display name.</li>
+				</ul>
+				 <figure typeof="sa:Image">
+                        <img width="800" height="400" src="firebase_auth.png" />
+                    </figure>
+            <b>FIREBASE DATABASE:</b>
             <p>We store our data in a NOSQL database. There are two main fields in our database:</p>
             <ul>
                 <li><code>permissions</code> - in which we store all user identifiers and the permissions associated
@@ -365,9 +374,11 @@
 
 
             <b>Google Drive</b>
+			<p>We will use the v2 version of the Drive Rest API.The desired data is obtained through Get requests.
             <ul>
-
-            </ul>
+					<li>The api set up is done in <code>driveSetUp()</code> method using <code>gapi.load()</code>and <code>gapi.client.init()</code>methods and an object that will store th API key,client ID,the version.After init function returns the promise we can "listen" a <code>sendRequest()</code> method</li>
+					<li><code>sendRequest(callback,parameter)</code> method implements the two requests needed <code>getCSVFilesMetadataFromDrive()</code> and <code>getFileContent(fileName)</code></li>
+			</ul>
 
 
             <b>Other functions</b>
@@ -433,6 +444,12 @@
             </ul>
         </section>
         <hr>
+		<section id="classDiagram" typeof="sa:classDiagram">
+		<h1>Class Diagram</h1>
+			<figure typeof="sa:Image">
+                        <img width="800" height="400" src="diagrama_de_clase.png" />
+                    </figure>
+		</section>
         <section id="conclusion" typeof="sa:Conclusion">
             <h1>Conclusion</h1>
             <li property="itemListElement" typeof="ListItem">
