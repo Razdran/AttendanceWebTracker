@@ -1221,7 +1221,7 @@ async function chart(_predefinedChart,_sesiuniMarcate,_intervalNote,_intervalTim
       for(var i=parseInt(datas.intervalNotaremin);i<=parseInt(datas.intervalNotaremax);i++)
        labels[k++]=i;
     
-      titlu="Note puse in urma cu maxim 1h";
+      titlu="Note puse studentilor care s-au trecut prezenti in urma cu o ora";
       legenda="No of students";
 
       renderChart("myChart",titlu,legenda,data,labels); 
