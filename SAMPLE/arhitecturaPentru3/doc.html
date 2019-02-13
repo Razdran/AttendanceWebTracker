@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Attendance web tracker</title>
+    <link rel="stylesheet" href="arhitectura.css">
+
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+
+    <header>
+        <h1 property="http://purl.org/dc/terms/title">Attendance Web Tracker</h1>
+    </header>
+
+    <article  typeof="schema:ScholarlyArticle" resource="#">
+        <h1>Atter - Guide</h1>
+        <section>
+            Authors:
+            <ol>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a href="https://github.com/Razdran" property="schema:author" typeof="schema:Person">
+                        <span property="schema:givenName">Dragos-Razvan</span>
+                        <span property="schema:familyName">Anton</span>
+                    </a>
+                </li>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a href="https://github.com/constantinstefan" property="schema:author" typeof="schema:Person">
+                        <span property="schema:givenName">Stefan</span>
+                        <span property="schema:familyName">Constantin</span>
+                    </a>
+                </li>
+            </ol>
+        </section>
+
+        <section id="introduction" typeof="sa:Abstract">
+            <h1>Introduction</h1>
+            <p>
+                AttendanceWebTracker is an application that allows online presence on activities associated with an
+                academic program
+                - for example, course / laboratory / seminar classes for each discipline or participation in a contest.
+                The tool will support both participants (ie students) and people who want the presence (eg, lab, event
+                organizer).
+                Additionally, people present can be awarded scores and / or associate content terms (tags) or notes. To
+                appeal to
+                an effective method of preventing false presence. Generic, through data viewing techniques, intermediate
+                or
+                final
+                reports on the presence and scores accumulated by an individual / group, including statistics,
+                comparisons,
+                multi-criteria
+                filtering, etc. will be generated. The data will be imported from an external web storage source and
+                exported as JSON and
+                HTML5 + documents and related microdata schemes.
+            </p>
+        </section>
+
+        <section typeof="sa:loginPage" id="loginPage">
+            <h2>Login Page</h2>
+            <p>
+                The login component is made via <code>Firebase</code>
+            </p>
+            <figure typeof="sa:Image">
+
+                <img src="login.PNG" width="880" height="455">
+
+            </figure>
+
+        </section>
+        <section typeof="sa:homePage" id="homePage">
+            <h2>Home Page</h2>
+            <p>The home page for organizers</p>
+            <figure typeof="sa:Image">
+
+                <img src="homepage1.PNG" width="880" height="455">
+
+            </figure>
+            <p>On the organizer's home page we have 5 buttons:</p>
+            <ul>
+                <li>Create a new session</li>
+                <li>Create chart</li>
+                <li>Import</li>
+                <li>Export</li>
+                <li>Log Out</li>
+            </ul>
+            <p>The home page for normal users</p>
+            <figure typeof="sa:Image">
+
+                <img src="homepage2.png" width="880" height="455">
+
+            </figure>
+            <p>On the user's page we have just one button for logging out</p>
+            <P>But beside that button, the user can click on a card in order to mark himself
+                present at one event
+            </P>
+        </section>
+
+        <section typeof="sa:homePage" id="homePage-createSessions">
+            <h1>Create a new session</h1>
+            <p>In order to create a new event the organizer can click on "Create a new session"</p>
+            <figure typeof="sa:Image">
+
+                <img src="createSession.PNG" width="880" height="455">
+
+            </figure>
+            <p>After the user clicks the button, ann popUp will appear. In this popUp are three input fields and two
+                buttons:</p>
+            <ul>
+                <li>
+                    Enter title - here must be filled with the title of the event that will be created
+                </li>
+                <li>
+                    Enter max students - here will be filled with the maximum number of participants that can be present
+                    at the event
+                </li>
+                <li>
+                    Session code - a code that will shared to the participants in order to let them mark themselfs
+                    present at the event
+                </li>
+                <li>
+                    <code>create code</code> button - will create a random session code
+                </li>
+                <li>
+                    <code>Create</code> button - will create the event
+                </li>
+            </ul>
+
+        </section>
+
+        <section typeof="sa:homePage" id="homePage-createSessions">
+            <h1>Create Chart</h1>
+            <p>In order to create a chart view of some data, the organizer can click on "Create Chart"</p>
+            <figure typeof="sa:Image">
+
+                <img src="createChart.PNG" width="880" height="455">
+
+            </figure>
+            <p>After the user clicks the button, ann popUp will appear. In this popUp are some input fields used by the
+                organizer to filter the data used to create a chart view:</p>
+            <ul>
+                <li>
+                    First field is a select field. In this field, the organizer can select between some predefined
+                    charts in order to see them
+                </li>
+                <li>
+                    The next two fields are used to select grades that are between the input from "min grade" field and
+                    "max grade" field
+                </li>
+                <li>
+                    The fields "start time" and "end time" are used to filter the data based on the time when the
+                    students marked themselfs as present at one event
+                </li>
+                <li>
+                    The "Select just passed students" checkbox is used by the organizer to see data just from the passed
+                    students
+                </li>
+                <li>
+                    All the following checkboxes are used by the organizer to see just data from the selected
+                    sessions(the sessions
+                    that he can check are represented by events organised by him )
+                </li>
+                <li>
+                    <code>Show filtered chart</code> button - will create and display a chart view based on the filters
+                    selected by the organizer
+                </li>
+            </ul>
+            <p>Example of chart view:</p>
+            <figure typeof="sa:Image">
+
+                <img src="chart.PNG" width="880" height="455">
+
+            </figure>
+        </section>
+
+        <section typeof="sa:homePage" id="homePage-Import">
+            <h1>Import</h1>
+            <p>In order to import some data and to store the into the database, the organizer can click on the "import"
+                button. After he clicks the button
+                the application will search for csv files from the <code>google drive </code>account of the logged in
+                user. Then
+                a popUp appears with some fields that the organizer needs to fill in order to import data.
+
+            </p>
+            <figure typeof="sa:Image">
+
+                <img src="import.PNG" width="880" height="455">
+
+            </figure>
+            <p> The fields are:</p>
+            <ul>
+                <li>
+                    Select the file - is a select field where are displayed all the csv files
+                    from the google drive account of the logged in user
+                </li>
+                <li>
+                    Select for which session you upload the file - is a select field in which the organizer needs to
+                    select for which event he wants to import data
+                </li>
+                <li>
+                    <code>Import</code> button - will perform the import action
+                </li>
+            </ul>
+
+        </section>
+
+
+        <section typeof="sa:homePage" id="homePage-Export">
+            <h1>Export</h1>
+            <p>In order to export some data the organizer can click on the "export" button. After he clicks the button
+                a popUp appears with two checkboxes that the organizer needs to fill in order to export data.
+
+            </p>
+            <figure typeof="sa:Image">
+
+                <img src="export.PNG" width="880" height="455">
+
+            </figure>
+            <p> The checkboxes are:</p>
+            <ul>
+                <li>
+                    JSON - if checked, the export button will download a json file
+                </li>
+                <li>
+                    Html - if checked, the export button will download a html file
+                </li>
+                <li>
+                    If both are checked, the export button will download a html file and a json file
+                </li>
+                <li>
+                    <code>Export</code> button - will perform the import action
+                </li>
+            </ul>
+
+        </section>
+
+
+        <section typeof="sa:homePage" id="homePage-card1">
+            <h1>Card on organizer's page</h1>
+            <p>When an organizer clicks a card he cand eddit the card by filling some data
+            </p>
+            <figure typeof="sa:Image">
+
+                <img src="edit.PNG" width="880" height="455">
+
+            </figure>
+
+        </section>
+
+
+        <section typeof="sa:homePage" id="homePage-card2">
+
+            <p>When an student clicks a card he can mark himself present by filling the session code input field
+            </p>
+            <figure typeof="sa:Image">
+
+                <img src="present.PNG" width="880" height="455">
+            </figure>
+            <p> When the student clicks the <code>send code</code> button the application will checks if
+                the users geolocation is in the faculty </p>
+            
+        </section>
+        <section typeof="sa:homePage" id="homePage-card3">
+
+
+            <hr>
+            <p>If the student clicks an card in which he already marked himself present
+                the application will dispay another popUp with his grades and feedbacks
+            </p>
+            <figure typeof="sa:Image">
+
+                    <img src="feedback.PNG" width="880" height="455">
+                </figure>
+              
+        </section>
+
+        <section id="progress">
+            <h1>Project's progress</h1>
+            In the last several weeks we changed our application entirely. We created a new design and we changed the mainflow of our app.
+            <p>Actually, we started the application from the ground, again. This fact made us to work harder in order to deliver
+                the application on time. In the end, our application is done and has all the features we had to add.
+            </p>
+            
+        </section>
+
+        
+        <section id="motivation" typeof="sa:Motivation">
+                <h1>Motivation(how our application helps in real world)</h1>
+                <p>
+                        Teachers need a smart way to keep track of courses, grades and attendance. It is
+                        a lot easier to just create a class on our app and ask the students to enter there
+                        and mark themselfs as present. In this way, the teacher can give grades and feedback
+                        to every student. Beside that, this Attendance Web Tracker is safe because
+                        a student can mark himself present based on his geolocation ,unlike the old fashion
+                        way where students have to write their name on a piece of paper because they canr write
+                        as many names as they like.
+                </p>
+        </section>
+    
+    </article>
+
+
+
+</body>
+
+</html>
