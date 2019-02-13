@@ -14,9 +14,9 @@
     </header>
 
     <article>
-        <h1>Attendance Web Tracker - Arhitecture</h1>
+        <h2>Attendance Web Tracker - Arhitecture</h2>
         <section>
-            Authors:
+            <h2>Authors:</h2>
             <ol>
                 <li property="schema:contributor" typeof="sa:ContributorRole">
                     <a href="https://github.com/Razdran" property="schema:author" typeof="schema:Person">
@@ -63,7 +63,7 @@
         <hr>
 
         <section id="abstract" typeof="sa:Abstract">
-            <h1>Abstract</h1>
+            <h2>Abstract</h2>
             <p>
                 AttendanceWebTracker is an application that allows online presence on activities associated with an
                 academic program
@@ -87,7 +87,7 @@
         <hr>
 
         <section id="motivation" typeof="sa:Motivation">
-            <h1>Motivation</h1>
+            <h2>Motivation</h2>
             <p>
                 Teachers need a smart way to keep track of courses, grades and attendance. It is
                 a lot easier to just create a class on our app and ask the students to enter there
@@ -104,7 +104,7 @@
 
 
         <section id="services">
-            <h1>Services used</h1>
+            <h2>Services used</h2>
             <link property="itemListOrder" href="http://schema.org/ItemListOrderAscending" />
             <ul>
 
@@ -141,15 +141,15 @@
 
         <hr>
         <section id="componentsdetails" typeof="sa:componentsDetails">
-            <h1>Components Details</h1>
+            <h2>Components Details</h2>
 			<b>FIREBASE AUTHENTIFICATION</b>
 				<p>We will use the firebase email authentication.The app will have two main pages:login.html and app.html.</p>
 				<ul>
-				<li>In login.js we set <code>var ui = new firebaseui.auth.AuthUI(firebase.auth());</code>and assign the ui to a "div" container in login.html <code>ui.start('#divId', uiConfig);</code></li>.The <code>uiConfig</code> object contains metadatas as redirect page and sign in providers.</li> 
+				<li>In login.js we set <code>var ui = new firebaseui.auth.AuthUI(firebase.auth());</code>and assign the ui to a "div" container in login.html <code>ui.start('#divId', uiConfig);</code>. The <code>uiConfig</code> object contains metadatas as redirect page and sign in providers.</li> 
 				<li>In the app.js we can check the authentication status with <code>firebase.auth().onAuthStateChanged(callback(user))</code> method. If user is undefined then we redirect to login.js page. Also in callback function we can get infos about user as User UID and his display name.</li>
 				</ul>
 				 <figure typeof="sa:Image">
-                        <img width="800" height="400" src="firebase_auth.png" />
+                        <img width="800" height="400" src="firebase_auth.png" alt="firebase_auth.png"/>
                     </figure>
             <b>FIREBASE DATABASE:</b>
             <p>We store our data in a NOSQL database. There are two main fields in our database:</p>
@@ -158,7 +158,7 @@
                     with
                     their account, permission 0 for participants and permission 1 for organizers
                     <figure typeof="sa:Image">
-                        <img width="400" height="200" src="permissions.png" />
+                        <img width="400" height="200" src="permissions.png" alt="permissions.png"/>
                     </figure>
                 </li>
                 <li>
@@ -167,10 +167,10 @@
                     organizer's uid, session code, a list of the participants and their associated metadatas and also
                     organizer's review(feedback and grade)
                     <figure typeof="sa:Image">
-                        <img width="400" height="500" src="sessions.png" />
+                        <img width="400" height="500" src="sessions.png" alt="sessions.png"/>
                     </figure>
                     <figure typeof="sa:Image">
-                        <img width="400" height="250" src="participants.PNG" />
+                        <img width="400" height="250" src="participants.PNG" alt="participants.png"/>
                     </figure>
                 </li>
             </ul>
@@ -267,7 +267,7 @@
                 chart
             </p>
             <figure typeof="sa:Image">
-                <img width="800" height="400" src="capture.png" />
+                <img width="800" height="400" src="capture.png" alt="capture.png"/>
             </figure>
             <p>In order to create and display a chart we use the following functions:</p>
             <ul>
@@ -409,10 +409,11 @@
                     - this fuction is used for creating a "card" for the sessionId in order to display it.
                     - a "card" is an hmtl element in which users can see details about one session
                 </li>
+				</ul>
                 <figure typeof="sa:Image">
-                    <img width="550" height="200" src="card.PNG" />
+                    <img width="550" height="200" src="card.PNG" alt="card.png"/>
                 </figure>
-
+				<ul>
                 <li>
                     <code>
                                 async function getJSON()
@@ -445,32 +446,34 @@
         </section>
         <hr>
 		<section id="workflowDiagram" typeof="sa:workflowDiagram">
-		<h1>Workflow Diagram</h1>
+		<h2>Workflow Diagram</h2>
 			<figure typeof="sa:Image">
-                        <img width="1200" height="1200" src="workflow.png" />
+                        <img width="1200" height="1200" src="workflow.png" alt="workflow.png"/>
                     </figure>
 		</section>
 		<hr>
 		<section id="serviceDiagram" typeof="sa:serviceDiagram">
-		<h1>Service Diagram</h1>
+		<h2>Service Diagram</h2>
 			<figure typeof="sa:Image">
-                        <img width="800" height="400" src="service_diagram.png" />
+                        <img width="800" height="400" src="service_diagram.png" alt="service_diagram.png"/>
                     </figure>
 		</section>
 		<hr>
 		<section id="classDiagram" typeof="sa:classDiagram">
-		<h1>Class Diagram</h1>
+		<h2>Class Diagram</h2>
 			<figure typeof="sa:Image">
-                        <img width="1200" height="600" src="diagrama_de_clase.png" />
+                        <img width="1200" height="600" src="diagrama_de_clase.png" alt="diagrama_de_clase.png"/>
                     </figure>
 		</section>
 		<hr>
         <section id="conclusion" typeof="sa:Conclusion">
-            <h1>Conclusion</h1>
+            <h2>Conclusion</h2>
+			<ul>
             <li property="itemListElement" typeof="ListItem">
                 We are very excited to work on this project and we hope that we will be able to provide
                 a top attendance track app which the users will be happy to use.
             </li>
+			</ul>
         </section>
     </article>
 

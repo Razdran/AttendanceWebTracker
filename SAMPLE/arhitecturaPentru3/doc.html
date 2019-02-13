@@ -16,9 +16,9 @@
     </header>
 
     <article  typeof="schema:ScholarlyArticle" resource="#">
-        <h1>Atter - Guide</h1>
+        <h2>Atter - Guide</h2>
         <section>
-            Authors:
+            <h3>Authors:</h3>
             <ol>
                 <li property="schema:contributor" typeof="sa:ContributorRole">
                     <a href="https://github.com/Razdran" property="schema:author" typeof="schema:Person">
@@ -36,7 +36,7 @@
         </section>
 
         <section id="introduction" typeof="sa:Abstract">
-            <h1>Introduction</h1>
+            <h2>Introduction</h2>
             <p>
                 AttendanceWebTracker is an application that allows online presence on activities associated with an
                 academic program
@@ -64,7 +64,7 @@
             </p>
             <figure typeof="sa:Image">
 
-                <img src="login.PNG" width="880" height="455">
+                <img src="login.PNG" alt="login.PNG" width="880" height="455">
 
             </figure>
 
@@ -74,7 +74,7 @@
             <p>The home page for organizers</p>
             <figure typeof="sa:Image">
 
-                <img src="homepage1.PNG" width="880" height="455">
+                <img src="homepage1.PNG" alt="homepage1.PNG" width="880" height="455">
 
             </figure>
             <p>On the organizer's home page we have 5 buttons:</p>
@@ -88,7 +88,7 @@
             <p>The home page for normal users</p>
             <figure typeof="sa:Image">
 
-                <img src="homepage2.png" width="880" height="455">
+                <img src="homepage2.png" alt="homepage2.PNG" width="880" height="455">
 
             </figure>
             <p>On the user's page we have just one button for logging out</p>
@@ -98,11 +98,11 @@
         </section>
 
         <section typeof="sa:homePage" id="homePage-createSessions">
-            <h1>Create a new session</h1>
+            <h2>Create a new session</h2>
             <p>In order to create a new event the organizer can click on "Create a new session"</p>
             <figure typeof="sa:Image">
 
-                <img src="createSession.PNG" width="880" height="455">
+                <img src="createSession.PNG" alt="createSession.PNG" width="880" height="455">
 
             </figure>
             <p>After the user clicks the button, ann popUp will appear. In this popUp are three input fields and two
@@ -129,12 +129,12 @@
 
         </section>
 
-        <section typeof="sa:homePage" id="homePage-createSessions">
-            <h1>Create Chart</h1>
+        <section typeof="sa:createChart" id="createChart">
+            <h2>Create Chart</h2>
             <p>In order to create a chart view of some data, the organizer can click on "Create Chart"</p>
             <figure typeof="sa:Image">
 
-                <img src="createChart.PNG" width="880" height="455">
+                <img src="createChart.PNG" alt="createChart.png" width="880" height="455">
 
             </figure>
             <p>After the user clicks the button, ann popUp will appear. In this popUp are some input fields used by the
@@ -169,13 +169,13 @@
             <p>Example of chart view:</p>
             <figure typeof="sa:Image">
 
-                <img src="chart.PNG" width="880" height="455">
+                <img src="chart.PNG" alt="chart.png" width="880" height="455">
 
             </figure>
         </section>
 
         <section typeof="sa:homePage" id="homePage-Import">
-            <h1>Import</h1>
+            <h2>Import</h2>
             <p>In order to import some data and to store the into the database, the organizer can click on the "import"
                 button. After he clicks the button
                 the application will search for csv files from the <code>google drive </code>account of the logged in
@@ -185,7 +185,7 @@
             </p>
             <figure typeof="sa:Image">
 
-                <img src="import.PNG" width="880" height="455">
+                <img src="import.PNG" alt="import.png" width="880" height="455">
 
             </figure>
             <p> The fields are:</p>
@@ -207,14 +207,14 @@
 
 
         <section typeof="sa:homePage" id="homePage-Export">
-            <h1>Export</h1>
+            <h2>Export</h2>
             <p>In order to export some data the organizer can click on the "export" button. After he clicks the button
                 a popUp appears with two checkboxes that the organizer needs to fill in order to export data.
 
             </p>
             <figure typeof="sa:Image">
 
-                <img src="export.PNG" width="880" height="455">
+                <img src="export.PNG" alt="export.png" width="880" height="455">
 
             </figure>
             <p> The checkboxes are:</p>
@@ -237,46 +237,36 @@
 
 
         <section typeof="sa:homePage" id="homePage-card1">
-            <h1>Card on organizer's page</h1>
+            <h2>Card on organizer's page</h2>
             <p>When an organizer clicks a card he cand eddit the card by filling some data
             </p>
             <figure typeof="sa:Image">
 
-                <img src="edit.PNG" width="880" height="455">
+                <img src="edit.PNG" alt="edit.png" width="880" height="455">
 
             </figure>
-
-        </section>
-
-
-        <section typeof="sa:homePage" id="homePage-card2">
 
             <p>When an student clicks a card he can mark himself present by filling the session code input field
             </p>
             <figure typeof="sa:Image">
 
-                <img src="present.PNG" width="880" height="455">
+                <img src="present.PNG" alt="present.png" width="880" height="455">
             </figure>
             <p> When the student clicks the <code>send code</code> button the application will checks if
                 the users geolocation is in the faculty </p>
-            
-        </section>
-        <section typeof="sa:homePage" id="homePage-card3">
-
-
             <hr>
             <p>If the student clicks an card in which he already marked himself present
                 the application will dispay another popUp with his grades and feedbacks
             </p>
             <figure typeof="sa:Image">
 
-                    <img src="feedback.PNG" width="880" height="455">
+                    <img src="feedback.PNG" alt="feedback.png" width="880" height="455">
                 </figure>
               
         </section>
 
         <section id="progress">
-            <h1>Project's progress</h1>
+            <h2>Project's progress</h2>
             In the last several weeks we changed our application entirely. We created a new design and we changed the mainflow of our app.
             <p>Actually, we started the application from the ground, again. This fact made us to work harder in order to deliver
                 the application on time. In the end, our application is done and has all the features we had to add.
@@ -286,7 +276,7 @@
 
         
         <section id="motivation" typeof="sa:Motivation">
-                <h1>Motivation(how our application helps in real world)</h1>
+                <h2>Motivation(how our application helps in real world)</h2>
                 <p>
                         Teachers need a smart way to keep track of courses, grades and attendance. It is
                         a lot easier to just create a class on our app and ask the students to enter there

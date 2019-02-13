@@ -489,6 +489,9 @@ function sessionPopUp(_sessionId) {
 						showSnackbar("Participated at "+session.titlu);
 						closePopUpById('submitPresence');
 					}
+					else{
+						showSnackbar('Partticipate fail');
+					}
 						
 				})
 			}
